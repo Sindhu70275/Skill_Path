@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
+import { useTheme } from "@mui/material/styles";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -24,6 +26,7 @@ const pages = [
 const settings = ["Profile", "Logout"];
 
 const ResponsiveAppBar = () => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -39,7 +42,7 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => setAnchorElUser(null);
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "white" }}>
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -54,7 +57,7 @@ const ResponsiveAppBar = () => {
               noWrap
               onClick={() => navigate("/")}
               sx={{
-                color: "#58b0ed",
+                color: theme.palette.primary.main,
                 fontStyle: "italic",
                 fontSize: "1.5rem",
                 cursor: "pointer",
@@ -71,7 +74,6 @@ const ResponsiveAppBar = () => {
                 to={page.path}
                 style={({ isActive }) => ({
                   textDecoration: isActive ? "underline" : "none",
-                  color: "black",
                   fontSize: "1rem",
                 })}
                 key={page.page}
@@ -118,7 +120,7 @@ const ResponsiveAppBar = () => {
               noWrap
               onClick={() => navigate("/")}
               sx={{
-                color: "#58b0ed",
+                color: theme.palette.primary.main,
                 fontStyle: "italic",
                 fontSize: "1.5rem",
                 cursor: "pointer",
