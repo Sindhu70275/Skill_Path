@@ -7,9 +7,11 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
+
+import CustomButton from "../../common/CustomButton";
+import { ROUTES } from "../../constants/routes";
 
 const roles = [
   { label: "Student", id: 1 },
@@ -29,11 +31,7 @@ const skillList = [
 
 const AuthPage = () => {
   const navigate = useNavigate();
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { control, handleSubmit } = useForm({
     defaultValues: {
       name: "",
       role: null,
@@ -43,7 +41,7 @@ const AuthPage = () => {
 
   const onSubmit = (data) => {
     localStorage.setItem("user", JSON.stringify(data));
-    navigate("/");
+    navigate(ROUTES.HOME);
   };
 
   return (
@@ -84,14 +82,11 @@ const AuthPage = () => {
                 name="role"
                 control={control}
                 rules={{ required: "Role is required" }}
-                render={({
-                  field: { onChange, value, ...field },
-                  fieldState: { error },
-                }) => (
+                render={({ field, fieldState: { error } }) => (
                   <Autocomplete
                     {...field}
-                    value={value || null}
-                    onChange={(_, newValue) => onChange(newValue)}
+                    value={field.value || null}
+                    onChange={(_, newValue) => field.onChange(newValue)}
                     disablePortal
                     options={roles}
                     getOptionLabel={(option) => option?.label || ""}
@@ -116,21 +111,18 @@ const AuthPage = () => {
                     (value && value.length > 0) ||
                     "At least one skill is required",
                 }}
-                render={({
-                  field: { onChange, value, ...field },
-                  fieldState: { error },
-                }) => (
+                render={({ field, fieldState: { error } }) => (
                   <Autocomplete
                     multiple
                     id="skills-demo"
                     disableCloseOnSelect
-                    value={value || []}
+                    value={field.value || []}
                     onChange={(event, newValue, reason) => {
                       if (
                         reason === "selectOption" ||
                         reason === "removeOption"
                       ) {
-                        onChange(newValue);
+                        field.onChange(newValue);
                       }
                     }}
                     options={skillList}
@@ -161,9 +153,12 @@ const AuthPage = () => {
                   />
                 )}
               />
-              <Button type="submit" variant="contained" fullWidth>
-                Continue
-              </Button>
+              <CustomButton
+                label="Continue"
+                type="submit"
+                variant="contained"
+                fullWidth
+              />
             </Stack>
           </form>
         </CardContent>

@@ -58,12 +58,6 @@ const theme = createTheme({
       lineHeight: 1.43,
       color: "rgba(0, 0, 0, 0.54)",
     },
-
-    button: {
-      fontSize: "0.875rem",
-      fontWeight: 500,
-      textTransform: "none",
-    },
   },
 
   components: {
