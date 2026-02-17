@@ -1,13 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 
-import skillpath from "../../assets/skill-path.png";
+import { useTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+
+import SkillIcon from "../../assets/skill-path.png";
 import landingbg from "../../assets/landing-bg.jpg";
 import CustomButton from "../../common/CustomButton";
 import { ROUTES } from "../../constants/routes";
 import { TITLES, SUBTITLES, BUTTON_LABELS } from "../../constants/messages";
 
 const LandingPage = () => {
+  const theme = useTheme();
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -16,7 +21,6 @@ const LandingPage = () => {
 
   return (
     <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-
       <AppBar
         position="static"
         sx={{
@@ -24,37 +28,29 @@ const LandingPage = () => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "0rem 0.6rem 0rem 0.4rem",
-          backgroundColor: "white",
-          boxShadow: "none",
+          padding: "1rem 0.6rem 1rem 0.4rem",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
+        <Box sx={{ display: "flex" }}>
           <Box
             component="img"
-            src={skillpath}
-            alt="skill-path"
-            sx={{
-              height: "2.5rem",
-              width: "3rem",
-              marginRight: "0.3rem",
-            }}
+            src={SkillIcon}
+            alt="Skill Path Logo"
+            sx={{ height: 40, mr: 1 }}
           />
           <Typography
+            variant="h6"
+            noWrap
+            onClick={() => navigate("/")}
             sx={{
-              color: "#58b0ed",
+              color: theme.palette.primary.main,
               fontStyle: "italic",
               fontSize: "1.5rem",
-              marginTop: "2rem",
+              cursor: "pointer",
+              marginTop: "0.2rem",
             }}
           >
-            {TITLES.APP_TITLE}
+            Skill Path
           </Typography>
         </Box>
         <Box>
@@ -72,16 +68,18 @@ const LandingPage = () => {
         }}
       >
         <Box sx={{ padding: "3rem", width: "50vw" }}>
-          <Typography variant="h1" component="h1" gutterBottom>
+          <Typography variant="h1" gutterBottom>
             {SUBTITLES.LANDING_QUOTE}
           </Typography>
-          <Typography variant="h4" component="h4" sx={{ fontStyle: "italic" }}>
+          <Typography
+            variant="h4"
+            sx={{ fontStyle: "italic", marginBottom: "1rem" }}
+          >
             {SUBTITLES.LANDING_AUTHOR}
           </Typography>
           <CustomButton
             label={BUTTON_LABELS.JOIN_PROGRAM}
             onClick={handleLogin}
-            sx={{ mt: 3 }}
           />
         </Box>
         <Box>

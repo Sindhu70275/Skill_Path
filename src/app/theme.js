@@ -16,6 +16,7 @@ const theme = createTheme({
 
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    display: "flex",
 
     h1: {
       fontSize: "2.5rem",

@@ -1,5 +1,6 @@
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -10,6 +11,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
 
+import { AuthContext } from "../../context/AuthContext";
 import CustomButton from "../../common/CustomButton";
 import { ROUTES } from "../../constants/routes";
 
@@ -31,6 +33,7 @@ const skillList = [
 
 const AuthPage = () => {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
   const { control, handleSubmit } = useForm({
     defaultValues: {
       name: "",
@@ -40,7 +43,7 @@ const AuthPage = () => {
   });
 
   const onSubmit = (data) => {
-    localStorage.setItem("user", JSON.stringify(data));
+    login(data);
     navigate(ROUTES.HOME);
   };
 

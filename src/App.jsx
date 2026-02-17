@@ -1,4 +1,13 @@
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
+
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import LandingPage from "./features/landing/LandingPage";
@@ -6,12 +15,22 @@ import AuthPage from "./features/auth/AuthPage";
 import DiscoverPage from "./features/discover/DiscoverPage";
 import DashboardPage from "./features/dashboard/DashboardPage";
 import AnalyticsPage from "./features/analytics/AnalyticsPage";
+import { ROUTES } from "./constants/routes";
 
 const PublicLayout = () => {
+  const { user } = useContext(AuthContext);
+  if (user) {
+    return <Navigate to={ROUTES.HOME} replace />;
+  }
   return <Outlet />;
 };
 
 const AuthLayout = () => {
+  const { user } = useContext(AuthContext);
+
+  if (!user) {
+    return <Navigate to={ROUTES.LANDING} replace />;
+  }
   return (
     <>
       <ResponsiveAppBar />

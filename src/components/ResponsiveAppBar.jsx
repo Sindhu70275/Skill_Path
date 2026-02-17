@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 import { useTheme } from "@mui/material/styles";
 
@@ -16,10 +17,12 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
+import { AuthContext } from "../context/AuthContext";
 import SkillIcon from "../assets/skill-path.png";
+import { ROUTES } from "../constants/routes";
 
 const pages = [
-  { page: "Discover", path: "/" },
+  { page: "Discover", path: "/discover" },
   { page: "Dashboard", path: "/dashboard" },
   { page: "Analytics", path: "/analytics" },
 ];
@@ -28,6 +31,7 @@ const settings = ["Profile", "Logout"];
 const ResponsiveAppBar = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const { logout } = useContext(AuthContext);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -39,7 +43,14 @@ const ResponsiveAppBar = () => {
     navigate(path);
   };
 
-  const handleCloseUserMenu = () => setAnchorElUser(null);
+  const handleCloseUserMenu = (option) => {
+    console.log(option);
+    if (option === "Logout") {
+      logout();
+      navigate(ROUTES.LANDING);
+    }
+    setAnchorElUser(null);
+  };
 
   return (
     <AppBar position="static">
@@ -153,7 +164,10 @@ const ResponsiveAppBar = () => {
               }}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => handleCloseUserMenu(setting)}
+                >
                   <Typography sx={{ textAlign: "center" }}>
                     {setting}
                   </Typography>
