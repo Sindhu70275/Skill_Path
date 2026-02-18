@@ -7,12 +7,12 @@ import {
 } from "react-router-dom";
 
 import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
+import { AuthContext } from "./features/auth/context/AuthContext.jsx";
 
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import LandingPage from "./features/landing/LandingPage";
-import AuthPage from "./features/auth/AuthPage";
-import DiscoverPage from "./features/discover/DiscoverPage";
+import AuthPage from "./features/auth/pages/AuthPage";
+import DiscoverPage from "./features/discover/pages/DiscoverPage.jsx";
 import DashboardPage from "./features/dashboard/DashboardPage";
 import AnalyticsPage from "./features/analytics/AnalyticsPage";
 import { ROUTES } from "./constants/routes";
