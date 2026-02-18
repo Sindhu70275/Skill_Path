@@ -17,7 +17,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../features/auth/context/AuthContext.jsx";
 import SkillIcon from "../assets/skill-path.png";
 import { ROUTES } from "../constants/routes";
 

@@ -11,9 +11,9 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
 
-import { AuthContext } from "../../context/AuthContext";
-import CustomButton from "../../common/CustomButton";
-import { ROUTES } from "../../constants/routes";
+import { AuthContext } from "../context/AuthContext.jsx";
+import CustomButton from "../../../common/CustomButton";
+import { ROUTES } from "../../../constants/routes";
 
 const roles = [
   { label: "Student", id: 1 },

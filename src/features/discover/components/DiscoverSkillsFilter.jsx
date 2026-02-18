@@ -1,0 +1,134 @@
+import { useState } from "react";
+
+import { useTheme } from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemText from "@mui/material/ListItemText";
+import Checkbox from "@mui/material/Checkbox";
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchIcon from "@mui/icons-material/Search";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+
+const names = [
+  "Oliver Hansen",
+  "Van Henry",
+  "April Tucker",
+  "Ralph Hubbard",
+  "Omar Alexander",
+  "Carlos Abbott",
+  "Miriam Wagner",
+  "Bradley Wilkerson",
+  "Virginia Andrews",
+  "Kelly Snyder",
+];
+
+const DiscoverSkillsFilter = ({ anchorEl, open, onClose }) => {
+  const theme = useTheme();
+  const [personName, setPersonName] = useState([]);
+  const [searchText, setSearchText] = useState("");
+
+  const handleClearAll = (e) => {
+    e.stopPropagation();
+    setPersonName([]);
+  };
+
+  const filteredNames = names.filter((name) =>
+    name.toLowerCase().includes(searchText.toLowerCase()),
+  );
+
+  return (
+    <Menu
+      anchorEl={anchorEl}
+      open={open}
+      onClose={onClose}
+      PaperProps={{
+        style: {
+          width: 250,
+          marginTop: 7,
+        },
+      }}
+    >
+      <Box
+        sx={{
+          p: 1,
+          position: "sticky",
+          top: 3,
+          bgcolor: theme.palette.background.paper,
+          zIndex: 1,
+          borderBottom: "1px solid #e0e0e0",
+        }}
+      >
+        <OutlinedInput
+          placeholder="Search skills..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          size="small"
+          fullWidth
+          autoFocus
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon fontSize="small" />
+            </InputAdornment>
+          }
+          onClick={(e) => e.stopPropagation()}
+        />
+      </Box>
+
+      <Box sx={{ maxHeight: 200, overflow: "auto" }}>
+        {filteredNames.map((name) => {
+          const selected = personName.includes(name);
+          return (
+            <MenuItem
+              key={name}
+              value={name}
+              onClick={(e) => {
+                e.stopPropagation();
+                const newValue = selected
+                  ? personName.filter((item) => item !== name)
+                  : [...personName, name];
+                setPersonName(newValue);
+              }}
+            >
+              <Checkbox checked={selected} />
+              <ListItemText primary={name} />
+            </MenuItem>
+          );
+        })}
+
+        {filteredNames.length === 0 && (
+          <MenuItem disabled>
+            <ListItemText primary="No skills found" />
+          </MenuItem>
+        )}
+      </Box>
+
+      <Box
+        sx={{
+          position: "sticky",
+          bottom: 0,
+          bgcolor: theme.palette.background.paper,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Button
+          onClick={handleClearAll}
+          sx={{
+            justifyContent: "center",
+            textTransform: "none",
+            color: "#ffffff",
+            padding: "0.5rem 5rem",
+            marginTop: "0.5rem",
+            backgroundColor: theme.palette.primary.main,
+          }}
+        >
+          Clear all
+        </Button>
+      </Box>
+    </Menu>
+  );
+};
+
+export default DiscoverSkillsFilter;
