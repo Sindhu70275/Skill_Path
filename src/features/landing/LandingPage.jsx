@@ -7,9 +7,9 @@ import Typography from "@mui/material/Typography";
 
 import SkillIcon from "../../assets/skill-path.png";
 import landingbg from "../../assets/landing-bg.jpg";
-import CustomButton from "../../common/CustomButton";
-import { ROUTES } from "../../constants/routes";
-import { TITLES, SUBTITLES, BUTTON_LABELS } from "../../constants/messages";
+import { CustomButton } from "../../shared/components";
+import { ROUTES } from "../../shared/constants";
+import { SUBTITLES, BUTTON_LABELS } from "../../shared/constants/messages";
 
 const LandingPage = () => {
   const theme = useTheme();

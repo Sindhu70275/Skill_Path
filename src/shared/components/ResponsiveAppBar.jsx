@@ -13,13 +13,12 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
-import { AuthContext } from "../features/auth/context/AuthContext.jsx";
-import SkillIcon from "../assets/skill-path.png";
-import { ROUTES } from "../constants/routes";
+import { AuthContext } from "../../features/auth";
+import SkillIcon from "../../assets/skill-path.png";
+import { ROUTES } from "../../shared/constants";
 
 const pages = [
   { page: "Discover", path: "/discover" },
@@ -53,7 +52,7 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ paddingX: { md: "2rem" } }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>

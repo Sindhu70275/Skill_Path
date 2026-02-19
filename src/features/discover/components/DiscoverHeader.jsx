@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -7,8 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import FilterListIcon from "@mui/icons-material/FilterList";
+
 import DiscoverSkillsFilter from "./DiscoverSkillsFilter";
-import { useState } from "react";
 
 const DiscoverHeader = () => {
   const [filterOpen, setFilterOpen] = useState(false);
