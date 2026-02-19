@@ -12,8 +12,8 @@ import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
 
 import { AuthContext } from "../context/AuthContext.jsx";
-import CustomButton from "../../../common/CustomButton";
-import { ROUTES } from "../../../constants/routes";
+import { CustomButton } from "../../../shared/components";
+import { ROUTES } from "../../../shared/constants";
 
 const roles = [
   { label: "Student", id: 1 },

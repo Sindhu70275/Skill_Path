@@ -11,18 +11,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
+import { skillsData } from "../data/SkillsData";
+
+const skillNames = skillsData.map((skill) => skill.title);
 
 const DiscoverSkillsFilter = ({ anchorEl, open, onClose }) => {
   const theme = useTheme();
@@ -34,7 +25,7 @@ const DiscoverSkillsFilter = ({ anchorEl, open, onClose }) => {
     setPersonName([]);
   };
 
-  const filteredNames = names.filter((name) =>
+  const filteredSkillNames = skillNames.filter((name) =>
     name.toLowerCase().includes(searchText.toLowerCase()),
   );
 
@@ -45,7 +36,7 @@ const DiscoverSkillsFilter = ({ anchorEl, open, onClose }) => {
       onClose={onClose}
       PaperProps={{
         style: {
-          width: 250,
+          width: 260,
           marginTop: 7,
         },
       }}
@@ -77,7 +68,7 @@ const DiscoverSkillsFilter = ({ anchorEl, open, onClose }) => {
       </Box>
 
       <Box sx={{ maxHeight: 200, overflow: "auto" }}>
-        {filteredNames.map((name) => {
+        {filteredSkillNames.map((name) => {
           const selected = personName.includes(name);
           return (
             <MenuItem
@@ -97,7 +88,7 @@ const DiscoverSkillsFilter = ({ anchorEl, open, onClose }) => {
           );
         })}
 
-        {filteredNames.length === 0 && (
+        {filteredSkillNames.length === 0 && (
           <MenuItem disabled>
             <ListItemText primary="No skills found" />
           </MenuItem>
