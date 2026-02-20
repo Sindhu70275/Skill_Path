@@ -12,7 +12,13 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 
 import DiscoverSkillsFilter from "./DiscoverSkillsFilter";
 
-const DiscoverHeader = () => {
+const DiscoverHeader = ({
+  searchSkill,
+  setSearchSkill,
+  skillFilter,
+  setSkillFilter,
+  setDebouncedSearch,
+}) => {
   const [filterOpen, setFilterOpen] = useState(false);
   const [filterAnchorEl, setFilterAnchorEl] = useState(null);
 
@@ -48,6 +54,13 @@ const DiscoverHeader = () => {
           placeholder="Search for skills by name"
           variant="outlined"
           size="medium"
+          value={searchSkill}
+          onChange={(e) => setSearchSkill(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              setDebouncedSearch(searchSkill);
+            }
+          }}
           sx={{
             width: "28rem",
             backgroundColor: "#ffffff",
@@ -94,6 +107,8 @@ const DiscoverHeader = () => {
           anchorEl={filterAnchorEl}
           open={filterOpen}
           onClose={handleFilterClose}
+          skillFilter={skillFilter}
+          setSkillFilter={setSkillFilter}
         />
       </Stack>
     </Stack>
