@@ -13,19 +13,24 @@ import Menu from "@mui/material/Menu";
 
 import { skillsData } from "../data/SkillsData";
 
-const skillNames = skillsData.map((skill) => skill.title);
+const skillTags = [...new Set(skillsData.flatMap((skill) => skill.tags))];
 
-const DiscoverSkillsFilter = ({ anchorEl, open, onClose }) => {
+const DiscoverSkillsFilter = ({
+  anchorEl,
+  open,
+  onClose,
+  skillFilter,
+  setSkillFilter,
+}) => {
   const theme = useTheme();
-  const [personName, setPersonName] = useState([]);
   const [searchText, setSearchText] = useState("");
 
   const handleClearAll = (e) => {
     e.stopPropagation();
-    setPersonName([]);
+    setSkillFilter([]);
   };
 
-  const filteredSkillNames = skillNames.filter((name) =>
+  const filteredSkillNames = skillTags.filter((name) =>
     name.toLowerCase().includes(searchText.toLowerCase()),
   );
 
@@ -69,7 +74,7 @@ const DiscoverSkillsFilter = ({ anchorEl, open, onClose }) => {
 
       <Box sx={{ maxHeight: 200, overflow: "auto" }}>
         {filteredSkillNames.map((name) => {
-          const selected = personName.includes(name);
+          const selected = skillFilter.includes(name);
           return (
             <MenuItem
               key={name}
@@ -77,9 +82,9 @@ const DiscoverSkillsFilter = ({ anchorEl, open, onClose }) => {
               onClick={(e) => {
                 e.stopPropagation();
                 const newValue = selected
-                  ? personName.filter((item) => item !== name)
-                  : [...personName, name];
-                setPersonName(newValue);
+                  ? skillFilter.filter((item) => item !== name)
+                  : [...skillFilter, name];
+                setSkillFilter(newValue);
               }}
             >
               <Checkbox checked={selected} />
