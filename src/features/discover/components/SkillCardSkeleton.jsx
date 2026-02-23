@@ -1,0 +1,43 @@
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Skeleton from "@mui/material/Skeleton";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+
+const SkillCardSkeleton = () => {
+  return (
+    <Card sx={{ maxWidth: 300 }}>
+      <Skeleton variant="rectangular" height={180} animation="wave" />
+      <CardContent>
+        <Skeleton variant="text" width="60%" height={28} animation="wave" />
+        <Skeleton variant="text" width="100%" height={20} animation="wave" />
+        <Skeleton variant="text" width="80%" height={20} animation="wave" />
+        <Box sx={{ mt: 2, display: "flex", gap: 1 }}>
+          <Skeleton variant="rounded" width={60} height={24} animation="wave" />
+          <Skeleton variant="rounded" width={60} height={24} animation="wave" />
+        </Box>
+      </CardContent>
+    </Card>
+  );
+};
+
+export const SkillsLoadingSkeleton = ({ count = 4 }) => {
+  return (
+    <Grid
+      container
+      spacing={2}
+      columns={12}
+      sx={{
+        paddingY: "1rem",
+      }}
+    >
+      {Array.from({ length: count }).map((_, index) => (
+        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
+          <SkillCardSkeleton />
+        </Grid>
+      ))}
+    </Grid>
+  );
+};
+
+export default SkillCardSkeleton;
