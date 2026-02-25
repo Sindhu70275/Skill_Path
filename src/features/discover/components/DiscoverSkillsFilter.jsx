@@ -11,9 +11,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 
-import { skillsData } from "../data/SkillsData";
-
-const skillTags = [...new Set(skillsData.flatMap((skill) => skill.tags))];
+import { useSkillTags } from "../hooks/useGetSkillTags";
 
 const DiscoverSkillsFilter = ({
   anchorEl,
@@ -25,12 +23,14 @@ const DiscoverSkillsFilter = ({
   const theme = useTheme();
   const [searchText, setSearchText] = useState("");
 
+  const { isLoading, data: skillTags } = useSkillTags();
+
   const handleClearAll = (e) => {
     e.stopPropagation();
     setSkillFilter([]);
   };
 
-  const filteredSkillNames = skillTags.filter((name) =>
+  const filteredSkillNames = skillTags?.filter((name) =>
     name.toLowerCase().includes(searchText.toLowerCase()),
   );
 
@@ -73,33 +73,40 @@ const DiscoverSkillsFilter = ({
       </Box>
 
       <Box sx={{ maxHeight: 200, overflow: "auto" }}>
-        {filteredSkillNames.map((name) => {
-          const selected = skillFilter.includes(name);
-          return (
-            <MenuItem
-              key={name}
-              value={name}
-              onClick={(e) => {
-                e.stopPropagation();
-                const newValue = selected
-                  ? skillFilter.filter((item) => item !== name)
-                  : [...skillFilter, name];
-                setSkillFilter(newValue);
-              }}
-            >
-              <Checkbox checked={selected} />
-              <ListItemText primary={name} />
-            </MenuItem>
-          );
-        })}
-
-        {filteredSkillNames.length === 0 && (
+        {isLoading ? (
           <MenuItem disabled>
-            <ListItemText primary="No skills found" />
+            <ListItemText primary="Loading skills..." />
           </MenuItem>
+        ) : (
+          <>
+            {filteredSkillNames.map((name) => {
+              const selected = skillFilter.includes(name);
+              return (
+                <MenuItem
+                  key={name}
+                  value={name}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const newValue = selected
+                      ? skillFilter.filter((item) => item !== name)
+                      : [...skillFilter, name];
+                    setSkillFilter(newValue);
+                  }}
+                >
+                  <Checkbox checked={selected} />
+                  <ListItemText primary={name} />
+                </MenuItem>
+              );
+            })}
+
+            {filteredSkillNames.length === 0 && (
+              <MenuItem disabled>
+                <ListItemText primary="No skills found" />
+              </MenuItem>
+            )}
+          </>
         )}
       </Box>
-
       <Box
         sx={{
           position: "sticky",

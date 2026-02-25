@@ -8,8 +8,8 @@ import { useSkills } from "../hooks/useGetSkills";
 import DiscoverHeader from "../components/DiscoverHeader";
 import DiscoverSkillCard from "../components/DiscoverSkillCard";
 import NoSkillsFound from "../components/NoSkillsFound";
-import SkillCardSkeleton from "../components/SkillCardSkeleton";
-import ErrorDisplay from "../components/ErrorDisplay";
+import { SkillsLoadingSkeleton } from "../components/SkillCardSkeleton";
+import { ErrorDisplay } from "../../../shared/components";
 
 const DiscoverPage = () => {
   const [searchSkill, setSearchSkill] = useState("");
@@ -31,7 +31,7 @@ const DiscoverPage = () => {
 
   const renderContent = () => {
     if (isLoading) {
-      return <SkillCardSkeleton count={4} />;
+      return <SkillsLoadingSkeleton count={4} />;
     }
 
     if (error) {
@@ -50,11 +50,7 @@ const DiscoverPage = () => {
       <Grid container spacing={2} columns={12} sx={{ paddingY: "1rem" }}>
         {skillsData.map((skill) => (
           <Grid size={{ xs: 12, sm: 6, md: 3 }} key={skill._id}>
-            <DiscoverSkillCard
-              title={skill.title}
-              description={skill.description}
-              src={skill.image}
-            />
+            <DiscoverSkillCard skillData={skill} />
           </Grid>
         ))}
       </Grid>
@@ -69,6 +65,7 @@ const DiscoverPage = () => {
         skillFilter={skillFilter}
         setSkillFilter={setSkillFilter}
         setDebouncedSearch={setDebouncedSearch}
+        skillsData={skillsData || []}
       />
       {renderContent()}
     </Stack>
