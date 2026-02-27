@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -6,19 +8,23 @@ import Typography from "@mui/material/Typography";
 
 import { CustomButton } from "../../../shared/components";
 
-const DiscoverSkillCard = ({
-  src,
-  title,
-  description,
-  onEnroll,
-  onSeeMore,
-}) => {
+const DiscoverSkillCard = ({ skillData, onEnroll }) => {
+  const navigate = useNavigate();
+
+  const onSeeMore = (id) => {
+    navigate(`/skillDetails/${id}`);
+  };
+
   return (
     <Card sx={{ maxWidth: 300 }}>
-      <CardMedia sx={{ height: 180 }} image={src} title={title} />
+      <CardMedia
+        sx={{ height: 180 }}
+        image={skillData.image}
+        title={skillData.title}
+      />
       <CardContent sx={{ padding: "1rem" }}>
         <Typography gutterBottom variant="h5" component="div">
-          {title}
+          {skillData.title}
         </Typography>
         <Typography
           variant="body2"
@@ -31,7 +37,7 @@ const DiscoverSkillCard = ({
             textOverflow: "ellipsis",
           }}
         >
-          {description}
+          {skillData.description}
         </Typography>
       </CardContent>
       <CardActions
@@ -39,7 +45,7 @@ const DiscoverSkillCard = ({
       >
         <CustomButton onClick={onEnroll} label="Enroll" width="50%" />
         <CustomButton
-          onClick={onSeeMore}
+          onClick={() => onSeeMore(skillData._id)}
           label="See More"
           variant="outline"
           width="40%"
