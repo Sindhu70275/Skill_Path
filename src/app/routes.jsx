@@ -4,7 +4,7 @@ import PublicLayout from "./layouts/PublicLayout";
 import AuthLayout from "./layouts/AuthLayout";
 
 import { LandingPage } from "../features/landing";
-import { AuthPage } from "../features/auth";
+import { LoginPage, RegisterPage } from "../features/auth";
 import { DiscoverPage } from "../features/discover";
 import { SkillDetailPage } from "../features/skilldetail";
 import { DashboardPage } from "../features/dashboard";
@@ -15,7 +15,8 @@ const AppRoutes = () => {
     <Routes>
       <Route element={<PublicLayout />}>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Route>
 
       <Route element={<AuthLayout />}>
