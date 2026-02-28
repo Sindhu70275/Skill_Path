@@ -16,7 +16,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate(ROUTES.AUTH);
+    navigate(ROUTES.LOGIN);
   };
 
   return (
