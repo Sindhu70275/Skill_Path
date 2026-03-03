@@ -3,7 +3,12 @@ import Alert from "@mui/material/Alert";
 
 const CustomSnackbar = ({ open, message, severity, onClose }) => {
   return (
-    <Snackbar open={open} autoHideDuration={6000} onClose={onClose}>
+    <Snackbar
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      open={open}
+      autoHideDuration={5000}
+      onClose={onClose}
+    >
       <Alert
         onClose={onClose}
         severity={severity}
