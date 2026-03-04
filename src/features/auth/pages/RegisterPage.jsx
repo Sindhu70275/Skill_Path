@@ -9,24 +9,42 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 
+import { useRegisterUser } from "../hooks/usePostRegisterUser.js";
 import { AuthContext } from "../context/AuthContext.jsx";
+import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
 import { CustomButton } from "../../../shared/components";
 import { ROUTES } from "../../../shared/constants";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
+  const showSnackbar = useContext(SnackbarContext);
+
+  const { mutate: registerUser } = useRegisterUser();
+
   const { control, handleSubmit } = useForm({
     defaultValues: {
       username: "",
-      emailid: "",
+      emailId: "",
       password: "",
     },
   });
 
   const onSubmit = (data) => {
-    login(data);
-    navigate(ROUTES.HOME);
+    registerUser(data, {
+      onSuccess: async (response) => {
+        login(response.data.token, response.data.user);
+        navigate(ROUTES.HOME);
+        showSnackbar(response.message, "success");
+      },
+      onError: (error) => {
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong";
+        showSnackbar(message, "error");
+      },
+    });
   };
 
   return (
@@ -54,7 +72,7 @@ const RegisterPage = () => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    id="outlined-basic"
+                    id="username"
                     label="Username"
                     variant="outlined"
                     fullWidth
@@ -64,7 +82,7 @@ const RegisterPage = () => {
                 )}
               />
               <Controller
-                name="emailid"
+                name="emailId"
                 control={control}
                 rules={{
                   required: "Email is required",
@@ -76,7 +94,7 @@ const RegisterPage = () => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    id="outlined-basic"
+                    id="emailId"
                     label="Email"
                     variant="outlined"
                     fullWidth
@@ -92,7 +110,7 @@ const RegisterPage = () => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    id="outlined-basic"
+                    id="password"
                     label="Password"
                     type="password"
                     variant="outlined"
@@ -112,7 +130,7 @@ const RegisterPage = () => {
           </form>
 
           <Typography variant="body2" mt={2} textAlign="center">
-            Already have an account?{" "}
+            Already have an account?
             <Link to={ROUTES.LOGIN} style={{ color: "#1976d2" }}>
               Sign in
             </Link>

@@ -6,9 +6,9 @@ import { ResponsiveAppBar } from "../../shared/components";
 import { ROUTES } from "../../shared/constants";
 
 const AuthLayout = () => {
-  const { user } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
 
-  if (!user) {
+  if (!token || !user) {
     return <Navigate to={ROUTES.LANDING} replace />;
   }
 
