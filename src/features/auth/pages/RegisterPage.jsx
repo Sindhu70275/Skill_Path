@@ -20,7 +20,7 @@ const RegisterPage = () => {
   const { login } = useContext(AuthContext);
   const showSnackbar = useContext(SnackbarContext);
 
-  const { mutate: registerUser } = useRegisterUser();
+  const { mutate: registerUser, isPending } = useRegisterUser();
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -121,10 +121,11 @@ const RegisterPage = () => {
                 )}
               />
               <CustomButton
-                label="Create Account"
+                label={isPending ? "Creating Account..." : "Create Account"}
                 type="submit"
                 variant="contained"
                 fullWidth
+                disabled={isPending}
               />
             </Stack>
           </form>
