@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 
 import { useSkills } from "../hooks/useGetSkills";
+import { useDashboardSkills } from "../../../shared/hooks/useGetDashboardSkills.js";
 
 import DiscoverHeader from "../components/DiscoverHeader";
 import DiscoverSkillCard from "../components/DiscoverSkillCard";
@@ -21,6 +22,9 @@ const DiscoverPage = () => {
     isLoading,
     error,
   } = useSkills(debouncedSearch, skillFilter);
+  const { data: dashboardSkills } = useDashboardSkills();
+  const enrolledIds = new Set(dashboardSkills?.enrolled?.map((s) => s._id));
+  const wishlistedIds = new Set(dashboardSkills?.wishlisted?.map((s) => s._id));
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -50,7 +54,11 @@ const DiscoverPage = () => {
       <Grid container spacing={2} columns={12} sx={{ paddingY: "1rem" }}>
         {skillsData.map((skill) => (
           <Grid size={{ xs: 12, sm: 6, md: 3 }} key={skill._id}>
-            <DiscoverSkillCard skillData={skill} />
+            <DiscoverSkillCard
+              skillData={skill}
+              enrolledIds={enrolledIds}
+              wishlistedIds={wishlistedIds}
+            />
           </Grid>
         ))}
       </Grid>
