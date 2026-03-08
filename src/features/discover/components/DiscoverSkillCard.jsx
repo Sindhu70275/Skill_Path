@@ -12,14 +12,13 @@ import IconButton from "@mui/material/IconButton";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 
-import { AuthContext } from "../../auth";
 import { CustomButton } from "../../../shared/components";
 import { useEnrollSkill } from "../../../shared/hooks/usePostEnrollSkill.js";
 import { useAddWishlistSkill } from "../../../shared/hooks/usePostAddWishlistSkill.js";
 import { useRemoveWishlistSkill } from "../../../shared/hooks/usePostRemoveWishlistSkill.js";
 import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
 
-const DiscoverSkillCard = ({ skillData, enrolledIds, wishlistedIds }) => {
+const DiscoverSkillCard = ({ skillData }) => {
   const navigate = useNavigate();
   const showSnackbar = useContext(SnackbarContext);
   const {
@@ -30,14 +29,6 @@ const DiscoverSkillCard = ({ skillData, enrolledIds, wishlistedIds }) => {
   const { mutate: addWishlist, isPending: addPending } = useAddWishlistSkill();
   const { mutate: removeWishlist, isPending: removePending } =
     useRemoveWishlistSkill();
-
-  const isEnrolled = enrolledIds.has(skillData._id);
-  const isWishlisted = wishlistedIds.has(skillData._id);
-  const [wishlisted, setWishlisted] = useState(isWishlisted);
-
-  useEffect(() => {
-    setWishlisted(isWishlisted);
-  }, [isWishlisted]);
 
   const onSeeMore = (id) => {
     navigate(`/skillDetails/${id}`);
@@ -59,10 +50,10 @@ const DiscoverSkillCard = ({ skillData, enrolledIds, wishlistedIds }) => {
   };
 
   const handleWishlistToggle = (skillId) => {
-    if (wishlisted) {
+    if (skillData.isWishlisted) {
       removeWishlist(skillId, {
         onSuccess: (response) => {
-          (showSnackbar(response.message, "success"), setWishlisted(false));
+          showSnackbar(response.message, "success");
         },
         onError: (error) => {
           const message =
@@ -76,7 +67,6 @@ const DiscoverSkillCard = ({ skillData, enrolledIds, wishlistedIds }) => {
       addWishlist(skillId, {
         onSuccess: (response) => {
           showSnackbar(response.message, "success");
-          setWishlisted(true);
         },
         onError: (error) => {
           const message =
@@ -97,7 +87,7 @@ const DiscoverSkillCard = ({ skillData, enrolledIds, wishlistedIds }) => {
           image={skillData.image}
           title={skillData.title}
         />
-        {!isEnrolled && (
+        {!skillData.isEnrolled && (
           <IconButton
             onClick={() => handleWishlistToggle(skillData._id)}
             disabled={addPending || removePending}
@@ -111,7 +101,7 @@ const DiscoverSkillCard = ({ skillData, enrolledIds, wishlistedIds }) => {
               },
             }}
           >
-            {wishlisted ? (
+            {skillData.isWishlisted ? (
               <BookmarkIcon sx={{ color: "error.main" }} />
             ) : (
               <BookmarkBorderIcon sx={{ color: "text.secondary" }} />
@@ -145,12 +135,12 @@ const DiscoverSkillCard = ({ skillData, enrolledIds, wishlistedIds }) => {
           label={
             enrollPending
               ? "Enrolling..."
-              : enrollSuccess || isEnrolled
+              : enrollSuccess || skillData.isEnrolled
                 ? "Enrolled"
                 : "Enroll"
           }
           width="50%"
-          disabled={enrollPending || isEnrolled || enrollSuccess}
+          disabled={enrollPending || skillData.isEnrolled || enrollSuccess}
         />
         <CustomButton
           onClick={() => onSeeMore(skillData._id)}
