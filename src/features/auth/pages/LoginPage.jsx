@@ -20,7 +20,7 @@ const LoginPage = () => {
   const { login } = useContext(AuthContext);
   const showSnackbar = useContext(SnackbarContext);
 
-  const { mutate: loginUser } = useLoginUser();
+  const { mutate: loginUser, isPending } = useLoginUser();
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -104,10 +104,11 @@ const LoginPage = () => {
                 )}
               />
               <CustomButton
-                label="Sign In"
+                label={isPending ? "Signing In..." : "Sign In"}
                 type="submit"
                 variant="contained"
                 fullWidth
+                disabled={isPending}
               />
             </Stack>
           </form>
