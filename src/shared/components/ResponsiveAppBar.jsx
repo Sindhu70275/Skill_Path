@@ -43,7 +43,6 @@ const ResponsiveAppBar = () => {
   };
 
   const handleCloseUserMenu = (option) => {
-    console.log(option);
     if (option === "Logout") {
       logout();
       navigate(ROUTES.LANDING);
