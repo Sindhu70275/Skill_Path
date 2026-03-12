@@ -8,6 +8,7 @@ import { LoginPage, RegisterPage } from "../features/auth";
 import { DiscoverPage } from "../features/discover";
 import { SkillDetailPage } from "../features/skilldetail";
 import { DashboardPage } from "../features/dashboard";
+import { CoursesPage } from "../features/course";
 import { AnalyticsPage } from "../features/analytics";
 
 const AppRoutes = () => {
@@ -23,6 +24,7 @@ const AppRoutes = () => {
         <Route path="/discover" element={<DiscoverPage />} />
         <Route path="/skillDetails/:id" element={<SkillDetailPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/course/:skillId" element={<CoursesPage />} />
         <Route path="/analytics" element={<AnalyticsPage />} />
       </Route>
     </Routes>
