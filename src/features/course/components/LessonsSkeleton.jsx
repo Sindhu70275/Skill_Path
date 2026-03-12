@@ -3,6 +3,7 @@ import Skeleton from "@mui/material/Skeleton";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Box from "@mui/material/Box";
 
 const LessonsSkeleton = ({ count = 3 }) => {
   return (
@@ -15,18 +16,18 @@ const LessonsSkeleton = ({ count = 3 }) => {
           <ListItemText
             primary={<Skeleton width="60%" />}
             secondary={
-              <Stack
-                direction="row"
-                alignItems="center"
-                spacing={0.5}
-                sx={{ mt: 0.5 }}
+              <Box
+                component="span"
+                sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 0.5,
+                  mt: 0.5,
+                  fontSize: "0.75rem",
+                }}
               >
-                <Skeleton
-                  variant="text"
-                  width={40}
-                  sx={{ fontSize: "0.75rem" }}
-                />
-              </Stack>
+                <Skeleton variant="text" width={40} />
+              </Box>
             }
           />
         </ListItem>

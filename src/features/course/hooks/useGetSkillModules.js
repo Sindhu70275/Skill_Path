@@ -3,7 +3,6 @@ import axios from "../../../api/axios";
 
 const fetchModules = async (skillId) => {
   const { data } = await axios.get(`/api/modules/skill/${skillId}`);
-  console.log(data);
   return data.data;
 };
 
