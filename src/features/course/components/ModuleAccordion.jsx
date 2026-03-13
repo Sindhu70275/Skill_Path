@@ -4,6 +4,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -30,7 +31,7 @@ const ModuleAccordion = ({ module, onSelectLesson }) => {
           direction="row"
           alignItems="center"
           spacing={2}
-          sx={{ width: "100%", pr: 2 }}
+          sx={{ width: "100%", px: 2 }}
         >
           <Box sx={{ flex: 1, minWidth: 0 }}>
             <Typography
@@ -62,8 +63,9 @@ const ModuleAccordion = ({ module, onSelectLesson }) => {
           </Box>
         </Stack>
       </AccordionSummary>
+      <Divider sx={{ my: 0.5 }} />
 
-      <AccordionDetails sx={{ p: 0 }}>
+      <AccordionDetails sx={{ px: 2, py: 0 }}>
         {isLoading && <LessonsSkeleton count={2} />}
 
         {lessons.map((lesson) => (

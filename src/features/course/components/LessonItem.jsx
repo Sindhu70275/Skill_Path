@@ -19,12 +19,9 @@ const LessonItem = ({ lesson, onSelectLesson }) => {
         display: "flex",
         alignItems: "center",
         p: 1.5,
-        pl: 3,
         cursor: "pointer",
-        backgroundColor: lesson.isCompleted
-          ? "rgba(0,200,83,0.1)"
-          : "transparent",
-        "&:hover": { backgroundColor: "#f8f9fa" },
+        borderRadius: 1,
+        mb: 0.5,
       }}
     >
       <Checkbox

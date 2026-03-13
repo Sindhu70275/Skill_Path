@@ -60,7 +60,6 @@ const CoursePage = () => {
               top: { lg: 24 },
               backgroundColor: "#ffffff",
               borderRadius: 2,
-              p: 2,
               boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
               maxHeight: { lg: "calc(100vh - 100px)" },
               overflowY: "auto",
