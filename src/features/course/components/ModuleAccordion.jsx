@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -15,17 +13,10 @@ import { useModuleLessons } from "../hooks/useGetModuleLessons.js";
 
 import LessonItem from "./LessonItem";
 
-const ModuleAccordion = ({ module, onSelectLesson }) => {
-  const [open, setOpen] = useState(false);
-
-  const { data: lessons = [], isLoading } = useModuleLessons(module._id, open);
-
-  const handleAccordion = () => {
-    setOpen(!open);
-  };
-
+const ModuleAccordion = ({ module, onSelectLesson, expanded, onToggle, }) => {
+  const { data: lessons = [], isLoading } = useModuleLessons(module._id, expanded);
   return (
-    <Accordion expanded={open} onChange={handleAccordion}>
+    <Accordion expanded={expanded} onChange={() => onToggle(module._id)}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Stack
           direction="row"

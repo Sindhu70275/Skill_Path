@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Box from "@mui/material/Box";
@@ -12,12 +12,35 @@ import CoursePageSkeleton from "../components/CoursePageSkeleton";
 import { ErrorDisplay } from "../../../shared/components";
 
 import { useSkillModules } from "../hooks/useGetSkillModules.js";
+import { useModuleLessons } from "../hooks/useGetModuleLessons.js";
 
 const CoursePage = () => {
   const { skillId } = useParams();
   const [selectedLessonId, setSelectedLessonId] = useState(null);
+  const [selectedModuleId, setSelectedModuleId] = useState(null);
 
   const { data, isLoading, error } = useSkillModules(skillId);
+
+  const { data: lessons = [] } = useModuleLessons(
+    selectedModuleId,
+    !!selectedModuleId,
+  );
+
+  useEffect(() => {
+    if (data?.lastActiveLesson && !selectedLessonId) {
+      setSelectedLessonId(data.lastActiveLesson.lessonId);
+      setSelectedModuleId(data.lastActiveLesson.moduleId);
+    } else if (data?.modules?.length > 0 && !selectedModuleId) {
+      setSelectedModuleId(data.modules[0]._id);
+    }
+  }, [data, selectedLessonId, selectedModuleId]);
+
+  useEffect(() => {
+    if (lessons.length > 0 && !selectedLessonId) {
+      const firstIncomplete = lessons.find((l) => !l.isCompleted);
+      setSelectedLessonId((firstIncomplete || lessons[0])._id);
+    }
+  }, [lessons, selectedLessonId]);
 
   if (isLoading) return <CoursePageSkeleton />;
   if (error)
@@ -68,6 +91,7 @@ const CoursePage = () => {
             <ModuleSidebar
               modules={modules}
               onSelectLesson={setSelectedLessonId}
+              autoOpenModuleId={selectedModuleId}
             />
           </Box>
         </Grid>
