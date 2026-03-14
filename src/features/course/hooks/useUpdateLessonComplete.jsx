@@ -3,9 +3,9 @@ import { useMutation } from "@tanstack/react-query";
 
 export const useLessonComplete = () => {
   return useMutation({
-    mutationFn: async ({ lessonId }) => {
+    mutationFn: async ({ lessonId, skillId}) => {
       const response = await axios.put(
-        `/api/progress/lesson/${lessonId}/complete`,
+        `/api/progress/${skillId}/lesson/${lessonId}/complete`,
       );
       return response.data;
     },

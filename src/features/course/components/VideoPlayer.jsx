@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 
 import Box from "@mui/material/Box";
@@ -11,6 +12,7 @@ import VideoPlayerSkeleton from "./VideoPlayerSkeleton";
 
 const VideoPlayer = ({ lessonId }) => {
   const { data, isLoading } = useLessonById(lessonId);
+  const { skillId } = useParams();
   const { mutate: updateLessonProgress } = useLessonProgress();
   const { mutate: updateLessonComplete } = useLessonComplete();
 
@@ -29,11 +31,9 @@ const VideoPlayer = ({ lessonId }) => {
     }
   }, [data]);
 
-  
   if (isLoading) return <VideoPlayerSkeleton />;
 
   const handleProgress = (e) => {
-    console.log(e)
     const playedSeconds = Math.floor(e.target.currentTime);
 
     if (playedSeconds - lastSavedRef.current < 30) return;
@@ -42,13 +42,14 @@ const VideoPlayer = ({ lessonId }) => {
 
     updateLessonProgress({
       lessonId,
+      skillId,
       progressPercentage: playedSeconds / (data.durationInMinutes * 60),
       lastWatchedSecond: playedSeconds,
     });
   };
 
   const handleEnded = () => {
-    updateLessonComplete({ lessonId });
+    updateLessonComplete({ lessonId, skillId });
   };
 
   return (
