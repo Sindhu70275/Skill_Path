@@ -8,7 +8,10 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
-const CourseInfo = ({ course }) => {
+import { useCourseContext } from "../context/CourseContext";
+
+const CourseInfo = () => {
+  const { skill: course } = useCourseContext();
   return (
     <Box
       sx={{

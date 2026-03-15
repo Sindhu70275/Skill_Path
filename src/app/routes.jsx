@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import PublicLayout from "./layouts/PublicLayout";
 import AuthLayout from "./layouts/AuthLayout";
 
+import { CourseProvider } from "../features/course/context/CourseContext";
+
 import { LandingPage } from "../features/landing";
 import { LoginPage, RegisterPage } from "../features/auth";
 import { DiscoverPage } from "../features/discover";
@@ -24,7 +26,14 @@ const AppRoutes = () => {
         <Route path="/discover" element={<DiscoverPage />} />
         <Route path="/skillDetails/:id" element={<SkillDetailPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/course/:skillId" element={<CoursesPage />} />
+        <Route
+          path="/course/:skillId"
+          element={
+            <CourseProvider>
+              <CoursesPage />
+            </CourseProvider>
+          }
+        />
         <Route path="/analytics" element={<AnalyticsPage />} />
       </Route>
     </Routes>

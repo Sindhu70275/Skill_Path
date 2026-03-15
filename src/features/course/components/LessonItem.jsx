@@ -7,9 +7,13 @@ import Stack from "@mui/material/Stack";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
-const LessonItem = ({ lesson, onSelectLesson }) => {
+import { useCourseContext } from "../context/CourseContext";
+
+const LessonItem = ({ lesson }) => {
+  const { setSelectedLessonId, selectedLessonId } = useCourseContext();
+
   const handleClick = () => {
-    onSelectLesson(lesson._id);
+    setSelectedLessonId(lesson._id);
   };
 
   return (
@@ -22,6 +26,10 @@ const LessonItem = ({ lesson, onSelectLesson }) => {
         cursor: "pointer",
         borderRadius: 1,
         mb: 0.5,
+        backgroundColor: lesson._id === selectedLessonId ? "#e3f2fd" : "transparent",
+        "&:hover": {
+          backgroundColor: lesson._id === selectedLessonId ? "#e3f2fd" : "rgba(0,0,0,0.04)",
+        },
       }}
     >
       <Checkbox

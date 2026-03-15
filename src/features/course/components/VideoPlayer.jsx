@@ -4,17 +4,20 @@ import ReactPlayer from "react-player";
 
 import Box from "@mui/material/Box";
 
-import { useLessonById } from "../hooks/useGetLessonById";
 import { useLessonProgress } from "../hooks/useUpdateLessonProgress";
 import { useLessonComplete } from "../hooks/useUpdateLessonComplete";
 
 import VideoPlayerSkeleton from "./VideoPlayerSkeleton";
 
-const VideoPlayer = ({ lessonId }) => {
-  const { data, isLoading } = useLessonById(lessonId);
+import { useCourseContext } from "../context/CourseContext";
+
+const VideoPlayer = () => {
+  const { selectedLessonId: lessonId, currentLesson: data } = useCourseContext();
   const { skillId } = useParams();
   const { mutate: updateLessonProgress } = useLessonProgress();
   const { mutate: updateLessonComplete } = useLessonComplete();
+
+  const isLoading = !data && lessonId;
 
   const lastSavedRef = useRef(0);
   const playerRef = useRef(null);

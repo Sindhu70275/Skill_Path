@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import ModuleAccordion from "./ModuleAccordion";
+import { useCourseContext } from "../context/CourseContext";
 
-const ModuleSidebar = ({ modules, onSelectLesson, autoOpenModuleId }) => {
+const ModuleSidebar = () => {
+  const { modules, selectedModuleId: autoOpenModuleId } = useCourseContext();
   const [openModuleId, setOpenModuleId] = useState(null);
 
   useEffect(() => {
@@ -21,7 +23,6 @@ const ModuleSidebar = ({ modules, onSelectLesson, autoOpenModuleId }) => {
           module={module}
           expanded={openModuleId === module._id}
           onToggle={handleToggle}
-          onSelectLesson={onSelectLesson}
         />
       ))}
     </Stack>

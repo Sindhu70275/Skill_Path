@@ -1,6 +1,3 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
@@ -9,46 +6,19 @@ import ModuleSidebar from "../components/ModuleSidebar";
 import CourseInfo from "../components/CourseInfo";
 import VideoPlayer from "../components/VideoPlayer";
 import CoursePageSkeleton from "../components/CoursePageSkeleton";
+import LessonInfo from "../components/LessonInfo";
 import { ErrorDisplay } from "../../../shared/components";
 
-import { useSkillModules } from "../hooks/useGetSkillModules.js";
-import { useModuleLessons } from "../hooks/useGetModuleLessons.js";
+import { useCourseContext } from "../context/CourseContext";
 
 const CoursePage = () => {
-  const { skillId } = useParams();
-  const [selectedLessonId, setSelectedLessonId] = useState(null);
-  const [selectedModuleId, setSelectedModuleId] = useState(null);
-
-  const { data, isLoading, error } = useSkillModules(skillId);
-
-  const { data: lessons = [] } = useModuleLessons(
-    selectedModuleId,
-    !!selectedModuleId,
-  );
-
-  useEffect(() => {
-    if (data?.lastActiveLesson && !selectedLessonId) {
-      setSelectedLessonId(data.lastActiveLesson.lessonId);
-      setSelectedModuleId(data.lastActiveLesson.moduleId);
-    } else if (data?.modules?.length > 0 && !selectedModuleId) {
-      setSelectedModuleId(data.modules[0]._id);
-    }
-  }, [data, selectedLessonId, selectedModuleId]);
-
-  useEffect(() => {
-    if (lessons.length > 0 && !selectedLessonId) {
-      const firstIncomplete = lessons.find((l) => !l.isCompleted);
-      setSelectedLessonId((firstIncomplete || lessons[0])._id);
-    }
-  }, [lessons, selectedLessonId]);
+  const { isLoading, error } = useCourseContext();
 
   if (isLoading) return <CoursePageSkeleton />;
   if (error)
     return (
       <ErrorDisplay message="Failed to load course data. Please refresh or try again." />
     );
-
-  const { modules, skill } = data;
 
   return (
     <Box
@@ -59,7 +29,7 @@ const CoursePage = () => {
         py: 3,
       }}
     >
-      <CourseHeader title={skill?.title} />
+      <CourseHeader />
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, lg: 8 }}>
           <Box
@@ -70,10 +40,12 @@ const CoursePage = () => {
               mb: 3,
             }}
           >
-            <VideoPlayer lessonId={selectedLessonId} />
+            <VideoPlayer />
           </Box>
 
-          <CourseInfo course={skill} />
+          <LessonInfo />
+
+          <CourseInfo />
         </Grid>
 
         <Grid size={{ xs: 12, lg: 4 }}>
@@ -88,11 +60,7 @@ const CoursePage = () => {
               overflowY: "auto",
             }}
           >
-            <ModuleSidebar
-              modules={modules}
-              onSelectLesson={setSelectedLessonId}
-              autoOpenModuleId={selectedModuleId}
-            />
+            <ModuleSidebar />
           </Box>
         </Grid>
       </Grid>

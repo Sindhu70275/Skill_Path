@@ -16,7 +16,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const CourseHeader = ({ title }) => {
+import { useCourseContext } from "../context/CourseContext";
+
+const CourseHeader = () => {
+  const { skill } = useCourseContext();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
@@ -56,7 +60,7 @@ const CourseHeader = ({ title }) => {
           <CircularProgressbar value={percentage} text={`${percentage}%`} />
         </Box>
 
-        <Typography variant="h6">{title}</Typography>
+        <Typography variant="h6">{skill?.title}</Typography>
       </Box>
 
       <Stack>

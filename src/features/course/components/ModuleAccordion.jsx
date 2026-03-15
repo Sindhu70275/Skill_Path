@@ -13,8 +13,11 @@ import { useModuleLessons } from "../hooks/useGetModuleLessons.js";
 
 import LessonItem from "./LessonItem";
 
-const ModuleAccordion = ({ module, onSelectLesson, expanded, onToggle, }) => {
-  const { data: lessons = [], isLoading } = useModuleLessons(module._id, expanded);
+const ModuleAccordion = ({ module, expanded, onToggle }) => {
+  const { data: lessons = [], isLoading } = useModuleLessons(
+    module._id,
+    expanded,
+  );
   return (
     <Accordion expanded={expanded} onChange={() => onToggle(module._id)}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -60,11 +63,7 @@ const ModuleAccordion = ({ module, onSelectLesson, expanded, onToggle, }) => {
         {isLoading && <LessonsSkeleton count={2} />}
 
         {lessons.map((lesson) => (
-          <LessonItem
-            key={lesson._id}
-            lesson={lesson}
-            onSelectLesson={onSelectLesson}
-          />
+          <LessonItem key={lesson._id} lesson={lesson} />
         ))}
       </AccordionDetails>
     </Accordion>
