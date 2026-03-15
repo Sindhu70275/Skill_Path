@@ -12,12 +12,12 @@ import VideoPlayerSkeleton from "./VideoPlayerSkeleton";
 import { useCourseContext } from "../context/CourseContext";
 
 const VideoPlayer = () => {
-  const { selectedLessonId: lessonId, currentLesson: data } = useCourseContext();
+  const { selectedLessonId, currentLesson } = useCourseContext();
   const { skillId } = useParams();
   const { mutate: updateLessonProgress } = useLessonProgress();
   const { mutate: updateLessonComplete } = useLessonComplete();
 
-  const isLoading = !data && lessonId;
+  const isLoading = !currentLesson && selectedLessonId;
 
   const lastSavedRef = useRef(0);
   const playerRef = useRef(null);
@@ -25,14 +25,14 @@ const VideoPlayer = () => {
   // Reset progress tracking when lesson changes
   useEffect(() => {
     lastSavedRef.current = 0;
-  }, [lessonId]);
+  }, [selectedLessonId]);
 
   // Resume playback from last watched time
   useEffect(() => {
-    if (playerRef.current && data?.lastWatchedSecond) {
-      playerRef.current.currentTime = data.lastWatchedSecond;
+    if (playerRef.current && currentLesson?.lastWatchedSecond) {
+      playerRef.current.currentTime = currentLesson.lastWatchedSecond;
     }
-  }, [data]);
+  }, [currentLesson]);
 
   if (isLoading) return <VideoPlayerSkeleton />;
 
@@ -44,21 +44,22 @@ const VideoPlayer = () => {
     lastSavedRef.current = playedSeconds;
 
     updateLessonProgress({
-      lessonId,
+      selectedLessonId,
       skillId,
-      progressPercentage: playedSeconds / (data.durationInMinutes * 60),
+      progressPercentage:
+        playedSeconds / (currentLesson.durationInMinutes * 60),
       lastWatchedSecond: playedSeconds,
     });
   };
 
   const handleEnded = () => {
-    updateLessonComplete({ lessonId, skillId });
+    updateLessonComplete({ selectedLessonId, skillId });
   };
 
   return (
     <Box sx={{ width: "100%", aspectRatio: "16/9" }}>
       <ReactPlayer
-        src={data?.videoUrl}
+        src={currentLesson?.videoUrl}
         width="100%"
         height="100%"
         controls

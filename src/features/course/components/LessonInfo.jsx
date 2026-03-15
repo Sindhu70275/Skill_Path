@@ -5,11 +5,14 @@ import Stack from "@mui/material/Stack";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 import { useCourseContext } from "../context/CourseContext";
+import LessonInfoSkeleton from "./LessonInfoSkeleton";
 
 const LessonInfo = () => {
   const { currentModule, currentSubsection, videoProgress } =
     useCourseContext();
-    
+
+  if (!currentModule || !currentSubsection) return <LessonInfoSkeleton />;
+
   return (
     <Box
       sx={{

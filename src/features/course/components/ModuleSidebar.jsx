@@ -4,12 +4,12 @@ import ModuleAccordion from "./ModuleAccordion";
 import { useCourseContext } from "../context/CourseContext";
 
 const ModuleSidebar = () => {
-  const { modules, selectedModuleId: autoOpenModuleId } = useCourseContext();
+  const { modules, selectedModuleId } = useCourseContext();
   const [openModuleId, setOpenModuleId] = useState(null);
 
   useEffect(() => {
-    setOpenModuleId(autoOpenModuleId);
-  }, [autoOpenModuleId]);
+    setOpenModuleId(selectedModuleId);
+  }, [selectedModuleId]);
 
   const handleToggle = (moduleId) => {
     setOpenModuleId((prev) => (prev === moduleId ? null : moduleId));
