@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { useUnenrollSkill } from "../../../shared/hooks/usePostUnenrollSkill.js";
+import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -20,6 +23,8 @@ import { useCourseContext } from "../context/CourseContext";
 
 const CourseHeader = () => {
   const { skill } = useCourseContext();
+  const showSnackbar = useContext(SnackbarContext);
+  const { mutate: unenrollSkill } = useUnenrollSkill();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
@@ -32,6 +37,23 @@ const CourseHeader = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleUnenroll = () => {
+    unenrollSkill(skill._id, {
+      onSuccess: (response) => {
+        showSnackbar(response.message, "success");
+        navigate("/dashboard");
+      },
+      onError: (error) => {
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong";
+        showSnackbar(message, "error");
+      },
+    });
+    handleClose();
   };
 
   const handleBack = () => {
@@ -82,7 +104,7 @@ const CourseHeader = () => {
               <Typography>Share</Typography>
             </Stack>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleUnenroll}>
             <Stack direction="row" spacing={1.5} alignItems="center">
               <CloseIcon fontSize="small" sx={{ color: "error.main" }} />
               <Typography sx={{ color: "error.main" }}>Unenroll</Typography>
