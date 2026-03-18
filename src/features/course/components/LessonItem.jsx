@@ -10,9 +10,10 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { useCourseContext } from "../context/CourseContext";
 
 const LessonItem = ({ lesson }) => {
-  const { setSelectedLessonId, selectedLessonId } = useCourseContext();
+  const { setSelectedLessonId, selectedLessonId, setSelectedModuleId } = useCourseContext();
 
   const handleClick = () => {
+    setSelectedModuleId(lesson.moduleId);
     setSelectedLessonId(lesson._id);
   };
 
