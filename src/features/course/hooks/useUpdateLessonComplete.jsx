@@ -1,13 +1,18 @@
 import axios from "../../../api/axios";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useLessonComplete = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: async ({ lessonId, skillId}) => {
+    mutationFn: async ({ lessonId, skillId }) => {
       const response = await axios.put(
         `/api/progress/${skillId}/lesson/${lessonId}/complete`,
       );
       return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["lessons"] });
     },
   });
 };

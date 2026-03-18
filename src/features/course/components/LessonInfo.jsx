@@ -1,17 +1,53 @@
+import { useContext } from "react";
+
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
 import { useCourseContext } from "../context/CourseContext";
+import { useLessonComplete } from "../hooks/useUpdateLessonComplete";
+import { SnackbarContext } from "../../../shared/context/SnackbarContext";
+import CustomButton from "../../../shared/components/CustomButton";
 import LessonInfoSkeleton from "./LessonInfoSkeleton";
 
 const LessonInfo = () => {
-  const { currentModule, currentSubsection, videoProgress } =
-    useCourseContext();
+  const {
+    currentModule,
+    currentSubsection,
+    selectedLessonId,
+    skill,
+    videoProgress,
+  } = useCourseContext();
+  const { mutate: markComplete, isPending: isCompleting } = useLessonComplete();
+  const showSnackbar = useContext(SnackbarContext);
+
+  const handleMarkComplete = () => {
+    if (!selectedLessonId || !skill._id) return;
+
+    markComplete(
+      { lessonId: selectedLessonId, skillId: skill._id },
+      {
+        onSuccess: (data) => {
+          const message = data?.message || "Lesson marked as completed!";
+          showSnackbar(message, "success");
+        },
+        onError: (error) => {
+          const message =
+            error?.response?.data?.message || "Failed to mark as completed";
+          showSnackbar(message, "error");
+          console.error(error);
+        },
+      },
+    );
+  };
 
   if (!currentModule || !currentSubsection) return <LessonInfoSkeleton />;
+
+  const isCompleted = currentSubsection?.isCompleted;
 
   return (
     <Box
@@ -29,7 +65,7 @@ const LessonInfo = () => {
         alignItems="flex-start"
         sx={{ mb: 2 }}
       >
-        <Box>
+        <Box sx={{ flex: 1 }}>
           <Typography variant="caption" color="text.secondary">
             {currentModule?.order}. {currentModule?.title}
           </Typography>
@@ -37,6 +73,27 @@ const LessonInfo = () => {
             {currentSubsection?.title}
           </Typography>
         </Box>
+        <CustomButton
+          label={
+            isCompleted
+              ? "Completed"
+              : isCompleting
+                ? "Marking..."
+                : "Mark as completed"
+          }
+          variant="contained"
+          onClick={handleMarkComplete}
+          disabled={
+            isCompleted || isCompleting || !selectedLessonId || !skill._id
+          }
+                startIcon={isCompleted ? <CheckCircleIcon /> : <PlayCircleOutlineIcon />}
+          sx={{
+            backgroundColor: isCompleted ? "transparent" : "primary.main",
+            color: isCompleted ? "success.main" : "#ffffff",
+            borderColor: isCompleted ? "success.main" : "primary.main",
+          }}
+
+        />
       </Stack>
 
       <Stack
