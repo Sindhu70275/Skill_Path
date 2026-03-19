@@ -11,6 +11,9 @@ import EnrolledSkillCard from "./EnrolledSkillCard";
 import WishlistCard from "./WishlistCard";
 import EnrolledSkillCardSkeleton from "./EnrolledSkillCardSkeleton";
 import WishlistCardSkeleton from "./WishlistCardSkeleton";
+import NoSkillsFound from "../../../shared/components/NoSkillsFound";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const DashboardTab = ({ dashboardSkills, isLoading }) => {
   const [tab, setTab] = useState("enroll");
@@ -32,9 +35,15 @@ const DashboardTab = ({ dashboardSkills, isLoading }) => {
         <TabPanel value="enroll" sx={{ padding: "2rem 0rem" }}>
           {isLoading ? (
             <EnrolledSkillCardSkeleton count={4} />
+          ) : dashboardSkills?.enrolled?.length === 0 ? (
+            <NoSkillsFound
+              icon={AddCircleOutlineIcon}
+              title="No enrolled skills yet"
+              subtitle="Enroll in skills from the Discover page to get started."
+            />
           ) : (
             <Grid container spacing={2}>
-              {dashboardSkills?.enrolled?.map((skill) => (
+              {dashboardSkills.enrolled.map((skill) => (
                 <Grid size={{ xs: 12, sm: 6, md: 3 }} key={skill._id}>
                   <EnrolledSkillCard skillData={skill} />
                 </Grid>
@@ -46,9 +55,15 @@ const DashboardTab = ({ dashboardSkills, isLoading }) => {
         <TabPanel value="wishlist" sx={{ padding: "2rem 0rem" }}>
           {isLoading ? (
             <WishlistCardSkeleton count={4} />
+          ) : dashboardSkills?.wishlisted?.length === 0 ? (
+            <NoSkillsFound
+              icon={FavoriteBorderIcon}
+              title="No wishlisted skills yet"
+              subtitle="Add skills to your wishlist from the Discover page."
+            />
           ) : (
             <Grid container spacing={2}>
-              {dashboardSkills?.wishlisted?.map((skill) => (
+              {dashboardSkills.wishlisted.map((skill) => (
                 <Grid size={{ xs: 12, sm: 6, md: 3 }} key={skill._id}>
                   <WishlistCard skillData={skill} />
                 </Grid>

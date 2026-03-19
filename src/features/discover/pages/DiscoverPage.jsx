@@ -7,7 +7,7 @@ import { useSkills } from "../hooks/useGetSkills";
 
 import DiscoverHeader from "../components/DiscoverHeader";
 import DiscoverSkillCard from "../components/DiscoverSkillCard";
-import NoSkillsFound from "../components/NoSkillsFound";
+import NoSkillsFound from "../../../shared/components/NoSkillsFound";
 import { SkillsLoadingSkeleton } from "../components/SkillCardSkeleton";
 import { ErrorDisplay } from "../../../shared/components";
 
@@ -43,7 +43,7 @@ const DiscoverPage = () => {
     }
 
     if (!skillsData || skillsData.length === 0) {
-      return <NoSkillsFound />;
+      return <NoSkillsFound title="No matches yet" subtitle="Try adjusting your search or filters." />;
     }
 
     return (
