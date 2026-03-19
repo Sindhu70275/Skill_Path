@@ -22,14 +22,12 @@ import "react-circular-progressbar/dist/styles.css";
 import { useCourseContext } from "../context/CourseContext";
 
 const CourseHeader = () => {
-  const { skill } = useCourseContext();
+  const { skill, overallProgress } = useCourseContext();
   const showSnackbar = useContext(SnackbarContext);
   const { mutate: unenrollSkill } = useUnenrollSkill();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
-
-  const percentage = 0;
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -79,7 +77,7 @@ const CourseHeader = () => {
         </IconButton>
 
         <Box sx={{ width: 50 }}>
-          <CircularProgressbar value={percentage} text={`${percentage}%`} />
+          <CircularProgressbar value={overallProgress} text={`${overallProgress}%`} />
         </Box>
 
         <Typography variant="h6">{skill?.title}</Typography>

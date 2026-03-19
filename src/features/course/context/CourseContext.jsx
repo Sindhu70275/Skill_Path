@@ -46,6 +46,8 @@ export const CourseProvider = ({ children }) => {
     ? Math.round(currentLesson.progressPercentage * 100)
     : 0;
 
+  const overallProgress = data?.overallPercentage ?? 0;
+
   const value = {
     selectedModuleId,
     setSelectedModuleId,
@@ -57,6 +59,7 @@ export const CourseProvider = ({ children }) => {
     currentSubsection,
     currentLesson,
     videoProgress,
+    overallProgress,
     isLoading,
     error,
     skill,
