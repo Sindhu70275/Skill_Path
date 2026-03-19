@@ -54,6 +54,17 @@ const CourseHeader = () => {
     handleClose();
   };
 
+  const handleShare = async () => {
+    try {
+      const url = window.location.origin + window.location.pathname;
+      await navigator.clipboard.writeText(url);
+      showSnackbar("Copied course URL to clipboard!", "success");
+    } catch (err) {
+      showSnackbar("Failed to copy URL. Please copy manually.", "error");
+    }
+    handleClose();
+  };
+
   const handleBack = () => {
     navigate(-1);
   };
@@ -77,7 +88,10 @@ const CourseHeader = () => {
         </IconButton>
 
         <Box sx={{ width: 50 }}>
-          <CircularProgressbar value={overallProgress} text={`${overallProgress}%`} />
+          <CircularProgressbar
+            value={overallProgress}
+            text={`${overallProgress}%`}
+          />
         </Box>
 
         <Typography variant="h6">{skill?.title}</Typography>
@@ -96,7 +110,7 @@ const CourseHeader = () => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleShare}>
             <Stack direction="row" spacing={1.5} alignItems="center">
               <ShareIcon fontSize="small" />
               <Typography>Share</Typography>

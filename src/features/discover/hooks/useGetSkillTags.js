@@ -6,10 +6,11 @@ const fetchSkillTags = async () => {
   return data;
 };
 
-export const useSkillTags = () => {
+export const useSkillTags = (enabled) => {
   return useQuery({
     queryKey: ["tags"],
     queryFn: fetchSkillTags,
+    enabled: !!enabled,
     staleTime: 1000 * 60 * 5,
     retry: 1,
   });
