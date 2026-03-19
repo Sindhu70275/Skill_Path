@@ -80,7 +80,7 @@ const EnrolledSkillCard = ({ skillData }) => {
         <Box sx={{ width: "100%" }}>
           <LinearProgress
             variant="determinate"
-            value={skillData.progress || 0}
+            value={skillData.overallPercentage || 0}
             sx={{
               height: 8,
               borderRadius: 4,
@@ -91,7 +91,7 @@ const EnrolledSkillCard = ({ skillData }) => {
             }}
           />
           <Typography variant="caption" color="text.secondary">
-            {skillData.progress || 0}% Complete
+            {skillData.overallPercentage || 0}% Complete
           </Typography>
         </Box>
 
