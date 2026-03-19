@@ -13,6 +13,7 @@ export const useLessonComplete = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["lessons"] });
+      queryClient.invalidateQueries({ queryKey: ["courseModules"] });
     },
   });
 };
