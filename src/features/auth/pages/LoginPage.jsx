@@ -1,6 +1,11 @@
-import { useForm, Controller } from "react-hook-form";
+import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useContext } from "react";
+import { useForm, Controller } from "react-hook-form";
+
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -19,6 +24,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const showSnackbar = useContext(SnackbarContext);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const { mutate: loginUser, isPending } = useLoginUser();
 
@@ -70,8 +77,8 @@ const LoginPage = () => {
                 rules={{
                   required: "Email is required",
                   pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: "Invalid email address",
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: "Please enter a valid email address",
                   },
                 }}
                 render={({ field, fieldState: { error } }) => (
@@ -89,17 +96,48 @@ const LoginPage = () => {
               <Controller
                 name="password"
                 control={control}
-                rules={{ required: "Password is required" }}
+                rules={{
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+                  pattern: {
+                    value:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                    message:
+                      "Password must contain uppercase, lowercase, number, special char (@$!%*?&)",
+                  },
+                }}
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
                     id="password"
                     label="Password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     variant="outlined"
                     fullWidth
                     error={!!error}
                     helperText={error?.message}
+                    slotProps={{
+                      input: {
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={() => setShowPassword(!showPassword)}
+                              edge="end"
+                            >
+                              {showPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      },
+                    }}
                   />
                 )}
               />

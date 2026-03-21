@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 
 import { useSkillTags } from "../hooks/useGetSkillTags";
+import FilterSkeleton from "./FilterSkeleton";
 
 const DiscoverSkillsFilter = ({
   anchorEl,
@@ -23,7 +24,7 @@ const DiscoverSkillsFilter = ({
   const theme = useTheme();
   const [searchText, setSearchText] = useState("");
 
-  const { isLoading, data: skillTags } = useSkillTags();
+  const { isLoading, data: skillTags } = useSkillTags(open);
 
   const handleClearAll = (e) => {
     e.stopPropagation();
@@ -74,12 +75,10 @@ const DiscoverSkillsFilter = ({
 
       <Box sx={{ maxHeight: 200, overflow: "auto" }}>
         {isLoading ? (
-          <MenuItem disabled>
-            <ListItemText primary="Loading skills..." />
-          </MenuItem>
+          <FilterSkeleton />
         ) : (
           <>
-            {filteredSkillNames.map((name) => {
+            {filteredSkillNames?.map((name) => {
               const selected = skillFilter.includes(name);
               return (
                 <MenuItem
@@ -99,7 +98,7 @@ const DiscoverSkillsFilter = ({
               );
             })}
 
-            {filteredSkillNames.length === 0 && (
+            {filteredSkillNames?.length === 0 && (
               <MenuItem disabled>
                 <ListItemText primary="No skills found" />
               </MenuItem>

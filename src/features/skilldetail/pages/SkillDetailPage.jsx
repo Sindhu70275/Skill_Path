@@ -1,4 +1,8 @@
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+
+import { useEnrollSkill } from "../../../shared/hooks/usePostEnrollSkill.js";
+import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -26,7 +30,30 @@ import { ErrorDisplay, CustomButton } from "../../../shared/components";
 const SkillDetailPage = () => {
   const { id } = useParams();
 
-  const { data: skillData, isLoading, error } = useGetSkillDetails(id);
+  const { data: skillData, isLoading, error, refetch } = useGetSkillDetails(id);
+
+  const {
+    mutate: enrollSkill,
+    isPending: enrollPending,
+    isSuccess: enrollSuccess,
+  } = useEnrollSkill();
+  const showSnackbar = useContext(SnackbarContext);
+
+  const handleEnroll = () => {
+    enrollSkill(skillData._id, {
+      onSuccess: async (response) => {
+        refetch();
+        showSnackbar(response.message, "success");
+      },
+      onError: (error) => {
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong";
+        showSnackbar(message, "error");
+      },
+    });
+  };
 
   if (isLoading) {
     return <SkillDetailSkeleton />;
@@ -55,6 +82,7 @@ const SkillDetailPage = () => {
     learningOutcomes = [],
     modules = [],
     prerequisites = [],
+    isEnrolled,
   } = skillData;
 
   return (
@@ -295,9 +323,11 @@ const SkillDetailPage = () => {
 
               <Box sx={{ pt: 2 }}>
                 <CustomButton
-                  label="Enroll Now"
+                  label={enrollPending ? "Enrolling..." : (isEnrolled || enrollSuccess) ? "Enrolled" : "Enroll Now"}
+                  onClick={handleEnroll}
                   variant="contained"
                   width="100%"
+                  disabled={enrollPending || isEnrolled || enrollSuccess}
                 />
               </Box>
             </Stack>
