@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 
 import { useSkills } from "../hooks/useGetSkills";
+import { AuthContext } from "../../../features/auth/context/AuthContext";
 
 import DiscoverHeader from "../components/DiscoverHeader";
 import DiscoverSkillCard from "../components/DiscoverSkillCard";
@@ -16,11 +17,12 @@ const DiscoverPage = () => {
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [skillFilter, setSkillFilter] = useState([]);
 
+  const auth = useContext(AuthContext);
   const {
     data: skillsData,
     isLoading,
     error,
-  } = useSkills(debouncedSearch, skillFilter);
+  } = useSkills(debouncedSearch, skillFilter, auth?.user?.id);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -43,7 +45,12 @@ const DiscoverPage = () => {
     }
 
     if (!skillsData || skillsData.length === 0) {
-      return <NoSkillsFound title="No matches yet" subtitle="Try adjusting your search or filters." />;
+      return (
+        <NoSkillsFound
+          title="No matches yet"
+          subtitle="Try adjusting your search or filters."
+        />
+      );
     }
 
     return (
