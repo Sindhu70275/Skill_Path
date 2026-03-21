@@ -1,7 +1,9 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+
 
 import PublicLayout from "./layouts/PublicLayout";
 import AuthLayout from "./layouts/AuthLayout";
+import AdminLayout from "./layouts/AdminLayout";
 
 import { CourseProvider } from "../features/course/context/CourseContext";
 
@@ -34,8 +36,12 @@ const AppRoutes = () => {
             </CourseProvider>
           }
         />
-        <Route path="/analytics" element={<AnalyticsPage />} />
+        <Route element={<AdminLayout />}>
+          <Route path="/analytics" element={<AnalyticsPage />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/discover" replace />} />
       </Route>
+
     </Routes>
   );
 };

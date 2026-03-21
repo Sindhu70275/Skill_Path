@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useContext } from "react";
 
 import { useTheme } from "@mui/material/styles";
 
@@ -23,14 +22,17 @@ import { ROUTES } from "../../shared/constants";
 const pages = [
   { page: "Discover", path: "/discover" },
   { page: "Dashboard", path: "/dashboard" },
-  { page: "Analytics", path: "/analytics" },
 ];
 const settings = ["Profile", "Logout"];
 
 const ResponsiveAppBar = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
+  const filteredPages =
+    user?.role === "admin"
+      ? [...pages, { page: "Analytics", path: "/analytics" }]
+      : pages;
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -78,7 +80,7 @@ const ResponsiveAppBar = () => {
           </Box>
 
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 3 }}>
-            {pages.map((page) => (
+            {filteredPages.map((page) => (
               <NavLink
                 to={page.path}
                 style={({ isActive }) => ({
@@ -104,7 +106,7 @@ const ResponsiveAppBar = () => {
               onClose={() => setAnchorElNav(null)}
               sx={{ "& .MuiPaper-root": { borderRadius: "0.5rem" } }}
             >
-              {pages.map((page) => (
+              {filteredPages.map((page) => (
                 <MenuItem
                   key={page.page}
                   onClick={() => handleCloseNavMenu(page.path)}
