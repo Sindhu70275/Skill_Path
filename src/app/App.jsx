@@ -1,10 +1,15 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
-import AppRoutes from "./routes";
+
+import { SplashScreen } from "../shared/components";
+const AppRoutes = lazy(() => import("./routes"));
 
 const App = () => {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <Suspense fallback={<SplashScreen />}>
+        <AppRoutes />
+      </Suspense>
     </BrowserRouter>
   );
 };
