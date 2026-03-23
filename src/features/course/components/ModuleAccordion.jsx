@@ -7,10 +7,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import LessonsSkeleton from "./LessonsSkeleton";
 
 import { useModuleLessons } from "../hooks/useGetModuleLessons.js";
-
+import { formatDuration } from "../../../shared/utils/formatDuration.js";
+import LessonsSkeleton from "./LessonsSkeleton";
 import LessonItem from "./LessonItem";
 
 const ModuleAccordion = ({ module, expanded, onToggle }) => {
@@ -51,7 +51,7 @@ const ModuleAccordion = ({ module, expanded, onToggle }) => {
             >
               <AccessTimeIcon sx={{ fontSize: 16 }} />
               <Typography variant="body2">
-                {module.durationInMinutes} min
+                {formatDuration(module.durationInMinutes)}
               </Typography>
             </Stack>
           </Box>
