@@ -11,6 +11,7 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { useCourseContext } from "../context/CourseContext";
 import { useLessonComplete } from "../hooks/useUpdateLessonComplete";
 import { SnackbarContext } from "../../../shared/context/SnackbarContext";
+import { formatDuration } from "../../../shared/utils/formatDuration.js";
 import CustomButton from "../../../shared/components/CustomButton";
 import LessonInfoSkeleton from "./LessonInfoSkeleton";
 
@@ -86,13 +87,14 @@ const LessonInfo = () => {
           disabled={
             isCompleted || isCompleting || !selectedLessonId || !skill._id
           }
-                startIcon={isCompleted ? <CheckCircleIcon /> : <PlayCircleOutlineIcon />}
+          startIcon={
+            isCompleted ? <CheckCircleIcon /> : <PlayCircleOutlineIcon />
+          }
           sx={{
             backgroundColor: isCompleted ? "transparent" : "primary.main",
             color: isCompleted ? "success.main" : "#ffffff",
             borderColor: isCompleted ? "success.main" : "primary.main",
           }}
-
         />
       </Stack>
 
@@ -105,7 +107,7 @@ const LessonInfo = () => {
         <Stack direction="row" alignItems="center" spacing={0.5}>
           <AccessTimeIcon sx={{ fontSize: 18 }} />
           <Typography variant="body2">
-            {currentSubsection?.durationInMinutes || 0} min
+            {formatDuration(currentSubsection?.durationInMinutes)}
           </Typography>
         </Stack>
         <Typography variant="body2">

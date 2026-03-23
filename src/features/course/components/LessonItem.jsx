@@ -7,10 +7,12 @@ import Stack from "@mui/material/Stack";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
+import { formatDuration } from "../../../shared/utils/formatDuration.js";
 import { useCourseContext } from "../context/CourseContext";
 
 const LessonItem = ({ lesson }) => {
-  const { setSelectedLessonId, selectedLessonId, setSelectedModuleId } = useCourseContext();
+  const { setSelectedLessonId, selectedLessonId, setSelectedModuleId } =
+    useCourseContext();
 
   const handleClick = () => {
     setSelectedModuleId(lesson.moduleId);
@@ -27,9 +29,11 @@ const LessonItem = ({ lesson }) => {
         cursor: "pointer",
         borderRadius: 1,
         mb: 0.5,
-        backgroundColor: lesson._id === selectedLessonId ? "#e3f2fd" : "transparent",
+        backgroundColor:
+          lesson._id === selectedLessonId ? "#e3f2fd" : "transparent",
         "&:hover": {
-          backgroundColor: lesson._id === selectedLessonId ? "#e3f2fd" : "rgba(0,0,0,0.04)",
+          backgroundColor:
+            lesson._id === selectedLessonId ? "#e3f2fd" : "rgba(0,0,0,0.04)",
         },
       }}
     >
@@ -64,7 +68,7 @@ const LessonItem = ({ lesson }) => {
         >
           <AccessTimeIcon sx={{ fontSize: 12, color: "text.secondary" }} />
           <Typography variant="caption" color="text.secondary">
-            {lesson.durationInMinutes} min
+            {formatDuration(lesson.durationInMinutes)}
           </Typography>
         </Stack>
       </Box>
