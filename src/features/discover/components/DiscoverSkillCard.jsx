@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Box from "@mui/material/Box";
@@ -29,6 +29,8 @@ const DiscoverSkillCard = ({ skillData }) => {
   const { mutate: addWishlist, isPending: addPending } = useAddWishlistSkill();
   const { mutate: removeWishlist, isPending: removePending } =
     useRemoveWishlistSkill();
+
+  const isComingSoon = skillData.modulesCount === 0 || skillData.modulesCount === undefined;
 
   const onSeeMore = (id) => {
     navigate(`/skillDetails/${id}`);
@@ -87,10 +89,35 @@ const DiscoverSkillCard = ({ skillData }) => {
           image={skillData.image}
           title={skillData.title}
         />
-        {!skillData.isEnrolled && (
+        {isComingSoon && (
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: "50%",
+              background:
+                "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 1,
+            }}
+          >
+            <Typography
+              variant="h6"
+              color="common.white"
+              sx={{ fontWeight: "bold" }}
+            >
+              Coming Soon
+            </Typography>
+          </Box>
+        )}
+        {!skillData.isEnrolled && !isComingSoon && (
           <IconButton
             onClick={() => handleWishlistToggle(skillData._id)}
-            disabled={addPending || removePending}
+            disabled={addPending || removePending || isComingSoon}
             sx={{
               position: "absolute",
               top: 8,
@@ -140,11 +167,17 @@ const DiscoverSkillCard = ({ skillData }) => {
                 : "Enroll"
           }
           width="50%"
-          disabled={enrollPending || skillData.isEnrolled || enrollSuccess}
+          disabled={
+            enrollPending ||
+            skillData.isEnrolled ||
+            enrollSuccess ||
+            isComingSoon
+          }
         />
         <CustomButton
           onClick={() => onSeeMore(skillData._id)}
           label="See More"
+          disabled={isComingSoon}
           variant="outline"
           width="40%"
         />
