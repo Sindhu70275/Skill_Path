@@ -43,7 +43,7 @@ const LessonItem = ({ lesson }) => {
           p: 0,
           mr: 1.5,
           color: "#e0e0e0",
-          "&.Mui-checked": { color: "success.main" },
+          "&.Mui-checked": { color: "primary.main" },
         }}
       />
 

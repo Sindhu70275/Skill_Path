@@ -40,6 +40,7 @@ const DiscoverHeader = ({
         height: "10rem",
         backgroundImage: "linear-gradient(to right, #b3d9ff, #e6f2ff, #e6f2ff)",
         borderRadius: "1rem",
+        mt: 2,
       }}
     >
       <Typography variant="h7">

@@ -1,6 +1,7 @@
 import Stack from "@mui/material/Stack";
 
 import DashboardTab from "../components/DashboardTab";
+import DashboardHeader from "../components/DashboardHeader";
 import { ErrorDisplay } from "../../../shared/components";
 import { useDashboardSkills } from "../../../shared/hooks/useGetDashboardSkills";
 
@@ -21,6 +22,7 @@ const DashboardPage = () => {
 
   return (
     <Stack sx={{ paddingX: { xs: "2rem", md: "4rem" } }}>
+      <DashboardHeader />
       <DashboardTab dashboardSkills={dashboardSkills} isLoading={isLoading} />
     </Stack>
   );

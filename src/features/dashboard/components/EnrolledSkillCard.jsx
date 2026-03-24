@@ -5,6 +5,7 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
 import IconButton from "@mui/material/IconButton";
+import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
@@ -21,6 +22,10 @@ const EnrolledSkillCard = ({ skillData }) => {
   const handleStartLearning = (id) => {
     navigate(`/course/${id}`);
   };
+
+  const percentage = skillData.overallPercentage || 0;
+  const completed = skillData.lessonsCompleted || 0;
+  const total = skillData.lessonsCount || 0;
 
   return (
     <Card
@@ -78,9 +83,20 @@ const EnrolledSkillCard = ({ skillData }) => {
         </Typography>
 
         <Box sx={{ width: "100%" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 0.5 }}>
+            <Typography variant="caption" color="text.secondary">
+              {percentage}% Achieved
+            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+              <TrackChangesOutlinedIcon fontSize="0.5rem" color="text.secondary" />
+              <Typography variant="caption" color="text.secondary">
+                {completed}/{total}
+              </Typography>
+            </Box>
+          </Box>
           <LinearProgress
             variant="determinate"
-            value={skillData.overallPercentage || 0}
+            value={percentage}
             sx={{
               height: 8,
               borderRadius: 4,
@@ -90,9 +106,6 @@ const EnrolledSkillCard = ({ skillData }) => {
               },
             }}
           />
-          <Typography variant="caption" color="text.secondary">
-            {skillData.overallPercentage || 0}% Complete
-          </Typography>
         </Box>
 
         <CustomButton
