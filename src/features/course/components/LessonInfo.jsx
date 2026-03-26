@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -26,8 +26,21 @@ const LessonInfo = () => {
   const { mutate: markComplete, isPending: isCompleting } = useLessonComplete();
   const showSnackbar = useContext(SnackbarContext);
 
+  const [complete, setComplete] = useState(false);
+
+  useEffect(() => {
+    setComplete(false);
+  }, [selectedLessonId]);
+
   const handleMarkComplete = () => {
-    if (!selectedLessonId || !skill._id) return;
+    if (
+      !selectedLessonId ||
+      !skill._id ||
+      complete ||
+      currentSubsection?.isCompleted
+    )
+      return;
+    setComplete(true);
 
     markComplete(
       { lessonId: selectedLessonId, skillId: skill._id },
@@ -37,6 +50,7 @@ const LessonInfo = () => {
           showSnackbar(message, "success");
         },
         onError: (error) => {
+          setComplete(false);
           const message =
             error?.response?.data?.message || "Failed to mark as completed";
           showSnackbar(message, "error");
@@ -48,7 +62,7 @@ const LessonInfo = () => {
 
   if (!currentModule || !currentSubsection) return <LessonInfoSkeleton />;
 
-  const isCompleted = currentSubsection?.isCompleted;
+  const isCompleted = currentSubsection?.isCompleted || complete;
 
   return (
     <Box
@@ -75,13 +89,7 @@ const LessonInfo = () => {
           </Typography>
         </Box>
         <CustomButton
-          label={
-            isCompleted
-              ? "Completed"
-              : isCompleting
-                ? "Marking..."
-                : "Mark as completed"
-          }
+          label={isCompleted ? "Completed" : "Mark as completed"}
           variant="contained"
           onClick={handleMarkComplete}
           disabled={

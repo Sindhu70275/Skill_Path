@@ -10,7 +10,7 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { formatDuration } from "../../../shared/utils/formatDuration.js";
 import { useCourseContext } from "../context/CourseContext";
 
-const LessonItem = ({ lesson }) => {
+const LessonItem = ({ lesson, hideInteractive = false }) => {
   const { setSelectedLessonId, selectedLessonId, setSelectedModuleId } =
     useCourseContext();
 
@@ -21,31 +21,36 @@ const LessonItem = ({ lesson }) => {
 
   return (
     <Box
-      onClick={handleClick}
+      onClick={hideInteractive ? undefined : handleClick}
       sx={{
         display: "flex",
         alignItems: "center",
         p: 1.5,
-        cursor: "pointer",
+        cursor: hideInteractive ? "default" : "pointer",
         borderRadius: 1,
         mb: 0.5,
-        backgroundColor:
-          lesson._id === selectedLessonId ? "#e3f2fd" : "transparent",
-        "&:hover": {
-          backgroundColor:
-            lesson._id === selectedLessonId ? "#e3f2fd" : "rgba(0,0,0,0.04)",
-        },
+        backgroundColor: hideInteractive 
+          ? "transparent" 
+          : lesson._id === selectedLessonId ? "#e3f2fd" : "transparent",
+        "&:hover": hideInteractive 
+          ? undefined 
+          : {
+              backgroundColor:
+                lesson._id === selectedLessonId ? "#e3f2fd" : "rgba(0,0,0,0.04)",
+            },
       }}
     >
-      <Checkbox
-        checked={lesson.isCompleted}
-        sx={{
-          p: 0,
-          mr: 1.5,
-          color: "#e0e0e0",
-          "&.Mui-checked": { color: "primary.main" },
-        }}
-      />
+      {!hideInteractive && (
+        <Checkbox
+          checked={lesson.isCompleted}
+          sx={{
+            p: 0,
+            mr: 1.5,
+            color: "#e0e0e0",
+            "&.Mui-checked": { color: "primary.main" },
+          }}
+        />
+      )}
 
       <Box sx={{ flex: 1, minWidth: 0 }}>
         <Typography
@@ -73,12 +78,14 @@ const LessonItem = ({ lesson }) => {
         </Stack>
       </Box>
 
-      <IconButton
-        size="small"
-        sx={{ color: "text.secondary", "&:hover": { color: "primary.main" } }}
-      >
-        <PlayCircleOutlineIcon />
-      </IconButton>
+      {!hideInteractive && (
+        <IconButton
+          size="small"
+          sx={{ color: "text.secondary", "&:hover": { color: "primary.main" } }}
+        >
+          <PlayCircleOutlineIcon />
+        </IconButton>
+      )}
     </Box>
   );
 };

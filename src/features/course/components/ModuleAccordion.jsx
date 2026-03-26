@@ -13,7 +13,7 @@ import { formatDuration } from "../../../shared/utils/formatDuration.js";
 import LessonsSkeleton from "./LessonsSkeleton";
 import LessonItem from "./LessonItem";
 
-const ModuleAccordion = ({ module, expanded, onToggle }) => {
+const ModuleAccordion = ({ module, expanded, onToggle, hideInteractive }) => {
   const { data: lessons = [], isLoading } = useModuleLessons(
     module._id,
     expanded,
@@ -63,7 +63,7 @@ const ModuleAccordion = ({ module, expanded, onToggle }) => {
         {isLoading && <LessonsSkeleton count={2} />}
 
         {lessons.map((lesson) => (
-          <LessonItem key={lesson._id} lesson={lesson} />
+          <LessonItem key={lesson._id} lesson={lesson} hideInteractive={hideInteractive} />
         ))}
       </AccordionDetails>
     </Accordion>
