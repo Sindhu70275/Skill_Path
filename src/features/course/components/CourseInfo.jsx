@@ -9,6 +9,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
 import { useCourseContext } from "../context/CourseContext";
+import { formatDuration } from "../../../shared/utils/formatDuration.js";
 
 const CourseInfo = () => {
   const { skill: course } = useCourseContext();
@@ -62,7 +63,7 @@ const CourseInfo = () => {
         <Stack direction="row" alignItems="center" spacing={1}>
           <AccessTimeIcon sx={{ fontSize: 20 }} />
           <Typography variant="body2">
-            {course?.durationInHours} hours
+            {formatDuration(course?.durationInSecs)}
           </Typography>
         </Stack>
         <Stack direction="row" alignItems="center" spacing={1}>

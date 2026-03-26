@@ -51,7 +51,7 @@ const ModuleAccordion = ({ module, expanded, onToggle }) => {
             >
               <AccessTimeIcon sx={{ fontSize: 16 }} />
               <Typography variant="body2">
-                {formatDuration(module.durationInMinutes)}
+                {formatDuration(module.durationInSecs)}
               </Typography>
             </Stack>
           </Box>

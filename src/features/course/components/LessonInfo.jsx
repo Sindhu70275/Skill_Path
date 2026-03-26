@@ -107,7 +107,7 @@ const LessonInfo = () => {
         <Stack direction="row" alignItems="center" spacing={0.5}>
           <AccessTimeIcon sx={{ fontSize: 18 }} />
           <Typography variant="body2">
-            {formatDuration(currentSubsection?.durationInMinutes)}
+            {formatDuration(currentSubsection?.durationInSecs)}
           </Typography>
         </Stack>
         <Typography variant="body2">

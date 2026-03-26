@@ -68,7 +68,7 @@ const LessonItem = ({ lesson }) => {
         >
           <AccessTimeIcon sx={{ fontSize: 12, color: "text.secondary" }} />
           <Typography variant="caption" color="text.secondary">
-            {formatDuration(lesson.durationInMinutes)}
+            {formatDuration(lesson.durationInSecs)}
           </Typography>
         </Stack>
       </Box>

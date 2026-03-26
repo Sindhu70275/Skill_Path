@@ -46,8 +46,7 @@ const VideoPlayer = () => {
     updateLessonProgress({
       selectedLessonId,
       skillId,
-      progressPercentage:
-        playedSeconds / (currentLesson.durationInMinutes * 60),
+      progressPercentage: playedSeconds / currentLesson.durationInSecs,
       lastWatchedSecond: playedSeconds,
     });
   };

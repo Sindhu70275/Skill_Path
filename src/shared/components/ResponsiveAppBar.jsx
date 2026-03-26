@@ -85,6 +85,9 @@ const ResponsiveAppBar = () => {
                 to={page.path}
                 style={({ isActive }) => ({
                   textDecoration: isActive ? "underline" : "none",
+                  textDecorationColor: isActive
+                    ? theme.palette.secondary.main
+                    : "transparent",
                   fontSize: "1rem",
                 })}
                 key={page.page}
