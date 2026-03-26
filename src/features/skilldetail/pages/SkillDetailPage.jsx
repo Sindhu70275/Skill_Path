@@ -1,8 +1,5 @@
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
-
-import { useEnrollSkill } from "../../../shared/hooks/usePostEnrollSkill.js";
-import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -10,25 +7,26 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import SchoolIcon from "@mui/icons-material/School";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import SchoolIcon from "@mui/icons-material/School";
 
+import { useEnrollSkill } from "../../../shared/hooks/usePostEnrollSkill.js";
+import { useSkillModules } from "../../course/hooks/useGetSkillModules.js";
+import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
 import { useGetSkillDetails } from "../hooks/useGetSkillDetails";
 import SkillDetailSkeleton from "../components/SkillDetailSkeleton";
+import ModuleAccordion from "../../course/components/ModuleAccordion";
 import { ErrorDisplay, CustomButton } from "../../../shared/components";
 
 const SkillDetailPage = () => {
   const { id } = useParams();
+  const [expandedModuleId, setExpandedModuleId] = useState(null);
 
   const { data: skillData, isLoading, error, refetch } = useGetSkillDetails(id);
 
@@ -37,6 +35,10 @@ const SkillDetailPage = () => {
     isPending: enrollPending,
     isSuccess: enrollSuccess,
   } = useEnrollSkill();
+
+  const { data: modulesData, isLoading: modulesLoading } = useSkillModules(id);
+  const modules = modulesData?.modules || [];
+
   const showSnackbar = useContext(SnackbarContext);
 
   const handleEnroll = () => {
@@ -55,7 +57,12 @@ const SkillDetailPage = () => {
     });
   };
 
-  if (isLoading) {
+  const handleModuleToggle = (moduleId) => {
+    const currentIndex = expandedModuleId;
+    setExpandedModuleId(currentIndex === moduleId ? null : moduleId);
+  };
+
+  if (isLoading || modulesLoading) {
     return <SkillDetailSkeleton />;
   }
 
@@ -80,7 +87,6 @@ const SkillDetailPage = () => {
     durationInHours,
     tags = [],
     learningOutcomes = [],
-    modules = [],
     prerequisites = [],
     isEnrolled,
   } = skillData;
@@ -207,73 +213,14 @@ const SkillDetailPage = () => {
               <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
                 Course Modules
               </Typography>
-              {modules.map((module, index) => (
-                <Accordion
-                  key={module._id || index}
-                  sx={{
-                    mb: 1,
-                    "&:before": { display: "none" },
-                    boxShadow: "none",
-                    border: "1px solid #e0e0e0",
-                    borderRadius: "8px !important",
-                    overflow: "hidden",
-                  }}
-                >
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    sx={{
-                      backgroundColor: "#f5f5f5",
-                    }}
-                  >
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      spacing={2}
-                      sx={{ width: "100%" }}
-                    >
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          backgroundColor: "primary.main",
-                          color: "#ffffff",
-                          px: 1,
-                          py: 0.25,
-                          borderRadius: 3,
-                          fontWeight: 600,
-                          minWidth: 28,
-                          textAlign: "center",
-                        }}
-                      >
-                        {module.order}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        sx={{ fontWeight: 500, flex: 1 }}
-                      >
-                        {module.title}
-                      </Typography>
-                      <Stack
-                        direction="row"
-                        alignItems="center"
-                        spacing={0.5}
-                        sx={{ color: "text.secondary" }}
-                      >
-                        <AccessTimeIcon sx={{ fontSize: 18 }} />
-                        <Typography variant="body2">
-                          {module.durationInMinutes} min
-                        </Typography>
-                      </Stack>
-                    </Stack>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography variant="body2" color="text.secondary">
-                      This module covers{" "}
-                      <strong>{module.title.toLowerCase()}</strong> in detail.
-                      You'll learn essential concepts and practical applications
-                      through hands-on exercises.
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
+              {modules.map((module) => (
+                <ModuleAccordion
+                  key={module._id}
+                  module={module}
+                  expanded={expandedModuleId === module._id}
+                  onToggle={handleModuleToggle}
+                  hideInteractive={true}
+                />
               ))}
             </Box>
           )}
@@ -323,7 +270,13 @@ const SkillDetailPage = () => {
 
               <Box sx={{ pt: 2 }}>
                 <CustomButton
-                  label={enrollPending ? "Enrolling..." : (isEnrolled || enrollSuccess) ? "Enrolled" : "Enroll Now"}
+                  label={
+                    enrollPending
+                      ? "Enrolling..."
+                      : isEnrolled || enrollSuccess
+                        ? "Enrolled"
+                        : "Enroll Now"
+                  }
                   onClick={handleEnroll}
                   variant="contained"
                   width="100%"

@@ -27,7 +27,14 @@ const AppRoutes = () => {
 
       <Route element={<AuthLayout />}>
         <Route path="/discover" element={<DiscoverPage />} />
-        <Route path="/skillDetails/:id" element={<SkillDetailPage />} />
+        <Route
+          path="/skillDetails/:id"
+          element={
+            <CourseProvider>
+              <SkillDetailPage />
+            </CourseProvider>
+          }
+        />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route
           path="/course/:skillId"
