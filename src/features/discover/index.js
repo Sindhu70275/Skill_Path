@@ -1,2 +1,2 @@
-export { default as DiscoverPage } from "./pages/DiscoverPage";
+export { default } from "./pages/DiscoverPage";
 

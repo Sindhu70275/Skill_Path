@@ -1,5 +1,5 @@
+import { lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-
 
 import PublicLayout from "./layouts/PublicLayout";
 import AuthLayout from "./layouts/AuthLayout";
@@ -9,11 +9,12 @@ import { CourseProvider } from "../features/course/context/CourseContext";
 
 import { LandingPage } from "../features/landing";
 import { LoginPage, RegisterPage } from "../features/auth";
-import { DiscoverPage } from "../features/discover";
-import { SkillDetailPage } from "../features/skilldetail";
-import { DashboardPage } from "../features/dashboard";
-import { CoursesPage } from "../features/course";
-import { AnalyticsPage } from "../features/analytics";
+
+const DiscoverPage = lazy(() => import("../features/discover"));
+const SkillDetailPage = lazy(() => import("../features/skilldetail"));
+const DashboardPage = lazy(() => import("../features/dashboard"));
+const CoursesPage = lazy(() => import("../features/course"));
+const AnalyticsPage = lazy(() => import("../features/analytics"));
 
 const AppRoutes = () => {
   return (
@@ -41,7 +42,6 @@ const AppRoutes = () => {
         </Route>
         <Route path="*" element={<Navigate to="/discover" replace />} />
       </Route>
-
     </Routes>
   );
 };
