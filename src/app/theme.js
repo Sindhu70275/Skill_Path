@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
-const theme = createTheme({
+let theme = createTheme({
   palette: {
     primary: {
       main: "#58b0ed",
@@ -48,11 +48,6 @@ const theme = createTheme({
       fontWeight: 500,
       color: "#0d0b0b",
     },
-    h7: {
-      fontSize: "1.75rem",
-      fontWeight: 200,
-      color: "#0d0b0b",
-    },
 
     body1: {
       fontSize: "1rem",
@@ -77,5 +72,8 @@ const theme = createTheme({
     },
   },
 });
+
+// Enable responsive typography scaling
+theme = responsiveFontSizes(theme);
 
 export default theme;

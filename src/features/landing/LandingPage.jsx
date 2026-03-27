@@ -8,8 +8,12 @@ import Typography from "@mui/material/Typography";
 import SkillIcon from "../../assets/skill-path.png";
 import landingbg from "../../assets/landing-bg.jpg";
 import { CustomButton } from "../../shared/components";
-import { ROUTES } from "../../shared/constants";
-import { SUBTITLES, BUTTON_LABELS } from "../../shared/constants/messages";
+import {
+  ROUTES,
+  LANDING_SUBTITLES,
+  LANDING_BUTTON_LABELS,
+  APP_TITLE,
+} from "../../shared/constants";
 
 const LandingPage = () => {
   const theme = useTheme();
@@ -28,33 +32,36 @@ const LandingPage = () => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "1rem 0.6rem 1rem 0.4rem",
+          padding: { xs: "0.5rem 0.6rem", md: "1rem 0.6rem 1rem 0.4rem" },
         }}
       >
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           <Box
             component="img"
             src={SkillIcon}
             alt="Skill Path Logo"
-            sx={{ height: 40, mr: 1 }}
+            sx={{ height: { xs: 30, md: 40 }, mr: 1 }}
           />
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             onClick={() => navigate("/")}
             sx={{
               color: theme.palette.primary.main,
               fontStyle: "italic",
-              fontSize: "1.5rem",
               cursor: "pointer",
               marginTop: "0.2rem",
             }}
           >
-            Skill Path
+            {APP_TITLE}
           </Typography>
         </Box>
         <Box>
-          <CustomButton label={BUTTON_LABELS.LOGIN} onClick={handleLogin} />
+          <CustomButton
+            label={LANDING_BUTTON_LABELS.LOGIN}
+            onClick={handleLogin}
+            width={{ xs: "80%", md: "auto" }}
+          />
         </Box>
       </AppBar>
 
@@ -62,34 +69,48 @@ const LandingPage = () => {
         component="main"
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
           backgroundColor: "aliceblue",
         }}
       >
-        <Box sx={{ padding: "3rem", width: "50vw" }}>
+        <Box
+          sx={{
+            padding: { xs: "2.5rem 2rem", sm: "3rem" },
+            width: { md: "50vw" },
+          }}
+        >
           <Typography variant="h1" gutterBottom>
-            {SUBTITLES.LANDING_QUOTE}
+            {LANDING_SUBTITLES.QUOTE}
           </Typography>
           <Typography
             variant="h4"
             sx={{ fontStyle: "italic", marginBottom: "1rem" }}
           >
-            {SUBTITLES.LANDING_AUTHOR}
+            {LANDING_SUBTITLES.AUTHOR}
           </Typography>
           <CustomButton
-            label={BUTTON_LABELS.JOIN_PROGRAM}
+            label={LANDING_BUTTON_LABELS.JOIN_PROGRAM}
             onClick={handleLogin}
+            width="auto"
           />
         </Box>
-        <Box>
+
+        <Box
+          sx={{
+            width: { xs: "100%", md: "50vw" },
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <Box
             component="img"
             src={landingbg}
             alt="landing-bg"
             sx={{
-              height: "75vh",
-              width: "50vw",
+              minHeight: { xs: "50vh", md: "75vh" },
+              width: "100%",
+              backgroundSize: "cover",
             }}
           />
         </Box>
@@ -98,7 +119,7 @@ const LandingPage = () => {
       <Box
         component="footer"
         sx={{
-          marginTop: "3rem",
+          marginTop: { xs: "0rem", md: "3rem" },
         }}
       ></Box>
     </Box>

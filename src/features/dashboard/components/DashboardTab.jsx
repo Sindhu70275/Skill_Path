@@ -44,7 +44,7 @@ const DashboardTab = ({ dashboardSkills, isLoading }) => {
           ) : (
             <Grid container spacing={2}>
               {dashboardSkills.enrolled.map((skill) => (
-                <Grid size={{ xs: 12, sm: 6, md: 3 }} key={skill._id}>
+                <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }} key={skill._id}>
                   <EnrolledSkillCard skillData={skill} />
                 </Grid>
               ))}
@@ -64,7 +64,7 @@ const DashboardTab = ({ dashboardSkills, isLoading }) => {
           ) : (
             <Grid container spacing={2}>
               {dashboardSkills.wishlisted.map((skill) => (
-                <Grid size={{ xs: 12, sm: 6, md: 3 }} key={skill._id}>
+                <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }} key={skill._id}>
                   <WishlistCard skillData={skill} />
                 </Grid>
               ))}

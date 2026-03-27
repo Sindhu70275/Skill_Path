@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
 import IconButton from "@mui/material/IconButton";
-import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
+import TrackChangesOutlinedIcon from "@mui/icons-material/TrackChangesOutlined";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
@@ -30,7 +30,7 @@ const EnrolledSkillCard = ({ skillData }) => {
   return (
     <Card
       sx={{
-        maxWidth: 280,
+        maxWidth: "auto",
         boxShadow: 2,
         "&:hover": {
           boxShadow: 4,
@@ -44,7 +44,7 @@ const EnrolledSkillCard = ({ skillData }) => {
           alt={skillData.title}
           sx={{
             width: "100%",
-            height: 160,
+            height: { xs: 220, lg: 180 },
             objectFit: "cover",
           }}
         />
@@ -83,12 +83,22 @@ const EnrolledSkillCard = ({ skillData }) => {
         </Typography>
 
         <Box sx={{ width: "100%" }}>
-          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 0.5 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 0.5,
+            }}
+          >
             <Typography variant="caption" color="text.secondary">
               {percentage}% Achieved
             </Typography>
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <TrackChangesOutlinedIcon fontSize="0.5rem" color="text.secondary" />
+              <TrackChangesOutlinedIcon
+                fontSize="0.5rem"
+                color="text.secondary"
+              />
               <Typography variant="caption" color="text.secondary">
                 {completed}/{total}
               </Typography>
