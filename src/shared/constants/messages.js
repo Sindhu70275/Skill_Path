@@ -9,7 +9,7 @@ export const SUBTITLES = {
 
 export const BUTTON_LABELS = {
   LOGIN: "Login",
-  JOIN_PROGRAM: "Join Program",
+  JOIN_PROGRAM: "Join the Program",
 };
 
 export const DASHBOARD_HEADER_MESSAGES = [
