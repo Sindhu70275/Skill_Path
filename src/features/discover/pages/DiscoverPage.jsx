@@ -56,7 +56,7 @@ const DiscoverPage = () => {
     return (
       <Grid container spacing={2} columns={12} sx={{ paddingY: "1rem" }}>
         {skillsData.map((skill) => (
-          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={skill._id}>
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }} key={skill._id}>
             <DiscoverSkillCard skillData={skill} />
           </Grid>
         ))}
@@ -65,7 +65,7 @@ const DiscoverPage = () => {
   };
 
   return (
-    <Stack sx={{ paddingX: { xs: "2rem", md: "4rem" } }}>
+    <Stack sx={{ paddingX: { xs: "1rem", sm: "2rem", md: "4rem" } }}>
       <DiscoverHeader
         searchSkill={searchSkill}
         setSearchSkill={setSearchSkill}

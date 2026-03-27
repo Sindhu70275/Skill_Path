@@ -41,9 +41,9 @@ const DiscoverSkillsFilter = ({
       open={open}
       onClose={onClose}
       PaperProps={{
-        style: {
-          width: 260,
-          marginTop: 7,
+        sx: {
+          width: { xs: 220, sm: 260 },
+          marginTop: { xs: 1.5, md: 7 },
         },
       }}
     >
@@ -73,7 +73,7 @@ const DiscoverSkillsFilter = ({
         />
       </Box>
 
-      <Box sx={{ maxHeight: 200, overflow: "auto" }}>
+      <Box sx={{ maxHeight: {xs: 150 , md: 200}, overflow: "auto" }}>
         {isLoading ? (
           <FilterSkeleton />
         ) : (
@@ -121,7 +121,7 @@ const DiscoverSkillsFilter = ({
             justifyContent: "center",
             textTransform: "none",
             color: "#ffffff",
-            padding: "0.5rem 5rem",
+            padding: "0.5rem 4rem",
             marginTop: "0.5rem",
             backgroundColor: theme.palette.primary.main,
           }}

@@ -37,20 +37,32 @@ const DiscoverHeader = ({
       sx={{
         justifyContent: "center",
         alignItems: "center",
-        height: "10rem",
+        height: { xs: "7.5rem", md: "10rem" },
         backgroundImage: "linear-gradient(to right, #b3d9ff, #e6f2ff, #e6f2ff)",
         borderRadius: "1rem",
         mt: 2,
       }}
     >
-      <Typography variant="h7">
+      <Typography>
         Find the right&nbsp;
-        <Typography component="span" variant="h4">
+        <Typography
+          component="span"
+          variant="h4"
+          sx={{
+            fontSize: { xs: "1.2rem", md: "2.25rem" },
+          }}
+        >
           Skill Path
         </Typography>
         &nbsp;for you
       </Typography>
-      <Stack sx={{ display: "flex", flexDirection: "row" }}>
+      <Stack
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
         <TextField
           placeholder="Search for skills by name"
           variant="outlined"
@@ -63,7 +75,7 @@ const DiscoverHeader = ({
             }
           }}
           sx={{
-            width: "28rem",
+            width: { xs: "14rem", md: "28rem" },
             backgroundColor: "#ffffff",
             borderRadius: "0.5rem",
             marginTop: "0.7rem",
@@ -73,8 +85,8 @@ const DiscoverHeader = ({
               "&.Mui-focused fieldset": { border: "none" },
             },
             "& .MuiInputBase-input": {
-              fontSize: "1rem",
-              padding: "0.75rem",
+              fontSize: { xs: "0.75rem", md: "1rem" },
+              padding: { xs: "0.5rem", md: "0.75rem" },
             },
           }}
           InputProps={{
@@ -97,12 +109,19 @@ const DiscoverHeader = ({
             ml: 1,
             mt: "0.7rem",
             minWidth: "auto",
-            px: 2,
+            px: { xs: 1, sm: 2 },
           }}
           onClick={handleFilterClick}
           startIcon={<FilterListIcon />}
         >
-          Filter
+          <Typography
+            variant="button"
+            sx={{
+              display: { xs: "none", sm: "block" },
+            }}
+          >
+            Filter
+          </Typography>
         </Button>
         <DiscoverSkillsFilter
           anchorEl={filterAnchorEl}

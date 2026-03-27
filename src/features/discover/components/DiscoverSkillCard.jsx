@@ -82,7 +82,7 @@ const DiscoverSkillCard = ({ skillData }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 300 }}>
+    <Card sx={{ maxWidth: "auto" }}>
       <Box sx={{ position: "relative" }}>
         <CardMedia
           sx={{ height: 180 }}
