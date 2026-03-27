@@ -18,7 +18,14 @@ import { useRegisterUser } from "../hooks/usePostRegisterUser.js";
 import { AuthContext } from "../context/AuthContext.jsx";
 import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
 import { CustomButton } from "../../../shared/components";
-import { ROUTES } from "../../../shared/constants";
+import {
+  ROUTES,
+  AUTH_TITLES,
+  AUTH_LABELS,
+  AUTH_BUTTON_LABELS,
+  AUTH_LINK_TEXTS,
+  AUTH_VALIDATION,
+} from "../../../shared/constants";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -62,12 +69,13 @@ const RegisterPage = () => {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#f5f5f5",
+        px: 2,
       }}
     >
       <Card sx={{ width: 400, padding: 2 }}>
         <CardContent>
           <Typography variant="h5" mb={2}>
-            Create Account for Skill Path
+            {AUTH_TITLES.REGISTER}
           </Typography>
 
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -76,25 +84,25 @@ const RegisterPage = () => {
                 name="username"
                 control={control}
                 rules={{
-                  required: "Username is required",
+                  required: AUTH_VALIDATION.USERNAME_REQUIRED,
                   minLength: {
                     value: 6,
-                    message: "Username must be at least 6 characters",
+                    message: AUTH_VALIDATION.USERNAME_MIN_LENGTH,
                   },
                   maxLength: {
                     value: 20,
-                    message: "Username must be max 20 characters",
+                    message: AUTH_VALIDATION.USERNAME_MAX_LENGTH,
                   },
                   pattern: {
                     value: /^[a-zA-Z0-9_-]{6,20}$/i,
-                    message: "Username can only contain letters, numbers, -, _",
+                    message: AUTH_VALIDATION.USERNAME_PATTERN,
                   },
                 }}
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
                     id="username"
-                    label="Username"
+                    label={AUTH_LABELS.USERNAME}
                     variant="outlined"
                     fullWidth
                     error={!!error}
@@ -106,17 +114,17 @@ const RegisterPage = () => {
                 name="emailId"
                 control={control}
                 rules={{
-                  required: "Email is required",
+                  required: AUTH_VALIDATION.EMAIL_REQUIRED,
                   pattern: {
                     value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "Please enter a valid email address",
+                    message: AUTH_VALIDATION.EMAIL_INVALID,
                   },
                 }}
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
                     id="emailId"
-                    label="Email"
+                    label={AUTH_LABELS.EMAIL}
                     variant="outlined"
                     fullWidth
                     error={!!error}
@@ -128,23 +136,22 @@ const RegisterPage = () => {
                 name="password"
                 control={control}
                 rules={{
-                  required: "Password is required",
+                  required: AUTH_VALIDATION.PASSWORD_REQUIRED,
                   minLength: {
                     value: 8,
-                    message: "Password must be at least 8 characters",
+                    message: AUTH_VALIDATION.PASSWORD_MIN_LENGTH,
                   },
                   pattern: {
                     value:
                       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                    message:
-                      "Password must contain uppercase, lowercase, number, special char (@$!%*?&)",
+                    message: AUTH_VALIDATION.PASSWORD_PATTERN,
                   },
                 }}
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
                     id="password"
-                    label="Password"
+                    label={AUTH_LABELS.PASSWORD}
                     type={showPassword ? "text" : "password"}
                     variant="outlined"
                     fullWidth
@@ -173,7 +180,7 @@ const RegisterPage = () => {
                 )}
               />
               <CustomButton
-                label={isPending ? "Creating Account..." : "Create Account"}
+                label={isPending ? AUTH_BUTTON_LABELS.CREATING_ACCOUNT : AUTH_BUTTON_LABELS.CREATE_ACCOUNT}
                 type="submit"
                 variant="contained"
                 fullWidth
@@ -183,9 +190,9 @@ const RegisterPage = () => {
           </form>
 
           <Typography variant="body2" mt={2} textAlign="center">
-            Already have an account?
+            {AUTH_LINK_TEXTS.LOGIN_FROM_REGISTER}{" "}
             <Link to={ROUTES.LOGIN} style={{ color: "#1976d2" }}>
-              Sign in
+              {AUTH_BUTTON_LABELS.SIGN_IN}
             </Link>
           </Typography>
         </CardContent>

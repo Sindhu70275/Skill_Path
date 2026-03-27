@@ -8,8 +8,12 @@ import Typography from "@mui/material/Typography";
 import SkillIcon from "../../assets/skill-path.png";
 import landingbg from "../../assets/landing-bg.jpg";
 import { CustomButton } from "../../shared/components";
-import { ROUTES } from "../../shared/constants";
-import { SUBTITLES, BUTTON_LABELS } from "../../shared/constants/messages";
+import {
+  ROUTES,
+  LANDING_SUBTITLES,
+  LANDING_BUTTON_LABELS,
+  APP_TITLE,
+} from "../../shared/constants";
 
 const LandingPage = () => {
   const theme = useTheme();
@@ -49,12 +53,12 @@ const LandingPage = () => {
               marginTop: "0.2rem",
             }}
           >
-            Skill Path
+            {APP_TITLE}
           </Typography>
         </Box>
         <Box>
           <CustomButton
-            label={BUTTON_LABELS.LOGIN}
+            label={LANDING_BUTTON_LABELS.LOGIN}
             onClick={handleLogin}
             width={{ xs: "80%", md: "auto" }}
           />
@@ -77,16 +81,16 @@ const LandingPage = () => {
           }}
         >
           <Typography variant="h1" gutterBottom>
-            {SUBTITLES.LANDING_QUOTE}
+            {LANDING_SUBTITLES.QUOTE}
           </Typography>
           <Typography
             variant="h4"
             sx={{ fontStyle: "italic", marginBottom: "1rem" }}
           >
-            {SUBTITLES.LANDING_AUTHOR}
+            {LANDING_SUBTITLES.AUTHOR}
           </Typography>
           <CustomButton
-            label={BUTTON_LABELS.JOIN_PROGRAM}
+            label={LANDING_BUTTON_LABELS.JOIN_PROGRAM}
             onClick={handleLogin}
             width="auto"
           />

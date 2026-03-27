@@ -18,7 +18,13 @@ import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
 import { AuthContext } from "../context/AuthContext.jsx";
 import { useLoginUser } from "../hooks/usePostLoginUser.js";
 import { CustomButton } from "../../../shared/components";
-import { ROUTES } from "../../../shared/constants";
+import {
+  ROUTES,
+  AUTH_TITLES,
+  AUTH_LABELS,
+  AUTH_BUTTON_LABELS,
+  AUTH_VALIDATION,
+} from "../../../shared/constants";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -61,12 +67,13 @@ const LoginPage = () => {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#f5f5f5",
+        px: 2,
       }}
     >
       <Card sx={{ width: 400, padding: 2 }}>
         <CardContent>
           <Typography variant="h5" mb={2}>
-            Sign In to Skill Path
+            {AUTH_TITLES.LOGIN}
           </Typography>
 
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -75,17 +82,17 @@ const LoginPage = () => {
                 name="emailId"
                 control={control}
                 rules={{
-                  required: "Email is required",
+                  required: AUTH_VALIDATION.EMAIL_REQUIRED,
                   pattern: {
                     value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "Please enter a valid email address",
+                    message: AUTH_VALIDATION.EMAIL_INVALID,
                   },
                 }}
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
                     id="emailId"
-                    label="Email"
+                    label={AUTH_LABELS.EMAIL}
                     variant="outlined"
                     fullWidth
                     error={!!error}
@@ -97,23 +104,22 @@ const LoginPage = () => {
                 name="password"
                 control={control}
                 rules={{
-                  required: "Password is required",
+                  required: AUTH_VALIDATION.PASSWORD_REQUIRED,
                   minLength: {
                     value: 8,
-                    message: "Password must be at least 8 characters",
+                    message: AUTH_VALIDATION.PASSWORD_MIN_LENGTH,
                   },
                   pattern: {
                     value:
                       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                    message:
-                      "Password must contain uppercase, lowercase, number, special char (@$!%*?&)",
+                    message: AUTH_VALIDATION.PASSWORD_PATTERN,
                   },
                 }}
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
                     id="password"
-                    label="Password"
+                    label={AUTH_LABELS.PASSWORD}
                     type={showPassword ? "text" : "password"}
                     variant="outlined"
                     fullWidth
@@ -142,7 +148,11 @@ const LoginPage = () => {
                 )}
               />
               <CustomButton
-                label={isPending ? "Signing In..." : "Sign In"}
+                label={
+                  isPending
+                    ? AUTH_BUTTON_LABELS.SIGNING_IN
+                    : AUTH_BUTTON_LABELS.SIGN_IN
+                }
                 type="submit"
                 variant="contained"
                 fullWidth
@@ -152,9 +162,9 @@ const LoginPage = () => {
           </form>
 
           <Typography variant="body2" mt={2} textAlign="center">
-            Don’t have an account?
+            Don’t have an account?{" "}
             <Link to={ROUTES.REGISTER} style={{ color: "#1976d2" }}>
-              Create one
+              {AUTH_BUTTON_LABELS.CREATE_ONE}
             </Link>
           </Typography>
         </CardContent>
