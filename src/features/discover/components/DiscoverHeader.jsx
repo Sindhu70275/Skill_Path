@@ -43,13 +43,13 @@ const DiscoverHeader = ({
         mt: 2,
       }}
     >
-      <Typography>
+      <Typography sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}>
         Find the right&nbsp;
         <Typography
           component="span"
           variant="h4"
           sx={{
-            fontSize: { xs: "1.2rem", md: "2.25rem" },
+            fontSize: { xs: "1.2rem", md: "2rem" },
           }}
         >
           Skill Path

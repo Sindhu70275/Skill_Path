@@ -21,7 +21,7 @@ const DashboardPage = () => {
   }
 
   return (
-    <Stack sx={{ paddingX: { xs: "2rem", md: "4rem" } }}>
+    <Stack sx={{ paddingX: { xs: "1rem", sm: "2rem", md: "4rem" } }}>
       <DashboardHeader />
       <DashboardTab dashboardSkills={dashboardSkills} isLoading={isLoading} />
     </Stack>

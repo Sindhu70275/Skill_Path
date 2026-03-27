@@ -73,7 +73,7 @@ const WishlistCard = ({ skillData }) => {
   return (
     <Card
       sx={{
-        maxWidth: 280,
+        maxWidth: "auto",
         boxShadow: 2,
         "&:hover": {
           boxShadow: 4,
@@ -87,7 +87,7 @@ const WishlistCard = ({ skillData }) => {
           alt={skillData.title}
           sx={{
             width: "100%",
-            height: 160,
+            height: { xs: 220, lg: 180 },
             objectFit: "cover",
           }}
         />
