@@ -11,9 +11,9 @@ export const useLessonComplete = () => {
       );
       return response.data;
     },
-    onSuccess: () => {
+    onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["lessons"] });
-      queryClient.invalidateQueries({ queryKey: ["courseModules"] });
+      queryClient.invalidateQueries({ queryKey: ["courseModules", variables.skillId] });
     },
   });
 };

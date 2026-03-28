@@ -13,8 +13,9 @@ export const useLessonProgress = () => {
       });
       return response.data;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["courseModules"] });
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["courseModules", variables.skillId] });
+      queryClient.invalidateQueries({ queryKey: ["lesson", variables.lessonId] });
     },
   });
 };
