@@ -4,6 +4,8 @@ import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
 
 import VideoPlayerSkeleton from "./VideoPlayerSkeleton";
+import LessonInfoSkeleton from "./LessonInfoSkeleton";
+import CourseInfoSkeleton from "./CourseInfoSkeleton";
 
 const CoursePageSkeleton = () => {
   return (
@@ -11,7 +13,7 @@ const CoursePageSkeleton = () => {
       sx={{
         backgroundColor: "#f5f5f5",
         minHeight: "100vh",
-        px: { xs: 4, md: 8 },
+        paddingX: { xs: "1rem", sm: "2rem", md: "4rem" },
         py: 3,
       }}
     >
@@ -26,7 +28,7 @@ const CoursePageSkeleton = () => {
       >
         <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 1 }}>
           <Skeleton variant="circular" width={32} height={32} />
-          <Skeleton variant="circular" width={40} height={40} />
+          <Skeleton variant="circular" width={50} height={50} />
           <Skeleton variant="text" width="40%" sx={{ fontSize: "1.5rem" }} />
         </Stack>
       </Box>
@@ -44,22 +46,8 @@ const CoursePageSkeleton = () => {
             <VideoPlayerSkeleton />
           </Box>
 
-          <Box
-            sx={{
-              backgroundColor: "#ffffff",
-              p: 3,
-              borderRadius: 2,
-              boxShadow: 1,
-            }}
-          >
-            <Skeleton
-              variant="text"
-              width="80%"
-              sx={{ fontSize: "1.25rem", mb: 2 }}
-            />
-            <Skeleton variant="rectangular" height={120} sx={{ mb: 2 }} />
-            <Skeleton variant="text" width="60%" />
-          </Box>
+          <LessonInfoSkeleton />
+          <CourseInfoSkeleton />
         </Grid>
 
         <Grid size={{ xs: 12, lg: 4 }}>
