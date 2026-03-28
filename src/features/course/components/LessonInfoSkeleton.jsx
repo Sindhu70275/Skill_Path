@@ -14,25 +14,29 @@ const LessonInfoSkeleton = () => {
       }}
     >
       <Stack
-        direction="row"
-        justifyContent="flex-start"
-        alignItems="flex-start"
-        sx={{ mb: 2 }}
+        direction={{ xs: "column", md: "row" }}
+        justifyContent="space-between"
+        alignItems={{ xs: "stretch", md: "flex-start" }}
+        sx={{ mb: 2, gap: { xs: 2, md: 0 } }}
       >
-        <Box>
+        <Box sx={{ flex: 1 }}>
           <Skeleton variant="text" width={120} height={20} />
           <Skeleton variant="text" width={200} height={32} sx={{ mt: 0.5 }} />
+          <Stack
+            direction={{ xs: "row" }}
+            alignItems={{ xs: "flex-start", sm: "center" }}
+            spacing={2}
+            sx={{ mt: 1 }}
+          >
+            <Skeleton variant="text" width={80} height={20} />
+            <Skeleton variant="text" width={100} height={20} />
+          </Stack>
         </Box>
-      </Stack>
-
-      <Stack
-        direction="row"
-        alignItems="center"
-        spacing={2}
-        sx={{ color: "text.secondary" }}
-      >
-        <Skeleton variant="text" width={80} height={20} />
-        <Skeleton variant="text" width={100} height={20} />
+        <Skeleton
+          variant="rectangular"
+          height={36}
+          sx={{ borderRadius: 1, width: { xs: "100%", md: 140 } }}
+        />
       </Stack>
     </Box>
   );

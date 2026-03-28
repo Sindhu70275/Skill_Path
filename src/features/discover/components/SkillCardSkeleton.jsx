@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 
 const SkillCardSkeleton = () => {
   return (
-    <Card sx={{ maxWidth: 300, height: "100%" }}>
+    <Card sx={{ maxWidth: "auto", height: "100%" }}>
       <Skeleton variant="rectangular" height={180} animation="wave" />
       <CardContent sx={{ padding: "1rem" }}>
         <Skeleton variant="text" width="60%" height={32} animation="wave" />
@@ -35,7 +35,7 @@ export const SkillsLoadingSkeleton = ({ count = 4 }) => {
   return (
     <Grid container spacing={2} columns={12} sx={{ paddingY: "1rem" }}>
       {Array.from({ length: count }).map((_, index) => (
-        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }} key={index}>
           <SkillCardSkeleton />
         </Grid>
       ))}
