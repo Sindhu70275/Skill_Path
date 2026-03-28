@@ -75,10 +75,10 @@ const LessonInfo = () => {
       }}
     >
       <Stack
-        direction="row"
-        justifyContent="flex-start"
-        alignItems="flex-start"
-        sx={{ mb: 2 }}
+        direction={{ xs: "column", md: "row" }}
+        justifyContent="space-between"
+        alignItems={{ xs: "stretch", md: "flex-start" }}
+        sx={{ mb: 2, gap: { xs: 2, md: 0 } }}
       >
         <Box sx={{ flex: 1 }}>
           <Typography variant="caption" color="text.secondary">
@@ -87,6 +87,26 @@ const LessonInfo = () => {
           <Typography variant="h5" sx={{ fontWeight: 600, mt: 0.5 }}>
             {currentSubsection?.title}
           </Typography>
+
+          <Stack
+            direction={{ xs: "row" }}
+            alignItems={{ xs: "flex-start", sm: "center" }}
+            spacing={2}
+            sx={{ color: "text.secondary", mt: 1 }}
+          >
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+              <AccessTimeIcon sx={{ fontSize: 18 }} />
+              <Typography variant="body2">
+                {formatDuration(currentSubsection?.durationInSecs)}
+              </Typography>
+            </Stack>
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+            <PlayCircleOutlineIcon sx={{ fontSize: 19 }} />
+            <Typography variant="body2">
+              {videoProgress > 0 ? Math.round(videoProgress) : 0}% watched
+            </Typography>
+            </Stack>
+          </Stack>
         </Box>
         <CustomButton
           label={isCompleted ? "Completed" : "Mark as completed"}
@@ -104,23 +124,6 @@ const LessonInfo = () => {
             borderColor: isCompleted ? "success.main" : "primary.main",
           }}
         />
-      </Stack>
-
-      <Stack
-        direction="row"
-        alignItems="center"
-        spacing={2}
-        sx={{ color: "text.secondary" }}
-      >
-        <Stack direction="row" alignItems="center" spacing={0.5}>
-          <AccessTimeIcon sx={{ fontSize: 18 }} />
-          <Typography variant="body2">
-            {formatDuration(currentSubsection?.durationInSecs)}
-          </Typography>
-        </Stack>
-        <Typography variant="body2">
-          • {videoProgress > 0 ? Math.round(videoProgress) : 0}% watched
-        </Typography>
       </Stack>
     </Box>
   );

@@ -25,7 +25,7 @@ const CoursePage = () => {
       sx={{
         backgroundColor: "#f5f5f5",
         minHeight: "100vh",
-        paddingX: { xs: "2rem", md: "4rem" },
+        paddingX: { xs: "1rem", sm: "2rem", md: "4rem" },
         py: 3,
       }}
     >
