@@ -7,13 +7,15 @@ const WishlistCardSkeleton = ({ count = 4 }) => {
   return (
     <Grid container spacing={2}>
       {[...Array(count)].map((_, index) => (
-        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-          <Card sx={{ maxWidth: 280, boxShadow: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }} key={index}>
+          <Card sx={{ maxWidth: "auto", boxShadow: 2 }}>
             <Box sx={{ position: "relative" }}>
               <Skeleton
                 variant="rectangular"
                 width="100%"
-                height={160}
+                sx={{
+                  height: { xs: 220, lg: 180 },
+                }}
                 animation="wave"
               />
             </Box>
