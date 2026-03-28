@@ -18,7 +18,7 @@ const CourseInfo = () => {
       sx={{
         backgroundColor: "#ffffff",
         borderRadius: 2,
-        p: 3,
+        p: { xs: 2, md: 3 },
         boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
       }}
     >
@@ -46,20 +46,32 @@ const CourseInfo = () => {
         )}
       </Stack>
 
-      <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+      <Typography
+        variant={{ xs: "subtitle1", md: "h6" }}
+        sx={{ fontWeight: 600, mb: 2 }}
+      >
         {course?.title}
       </Typography>
 
       <Typography
-        variant="body1"
-        sx={{ color: "text.secondary", mb: 3, lineHeight: 1.8 }}
+        variant="body2"
+        sx={{
+          color: "text.secondary",
+          mb: 3,
+          lineHeight: 1.8,
+          fontSize: { xs: "0.9rem", md: "1rem" },
+        }}
       >
         {course?.description}
       </Typography>
 
       <Divider sx={{ my: 2 }} />
 
-      <Stack direction="row" spacing={4} sx={{ color: "text.secondary" }}>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={{ xs: 2, sm: 4 }}
+        sx={{ color: "text.secondary" }}
+      >
         <Stack direction="row" alignItems="center" spacing={1}>
           <AccessTimeIcon sx={{ fontSize: 20 }} />
           <Typography variant="body2">

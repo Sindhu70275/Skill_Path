@@ -32,9 +32,7 @@ const ModuleAccordion = ({ module, expanded, onToggle, hideInteractive }) => {
               variant="body1"
               sx={{
                 fontWeight: 500,
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
+                textWrap: "auto",
               }}
             >
               {module.order}. {module.title}
@@ -63,7 +61,11 @@ const ModuleAccordion = ({ module, expanded, onToggle, hideInteractive }) => {
         {isLoading && <LessonsSkeleton count={2} />}
 
         {lessons.map((lesson) => (
-          <LessonItem key={lesson._id} lesson={lesson} hideInteractive={hideInteractive} />
+          <LessonItem
+            key={lesson._id}
+            lesson={lesson}
+            hideInteractive={hideInteractive}
+          />
         ))}
       </AccordionDetails>
     </Accordion>

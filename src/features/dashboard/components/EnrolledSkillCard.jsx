@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
 import IconButton from "@mui/material/IconButton";
 import TrackChangesOutlinedIcon from "@mui/icons-material/TrackChangesOutlined";
-
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
