@@ -12,7 +12,6 @@ export const CourseProvider = ({ children }) => {
   const { skillId } = useParams();
   const [selectedLessonId, setSelectedLessonId] = useState(null);
   const [selectedModuleId, setSelectedModuleId] = useState(null);
-  // console.log removed
 
   const { data, isLoading, error } = useSkillModules(skillId);
 

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 
@@ -10,12 +10,14 @@ import { useLessonComplete } from "../hooks/useUpdateLessonComplete";
 import VideoPlayerSkeleton from "./VideoPlayerSkeleton";
 
 import { useCourseContext } from "../context/CourseContext";
+import { SnackbarContext } from "../../../shared/context/SnackbarContext";
 
 const VideoPlayer = () => {
   const { selectedLessonId, currentLesson } = useCourseContext();
   const { skillId } = useParams();
   const { mutate: updateLessonProgress } = useLessonProgress();
   const { mutate: updateLessonComplete } = useLessonComplete();
+  const showSnackbar = useContext(SnackbarContext);
 
   const isLoading = !currentLesson && selectedLessonId;
 
@@ -44,7 +46,7 @@ const VideoPlayer = () => {
     lastSavedRef.current = playedSeconds;
 
     updateLessonProgress({
-      selectedLessonId,
+      lessonId: selectedLessonId,
       skillId,
       progressPercentage: playedSeconds / currentLesson.durationInSecs,
       lastWatchedSecond: playedSeconds,
@@ -52,7 +54,21 @@ const VideoPlayer = () => {
   };
 
   const handleEnded = () => {
-    updateLessonComplete({ selectedLessonId, skillId });
+    updateLessonComplete(
+      { lessonId: selectedLessonId, skillId },
+      {
+        onSuccess: (data) => {
+          const message = data?.message || "Lesson completed successfully!";
+          showSnackbar(message, "success");
+        },
+        onError: (error) => {
+          const message =
+            error?.response?.data?.message || "Failed to mark as completed";
+          showSnackbar(message, "error");
+          console.error(error);
+        },
+      },
+    );
   };
 
   return (
