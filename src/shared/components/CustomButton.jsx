@@ -6,6 +6,7 @@ const CustomButton = ({
   variant = "contained",
   width,
   disabled = false,
+  startIcon,
   ...props
 }) => {
   return (
@@ -13,6 +14,7 @@ const CustomButton = ({
       variant={variant}
       onClick={onClick}
       disabled={disabled}
+      startIcon={startIcon}
       sx={{
         backgroundColor: variant === "contained" ? "#0d0b0b" : "#ffffff",
         color: variant === "contained" ? "#ffffff" : "#0d0b0b",
