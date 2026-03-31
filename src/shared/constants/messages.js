@@ -27,7 +27,7 @@ export const AUTH_TITLES = {
 export const AUTH_LABELS = {
   EMAIL: "Email",
   PASSWORD: "Password",
-  USERNAME: "Username",
+  FULL_NAME: "Full Name",
 };
 
 export const AUTH_BUTTON_LABELS = {
@@ -50,8 +50,8 @@ export const AUTH_VALIDATION = {
   PASSWORD_MIN_LENGTH: "Password must be at least 8 characters",
   PASSWORD_PATTERN:
     "Password must contain uppercase, lowercase, number, special char (@$!%*?&) ",
-  USERNAME_REQUIRED: "Username is required",
-  USERNAME_MIN_LENGTH: "Username must be at least 6 characters",
-  USERNAME_MAX_LENGTH: "Username must be max 20 characters",
-  USERNAME_PATTERN: "Username can only contain letters, numbers, -, _",
+  FULL_NAME_REQUIRED: "Full name is required",
+  FULL_NAME_MIN_LENGTH: "Full name must be at least 3 characters",
+  FULL_NAME_MAX_LENGTH: "Full name must be max 50 characters",
+  FULL_NAME_PATTERN: "Full name can only contain letters and spaces",
 };
