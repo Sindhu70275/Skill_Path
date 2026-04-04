@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -7,21 +7,27 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import { AuthContext } from "../../../features/auth/context/AuthContext";
 import { CustomButton } from "../../../shared/components";
+import EditProfileDialog from "./EditProfileDialog";
 
 const ProfileHeader = () => {
   const { user } = useContext(AuthContext);
+  const [openEditDialog, setOpenEditDialog] = useState(false);
 
   const avatarSrc =
-    user?.avatar ||
+    user?.userPhoto ||
     "https://t4.ftcdn.net/jpg/03/59/58/91/360_F_359589186_JDLl8dIWoBNf1iqEkHxhUeeOulx0wOC5.jpg";
+
+  const handleEditProfile = () => {
+    setOpenEditDialog(true);
+  };
 
   return (
     <Box
       sx={{
         display: "flex",
-        flexDirection: { xs: "column", md: "row" },
-        justifyContent: { xs: "flex-start", md: "space-between" },
-        alignItems: { xs: "flex-start", md: "center" },
+        flexDirection: { xs: "column", sm: "row" },
+        justifyContent: { xs: "flex-start", sm: "space-between" },
+        alignItems: { xs: "flex-start", sm: "center" },
         gap: 3,
         mb: 4,
         p: 2,
@@ -53,12 +59,21 @@ const ProfileHeader = () => {
 
       <Box
         sx={{
-          alignSelf: { xs: "stretch", md: "center" },
-          width: { xs: "100%", md: "auto" },
+          alignSelf: { xs: "stretch", sm: "center" },
+          width: { xs: "100%", sm: "auto" },
         }}
       >
-        <CustomButton label="Edit Profile" startIcon={<EditIcon />} fullWidth />
+        <CustomButton
+          label="Edit Profile"
+          startIcon={<EditIcon />}
+          fullWidth
+          onClick={handleEditProfile}
+        />
       </Box>
+      <EditProfileDialog
+        open={openEditDialog}
+        onClose={() => setOpenEditDialog(false)}
+      />
     </Box>
   );
 };
