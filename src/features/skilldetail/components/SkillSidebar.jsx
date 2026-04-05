@@ -7,6 +7,7 @@ import SchoolIcon from "@mui/icons-material/School";
 
 import { formatDuration } from "../../../shared/utils/formatDuration.js";
 import { CustomButton } from "../../../shared/components";
+import { SKILL_DETAIL_LABELS } from "../../../shared/constants/messages";
 
 const SkillSidebar = ({
   durationInSecs,
@@ -32,9 +33,11 @@ const SkillSidebar = ({
           <AccessTimeIcon sx={{ color: "primary.main" }} />
           <Box>
             <Typography variant="body2" color="text.secondary">
-              Duration
+              {SKILL_DETAIL_LABELS.DURATION}
             </Typography>
-            <Typography variant="h6">{formatDuration(durationInSecs)}</Typography>
+            <Typography variant="h6">
+              {formatDuration(durationInSecs)}
+            </Typography>
           </Box>
         </Stack>
 
@@ -42,7 +45,7 @@ const SkillSidebar = ({
           <MenuBookIcon sx={{ color: "primary.main" }} />
           <Box>
             <Typography variant="body2" color="text.secondary">
-              Modules
+              {SKILL_DETAIL_LABELS.MODULES}
             </Typography>
             <Typography variant="h6">{numModules} modules</Typography>
           </Box>
@@ -52,7 +55,7 @@ const SkillSidebar = ({
           <SchoolIcon sx={{ color: "primary.main" }} />
           <Box>
             <Typography variant="body2" color="text.secondary">
-              Level
+              {SKILL_DETAIL_LABELS.LEVEL}
             </Typography>
             <Typography variant="h6">{level}</Typography>
           </Box>

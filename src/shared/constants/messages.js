@@ -49,9 +49,25 @@ export const AUTH_VALIDATION = {
   PASSWORD_REQUIRED: "Password is required",
   PASSWORD_MIN_LENGTH: "Password must be at least 8 characters",
   PASSWORD_PATTERN:
-    "Password must contain uppercase, lowercase, number, special char (@$!%*?&) ",
+    "Password must contain uppercase, lowercase, number, special char (@$!%*?&)",
   USERNAME_REQUIRED: "Username is required",
   USERNAME_MIN_LENGTH: "Username must be at least 6 characters",
   USERNAME_MAX_LENGTH: "Username must be max 20 characters",
   USERNAME_PATTERN: "Username can only contain letters, numbers, -, _",
+};
+
+// skilldetail
+export const SKILL_DETAIL_LABELS = {
+  TAGS: "Tags",
+  WHAT_YOULL_LEARN: "What you'll learn",
+  PREREQUISITES: "Prerequisites",
+  COURSE_MODULES: "Course Modules",
+  DURATION: "Duration",
+  MODULES: "Modules",
+  LEVEL: "Level",
+};
+
+export const SKILL_DETAIL_ERRORS = {
+  NOT_FOUND: "Skill not found",
+  LOAD_FAILED: "Failed to load skill details. Please try again.",
 };
