@@ -12,6 +12,8 @@ import SchoolIcon from "@mui/icons-material/School";
 
 import ModuleAccordion from "../../course/components/ModuleAccordion";
 
+import { SKILL_DETAIL_LABELS } from "../../../../shared/constants/messages";
+
 const SkillFeatures = ({
   tags = [],
   learningOutcomes = [],
@@ -25,7 +27,7 @@ const SkillFeatures = ({
       {tags.length > 0 && (
         <Box sx={{ mb: 4 }}>
           <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-            Tags
+            {SKILL_DETAIL_LABELS.TAGS}
           </Typography>
           <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
             {tags.map((tag, index) => (
@@ -46,7 +48,7 @@ const SkillFeatures = ({
       {learningOutcomes.length > 0 && (
         <Box sx={{ mb: 4 }}>
           <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-            What you'll learn
+            {SKILL_DETAIL_LABELS.WHAT_YOULL_LEARN}
           </Typography>
           <Grid container spacing={2}>
             {learningOutcomes.map((outcome, index) => (
@@ -68,7 +70,7 @@ const SkillFeatures = ({
       {prerequisites.length > 0 && (
         <Box sx={{ mb: 4 }}>
           <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-            Prerequisites
+            {SKILL_DETAIL_LABELS.PREREQUISITES}
           </Typography>
           <List>
             {prerequisites.map((prereq, index) => (
@@ -86,7 +88,7 @@ const SkillFeatures = ({
       {modules.length > 0 && (
         <Box>
           <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-            Course Modules
+            {SKILL_DETAIL_LABELS.COURSE_MODULES}
           </Typography>
           {modules.map((module) => (
             <ModuleAccordion

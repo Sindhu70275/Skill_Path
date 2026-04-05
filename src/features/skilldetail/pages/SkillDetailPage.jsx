@@ -13,6 +13,7 @@ import SkillFeatures from "../components/SkillFeatures";
 import SkillSidebar from "../components/SkillSidebar";
 import { ErrorDisplay } from "../../../shared/components";
 import SkillDetailSkeleton from "../components/SkillDetailSkeleton";
+import { SKILL_DETAIL_ERRORS } from "../../../shared/constants/messages";
 
 const SkillDetailPage = () => {
   const { id } = useParams();
@@ -60,12 +61,12 @@ const SkillDetailPage = () => {
     const errorMessage =
       error.response?.data?.message ||
       error.message ||
-      "Failed to load skill details. Please try again.";
+      SKILL_DETAIL_ERRORS.LOAD_FAILED;
     return <ErrorDisplay message={errorMessage} />;
   }
 
   if (!skillData) {
-    return <ErrorDisplay message="Skill not found" />;
+    return <ErrorDisplay message={SKILL_DETAIL_ERRORS.NOT_FOUND} />;
   }
 
   const {
