@@ -7,7 +7,7 @@ import SchoolIcon from "@mui/icons-material/School";
 
 import { formatDuration } from "../../../shared/utils/formatDuration.js";
 import { CustomButton } from "../../../shared/components";
-import { SKILL_DETAIL_LABELS } from "../../../../shared/constants/messages";
+import { SKILL_DETAIL_LABELS } from "../../../shared/constants/messages";
 
 const SkillSidebar = ({
   durationInSecs,

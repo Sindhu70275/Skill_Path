@@ -12,7 +12,7 @@ import SchoolIcon from "@mui/icons-material/School";
 
 import ModuleAccordion from "../../course/components/ModuleAccordion";
 
-import { SKILL_DETAIL_LABELS } from "../../../../shared/constants/messages";
+import { SKILL_DETAIL_LABELS } from "../../../shared/constants/messages";
 
 const SkillFeatures = ({
   tags = [],
