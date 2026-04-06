@@ -11,6 +11,10 @@ import DiscoverSkillCard from "../components/DiscoverSkillCard";
 import NoSkillsFound from "../../../shared/components/NoSkillsFound";
 import { SkillsLoadingSkeleton } from "../components/SkillCardSkeleton";
 import { ErrorDisplay } from "../../../shared/components";
+import {
+  DISCOVER_ERRORS,
+  DISCOVER_LABELS,
+} from "../../../shared/constants/messages";
 
 const DiscoverPage = () => {
   const [searchSkill, setSearchSkill] = useState("");
@@ -40,15 +44,15 @@ const DiscoverPage = () => {
       const errorMessage =
         error.response?.data?.message ||
         error.message ||
-        "Failed to load skills. Please try again.";
+        DISCOVER_ERRORS.LOAD_SKILLS;
       return <ErrorDisplay message={errorMessage} />;
     }
 
     if (!skillsData || skillsData.length === 0) {
       return (
         <NoSkillsFound
-          title="No matches yet"
-          subtitle="Try adjusting your search or filters."
+          title={DISCOVER_LABELS.NO_MATCHES_TITLE}
+          subtitle={DISCOVER_LABELS.NO_MATCHES_SUBTITLE}
         />
       );
     }
