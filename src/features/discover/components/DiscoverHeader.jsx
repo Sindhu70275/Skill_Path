@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import FilterListIcon from "@mui/icons-material/FilterList";
 
 import DiscoverSkillsFilter from "./DiscoverSkillsFilter";
+import { DISCOVER_LABELS } from "../../../shared/constants/messages";
 
 const DiscoverHeader = ({
   searchSkill,
@@ -64,7 +65,7 @@ const DiscoverHeader = ({
         }}
       >
         <TextField
-          placeholder="Search for skills by name"
+          placeholder={DISCOVER_LABELS.SEARCH_PLACEHOLDER}
           variant="outlined"
           size="medium"
           value={searchSkill}
@@ -120,7 +121,7 @@ const DiscoverHeader = ({
               display: { xs: "none", sm: "block" },
             }}
           >
-            Filter
+            {DISCOVER_LABELS.FILTER}
           </Typography>
         </Button>
         <DiscoverSkillsFilter

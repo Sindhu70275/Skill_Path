@@ -56,6 +56,29 @@ export const AUTH_VALIDATION = {
   USERNAME_PATTERN: "Username can only contain letters, numbers, -, _",
 };
 
+// discover
+export const DISCOVER_LABELS = {
+  NO_MATCHES_TITLE: "No matches yet",
+  NO_MATCHES_SUBTITLE: "Try adjusting your search or filters.",
+  SEARCH_PLACEHOLDER: "Search for skills by name",
+  FILTER: "Filter",
+  SEARCH_SKILLS: "Search skills...",
+  NO_SKILLS_FOUND: "No skills found",
+  CLEAR_ALL: "Clear all",
+  COMING_SOON: "Coming Soon",
+};
+
+export const DISCOVER_ERRORS = {
+  LOAD_SKILLS: "Failed to load skills. Please try again.",
+};
+
+export const DISCOVER_BUTTONS = {
+  ENROLLING: "Enrolling...",
+  ENROLLED: "Enrolled",
+  ENROLL: "Enroll",
+  SEE_MORE: "See More",
+};
+
 // skilldetail
 export const SKILL_DETAIL_LABELS = {
   TAGS: "Tags",
