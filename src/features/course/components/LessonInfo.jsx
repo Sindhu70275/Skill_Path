@@ -12,6 +12,10 @@ import { useCourseContext } from "../context/CourseContext";
 import { useLessonComplete } from "../hooks/useUpdateLessonComplete";
 import { SnackbarContext } from "../../../shared/context/SnackbarContext";
 import { formatDuration } from "../../../shared/utils/formatDuration.js";
+import {
+  COURSE_BUTTONS,
+  COURSE_PROGRESS,
+} from "../../../shared/constants/messages.js";
 import CustomButton from "../../../shared/components/CustomButton";
 import LessonInfoSkeleton from "./LessonInfoSkeleton";
 
@@ -101,15 +105,15 @@ const LessonInfo = () => {
               </Typography>
             </Stack>
             <Stack direction="row" alignItems="center" spacing={0.5}>
-            <PlayCircleOutlineIcon sx={{ fontSize: 19 }} />
-            <Typography variant="body2">
-              {videoProgress > 0 ? Math.round(videoProgress) : 0}% watched
+              <PlayCircleOutlineIcon sx={{ fontSize: 19 }} />
+              <Typography variant="body2">
+              `${Math.round(videoProgress || 0)}${COURSE_PROGRESS.WATCHED}`
             </Typography>
             </Stack>
           </Stack>
         </Box>
         <CustomButton
-          label={isCompleted ? "Completed" : "Mark as completed"}
+          label={isCompleted ? COURSE_BUTTONS.COMPLETED : COURSE_BUTTONS.MARK_COMPLETE}
           variant="contained"
           onClick={handleMarkComplete}
           disabled={
