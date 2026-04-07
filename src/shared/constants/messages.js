@@ -94,3 +94,29 @@ export const SKILL_DETAIL_ERRORS = {
   NOT_FOUND: "Skill not found",
   LOAD_FAILED: "Failed to load skill details. Please try again.",
 };
+
+// course
+export const COURSE_LABELS = {
+  LESSONS: "lessons",
+  MODULES: "modules",
+  SHARE: "Share",
+  UNENROLL: "Unenroll",
+};
+
+export const COURSE_BUTTONS = {
+  MARK_COMPLETE: "Mark as completed",
+  COMPLETED: "Completed",
+};
+
+export const COURSE_PROGRESS = {
+  WATCHED: "% watched",
+};
+
+export const COURSE_MESSAGES = {
+  COPY_SUCCESS: "Copied course URL to clipboard!",
+  COPY_FAILED: "Failed to copy URL. Please copy manually.",
+  LESSON_COMPLETE: "Lesson completed successfully!",
+  LESSON_COMPLETE_FAILED: "Failed to mark as completed",
+};
+
+

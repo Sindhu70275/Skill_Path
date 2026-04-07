@@ -11,6 +11,7 @@ import VideoPlayerSkeleton from "./VideoPlayerSkeleton";
 
 import { useCourseContext } from "../context/CourseContext";
 import { SnackbarContext } from "../../../shared/context/SnackbarContext";
+import { COURSE_MESSAGES } from "../../../shared/constants/messages.js";
 
 const VideoPlayer = () => {
   const { selectedLessonId, currentLesson } = useCourseContext();
@@ -58,12 +59,12 @@ const VideoPlayer = () => {
       { lessonId: selectedLessonId, skillId },
       {
         onSuccess: (data) => {
-          const message = data?.message || "Lesson completed successfully!";
+          const message = data?.message || COURSE_MESSAGES.LESSON_COMPLETE;
           showSnackbar(message, "success");
         },
         onError: (error) => {
           const message =
-            error?.response?.data?.message || "Failed to mark as completed";
+            error?.response?.data?.message || COURSE_MESSAGES.LESSON_COMPLETE_FAILED;
           showSnackbar(message, "error");
           console.error(error);
         },

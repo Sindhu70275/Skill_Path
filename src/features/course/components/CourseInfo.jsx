@@ -10,6 +10,7 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
 import { useCourseContext } from "../context/CourseContext";
 import { formatDuration } from "../../../shared/utils/formatDuration.js";
+import { COURSE_LABELS } from "../../../shared/constants/messages.js";
 
 const CourseInfo = () => {
   const { skill: course } = useCourseContext();
@@ -81,13 +82,13 @@ const CourseInfo = () => {
         <Stack direction="row" alignItems="center" spacing={1}>
           <PlayCircleOutlineIcon sx={{ fontSize: 20 }} />
           <Typography variant="body2">
-            {course?.lessonsCount} lessons
+            {course?.lessonsCount} {COURSE_LABELS.LESSONS}
           </Typography>
         </Stack>
         <Stack direction="row" alignItems="center" spacing={1}>
           <CheckCircleIcon sx={{ fontSize: 20 }} />
           <Typography variant="body2">
-            {course?.modulesCount} modules
+            {course?.modulesCount} {COURSE_LABELS.MODULES}
           </Typography>
         </Stack>
       </Stack>
