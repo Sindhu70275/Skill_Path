@@ -11,13 +11,6 @@ export const LANDING_BUTTON_LABELS = {
   JOIN_PROGRAM: "Join the Program",
 };
 
-export const DASHBOARD_HEADER_MESSAGES = [
-  "Unlock your potential with SkillPath – your journey to mastery starts here!",
-  "Discover new skills and advance your career with SkillPath's curated learning paths.",
-  "SkillPath - Where learning meets opportunity. Explore, learn, and grow.",
-  "Empower yourself with SkillPath – personalized skills for a brighter future.",
-];
-
 //auth
 export const AUTH_TITLES = {
   LOGIN: "Sign In to Skill Path",
@@ -118,5 +111,32 @@ export const COURSE_MESSAGES = {
   LESSON_COMPLETE: "Lesson completed successfully!",
   LESSON_COMPLETE_FAILED: "Failed to mark as completed",
 };
+
+// dashboard
+export const DASHBOARD_LABELS = {
+  ENROLLED: "Enrolled",
+  WISHLIST: "Wishlist",
+  NO_ENROLLED_TITLE: "No enrolled skills yet",
+  NO_ENROLLED_SUBTITLE: "Enroll in skills from the Discover page to get started.",
+  NO_WISHLIST_TITLE: "No wishlisted skills yet",
+  NO_WISHLIST_SUBTITLE: "Add skills to your wishlist from the Discover page.",
+  START_LEARNING: "Start Learning",
+  ENROLL_NOW: "Enroll Now",
+  ACHIEVED: "% Achieved",
+  VIEW_DETAILS: "View Details",
+  REMOVE_WISHLIST: "Remove from wishlist",
+  WISHLISTED_ON: "Wishlisted on",
+};
+
+export const DASHBOARD_BUTTONS = {
+  VIEW_FAQS: "View FAQs →",
+};
+
+export const DASHBOARD_HEADER_MESSAGES = [
+  "Unlock your potential with SkillPath – your journey to mastery starts here!",
+  "Discover new skills and advance your career with SkillPath's curated learning paths.",
+  "SkillPath - Where learning meets opportunity. Explore, learn, and grow.",
+  "Empower yourself with SkillPath – personalized skills for a brighter future.",
+];
 
 

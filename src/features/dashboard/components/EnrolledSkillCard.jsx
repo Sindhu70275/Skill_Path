@@ -10,6 +10,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
 import { CustomButton } from "../../../shared/components";
+import { DASHBOARD_LABELS } from "../../../shared/constants/messages.js";
 
 const EnrolledSkillCard = ({ skillData }) => {
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ const EnrolledSkillCard = ({ skillData }) => {
             }}
           >
             <Typography variant="caption" color="text.secondary">
-              {percentage}% Achieved
+              {percentage} {DASHBOARD_LABELS.ACHIEVED}
             </Typography>
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
               <TrackChangesOutlinedIcon
@@ -118,7 +119,7 @@ const EnrolledSkillCard = ({ skillData }) => {
         </Box>
 
         <CustomButton
-          label="Start Learning"
+          label={DASHBOARD_LABELS.START_LEARNING}
           onClick={() => handleStartLearning(skillData._id)}
           variant="contained"
           startIcon={<PlayCircleOutlineIcon />}

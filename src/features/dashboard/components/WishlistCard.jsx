@@ -13,6 +13,7 @@ import { CustomButton } from "../../../shared/components";
 import { useRemoveWishlistSkill } from "../../../shared/hooks/usePostRemoveWishlistSkill.js";
 import { useEnrollSkill } from "../../../shared/hooks/usePostEnrollSkill.js";
 import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
+import { DASHBOARD_LABELS } from "../../../shared/constants/messages.js";
 
 const WishlistCard = ({ skillData }) => {
   const navigate = useNavigate();
@@ -146,12 +147,12 @@ const WishlistCard = ({ skillData }) => {
         <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
           <BookmarkIcon sx={{ fontSize: 16, color: "text.secondary" }} />
           <Typography variant="caption" color="text.secondary">
-            Wishlisted on {wishlistedDate}
+            {DASHBOARD_LABELS.WISHLISTED_ON} {wishlistedDate}
           </Typography>
         </Box>
 
         <CustomButton
-          label="Enroll Now"
+          label={DASHBOARD_LABELS.ENROLL_NOW}
           onClick={() => handleEnroll(skillData._id)}
           variant="contained"
           disabled={enrollPending || enrollSuccess}
