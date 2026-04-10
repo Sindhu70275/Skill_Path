@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useUnenrollSkill } from "../../../shared/hooks/usePostUnenrollSkill.js";
 import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
+import { COURSE_LABELS, COURSE_MESSAGES } from "../../../shared/constants/messages.js";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -58,9 +59,9 @@ const CourseHeader = () => {
     try {
       const url = window.location.origin + window.location.pathname;
       await navigator.clipboard.writeText(url);
-      showSnackbar("Copied course URL to clipboard!", "success");
+      showSnackbar(COURSE_MESSAGES.COPY_SUCCESS, "success");
     } catch (err) {
-      showSnackbar("Failed to copy URL. Please copy manually.", "error");
+      showSnackbar(COURSE_MESSAGES.COPY_FAILED, "error");
     }
     handleClose();
   };
@@ -113,13 +114,13 @@ const CourseHeader = () => {
           <MenuItem onClick={handleShare}>
             <Stack direction="row" spacing={1.5} alignItems="center">
               <ShareIcon fontSize="small" />
-              <Typography>Share</Typography>
+<Typography>{COURSE_LABELS.SHARE}</Typography>
             </Stack>
           </MenuItem>
           <MenuItem onClick={handleUnenroll}>
             <Stack direction="row" spacing={1.5} alignItems="center">
               <CloseIcon fontSize="small" sx={{ color: "error.main" }} />
-              <Typography sx={{ color: "error.main" }}>Unenroll</Typography>
+              <Typography sx={{ color: "error.main" }}>{COURSE_LABELS.UNENROLL}</Typography>
             </Stack>
           </MenuItem>
         </Menu>
