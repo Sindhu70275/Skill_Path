@@ -1,6 +1,8 @@
 import { lazy, Suspense } from "react";
 import { Box, Container, Grid, Typography, Paper } from "@mui/material";
 import ProfileHeader from "../components/ProfileHeader";
+import GoalsWidget from "../components/GoalsWidget";
+import SetWeeklyGoalDialog from "../components/SetWeeklyGoalDialog";
 
 // const ProgressCard = lazy(() => import("../components/ProgressCard")); // Placeholder
 // const AchievementsGrid = lazy(() => import("../components/AchievementsGrid"));
@@ -14,7 +16,9 @@ const ProfilePage = () => {
         <ProfileHeader />
 
         <Grid container spacing={4}>
-          {/* Progress Card with charts and stats */}
+          <Grid size={{ xs: 12, md: 6 }}>
+            <GoalsWidget />
+          </Grid>
           <Grid item xs={12} lg={8}>
             <Paper sx={{ p: 3, mb: 3 }}>
               <Typography variant="h6" sx={{ mb: 2 }}>
