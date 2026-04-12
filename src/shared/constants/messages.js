@@ -11,13 +11,6 @@ export const LANDING_BUTTON_LABELS = {
   JOIN_PROGRAM: "Join the Program",
 };
 
-export const DASHBOARD_HEADER_MESSAGES = [
-  "Unlock your potential with SkillPath – your journey to mastery starts here!",
-  "Discover new skills and advance your career with SkillPath's curated learning paths.",
-  "SkillPath - Where learning meets opportunity. Explore, learn, and grow.",
-  "Empower yourself with SkillPath – personalized skills for a brighter future.",
-];
-
 //auth
 export const AUTH_TITLES = {
   LOGIN: "Sign In to Skill Path",
@@ -55,3 +48,95 @@ export const AUTH_VALIDATION = {
   FULL_NAME_MAX_LENGTH: "Full name must be max 50 characters",
   FULL_NAME_PATTERN: "Full name can only contain letters and spaces",
 };
+
+// discover
+export const DISCOVER_LABELS = {
+  NO_MATCHES_TITLE: "No matches yet",
+  NO_MATCHES_SUBTITLE: "Try adjusting your search or filters.",
+  SEARCH_PLACEHOLDER: "Search for skills by name",
+  FILTER: "Filter",
+  SEARCH_SKILLS: "Search skills...",
+  NO_SKILLS_FOUND: "No skills found",
+  CLEAR_ALL: "Clear all",
+  COMING_SOON: "Coming Soon",
+};
+
+export const DISCOVER_ERRORS = {
+  LOAD_SKILLS: "Failed to load skills. Please try again.",
+};
+
+export const DISCOVER_BUTTONS = {
+  ENROLLING: "Enrolling...",
+  ENROLLED: "Enrolled",
+  ENROLL: "Enroll",
+  SEE_MORE: "See More",
+};
+
+// skilldetail
+export const SKILL_DETAIL_LABELS = {
+  TAGS: "Tags",
+  WHAT_YOULL_LEARN: "What you'll learn",
+  PREREQUISITES: "Prerequisites",
+  COURSE_MODULES: "Course Modules",
+  DURATION: "Duration",
+  MODULES: "Modules",
+  LEVEL: "Level",
+};
+
+export const SKILL_DETAIL_ERRORS = {
+  NOT_FOUND: "Skill not found",
+  LOAD_FAILED: "Failed to load skill details. Please try again.",
+};
+
+// course
+export const COURSE_LABELS = {
+  LESSONS: "lessons",
+  MODULES: "modules",
+  SHARE: "Share",
+  UNENROLL: "Unenroll",
+};
+
+export const COURSE_BUTTONS = {
+  MARK_COMPLETE: "Mark as completed",
+  COMPLETED: "Completed",
+};
+
+export const COURSE_PROGRESS = {
+  WATCHED: "% watched",
+};
+
+export const COURSE_MESSAGES = {
+  COPY_SUCCESS: "Copied course URL to clipboard!",
+  COPY_FAILED: "Failed to copy URL. Please copy manually.",
+  LESSON_COMPLETE: "Lesson completed successfully!",
+  LESSON_COMPLETE_FAILED: "Failed to mark as completed",
+};
+
+// dashboard
+export const DASHBOARD_LABELS = {
+  ENROLLED: "Enrolled",
+  WISHLIST: "Wishlist",
+  NO_ENROLLED_TITLE: "No enrolled skills yet",
+  NO_ENROLLED_SUBTITLE: "Enroll in skills from the Discover page to get started.",
+  NO_WISHLIST_TITLE: "No wishlisted skills yet",
+  NO_WISHLIST_SUBTITLE: "Add skills to your wishlist from the Discover page.",
+  START_LEARNING: "Start Learning",
+  ENROLL_NOW: "Enroll Now",
+  ACHIEVED: "% Achieved",
+  VIEW_DETAILS: "View Details",
+  REMOVE_WISHLIST: "Remove from wishlist",
+  WISHLISTED_ON: "Wishlisted on",
+};
+
+export const DASHBOARD_BUTTONS = {
+  VIEW_FAQS: "View FAQs →",
+};
+
+export const DASHBOARD_HEADER_MESSAGES = [
+  "Unlock your potential with SkillPath – your journey to mastery starts here!",
+  "Discover new skills and advance your career with SkillPath's curated learning paths.",
+  "SkillPath - Where learning meets opportunity. Explore, learn, and grow.",
+  "Empower yourself with SkillPath – personalized skills for a brighter future.",
+];
+
+

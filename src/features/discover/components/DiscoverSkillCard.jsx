@@ -17,6 +17,10 @@ import { useEnrollSkill } from "../../../shared/hooks/usePostEnrollSkill.js";
 import { useAddWishlistSkill } from "../../../shared/hooks/usePostAddWishlistSkill.js";
 import { useRemoveWishlistSkill } from "../../../shared/hooks/usePostRemoveWishlistSkill.js";
 import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
+import {
+  DISCOVER_BUTTONS,
+  DISCOVER_LABELS,
+} from "../../../shared/constants/messages";
 
 const DiscoverSkillCard = ({ skillData }) => {
   const navigate = useNavigate();
@@ -30,7 +34,8 @@ const DiscoverSkillCard = ({ skillData }) => {
   const { mutate: removeWishlist, isPending: removePending } =
     useRemoveWishlistSkill();
 
-  const isComingSoon = skillData.modulesCount === 0 || skillData.modulesCount === undefined;
+  const isComingSoon =
+    skillData.modulesCount === 0 || skillData.modulesCount === undefined;
 
   const onSeeMore = (id) => {
     navigate(`/skillDetails/${id}`);
@@ -110,7 +115,7 @@ const DiscoverSkillCard = ({ skillData }) => {
               color="common.white"
               sx={{ fontWeight: "bold" }}
             >
-              Coming Soon
+              {DISCOVER_LABELS.COMING_SOON}
             </Typography>
           </Box>
         )}
@@ -161,10 +166,10 @@ const DiscoverSkillCard = ({ skillData }) => {
           onClick={() => onEnroll(skillData._id)}
           label={
             enrollPending
-              ? "Enrolling..."
+              ? DISCOVER_BUTTONS.ENROLLING
               : enrollSuccess || skillData.isEnrolled
-                ? "Enrolled"
-                : "Enroll"
+                ? DISCOVER_BUTTONS.ENROLLED
+                : DISCOVER_BUTTONS.ENROLL
           }
           width="50%"
           disabled={
@@ -176,7 +181,7 @@ const DiscoverSkillCard = ({ skillData }) => {
         />
         <CustomButton
           onClick={() => onSeeMore(skillData._id)}
-          label="See More"
+          label={DISCOVER_BUTTONS.SEE_MORE}
           disabled={isComingSoon}
           variant="outline"
           width="40%"

@@ -14,6 +14,7 @@ import WishlistCardSkeleton from "./WishlistCardSkeleton";
 import NoSkillsFound from "../../../shared/components/NoSkillsFound";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { DASHBOARD_LABELS } from "../../../shared/constants/messages.js";
 
 const DashboardTab = ({ dashboardSkills, isLoading }) => {
   const [tab, setTab] = useState("enroll");
@@ -27,8 +28,8 @@ const DashboardTab = ({ dashboardSkills, isLoading }) => {
       <TabContext value={tab}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange}>
-            <Tab label="Enrolled" value="enroll" />
-            <Tab label="Wishlist" value="wishlist" />
+            <Tab label={DASHBOARD_LABELS.ENROLLED} value="enroll" />
+            <Tab label={DASHBOARD_LABELS.WISHLIST} value="wishlist" />
           </TabList>
         </Box>
 
@@ -38,13 +39,16 @@ const DashboardTab = ({ dashboardSkills, isLoading }) => {
           ) : dashboardSkills?.enrolled?.length === 0 ? (
             <NoSkillsFound
               icon={AddCircleOutlineIcon}
-              title="No enrolled skills yet"
-              subtitle="Enroll in skills from the Discover page to get started."
+              title={DASHBOARD_LABELS.NO_ENROLLED_TITLE}
+              subtitle={DASHBOARD_LABELS.NO_ENROLLED_SUBTITLE}
             />
           ) : (
             <Grid container spacing={2}>
               {dashboardSkills.enrolled.map((skill) => (
-                <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }} key={skill._id}>
+                <Grid
+                  size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}
+                  key={skill._id}
+                >
                   <EnrolledSkillCard skillData={skill} />
                 </Grid>
               ))}
@@ -58,13 +62,16 @@ const DashboardTab = ({ dashboardSkills, isLoading }) => {
           ) : dashboardSkills?.wishlisted?.length === 0 ? (
             <NoSkillsFound
               icon={FavoriteBorderIcon}
-              title="No wishlisted skills yet"
-              subtitle="Add skills to your wishlist from the Discover page."
+              title={DASHBOARD_LABELS.NO_WISHLIST_TITLE}
+              subtitle={DASHBOARD_LABELS.NO_WISHLIST_SUBTITLE}
             />
           ) : (
             <Grid container spacing={2}>
               {dashboardSkills.wishlisted.map((skill) => (
-                <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }} key={skill._id}>
+                <Grid
+                  size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}
+                  key={skill._id}
+                >
                   <WishlistCard skillData={skill} />
                 </Grid>
               ))}

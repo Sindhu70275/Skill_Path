@@ -13,6 +13,7 @@ import Menu from "@mui/material/Menu";
 
 import { useSkillTags } from "../hooks/useGetSkillTags";
 import FilterSkeleton from "./FilterSkeleton";
+import { DISCOVER_LABELS } from "../../../shared/constants/messages";
 
 const DiscoverSkillsFilter = ({
   anchorEl,
@@ -58,7 +59,7 @@ const DiscoverSkillsFilter = ({
         }}
       >
         <OutlinedInput
-          placeholder="Search skills..."
+          placeholder={DISCOVER_LABELS.SEARCH_SKILLS}
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           size="small"
@@ -73,7 +74,7 @@ const DiscoverSkillsFilter = ({
         />
       </Box>
 
-      <Box sx={{ maxHeight: {xs: 150 , md: 200}, overflow: "auto" }}>
+      <Box sx={{ maxHeight: { xs: 150, md: 200 }, overflow: "auto" }}>
         {isLoading ? (
           <FilterSkeleton />
         ) : (
@@ -100,7 +101,7 @@ const DiscoverSkillsFilter = ({
 
             {filteredSkillNames?.length === 0 && (
               <MenuItem disabled>
-                <ListItemText primary="No skills found" />
+                <ListItemText primary={DISCOVER_LABELS.NO_SKILLS_FOUND} />
               </MenuItem>
             )}
           </>
@@ -126,7 +127,7 @@ const DiscoverSkillsFilter = ({
             backgroundColor: theme.palette.primary.main,
           }}
         >
-          Clear all
+          {DISCOVER_LABELS.CLEAR_ALL}
         </Button>
       </Box>
     </Menu>
