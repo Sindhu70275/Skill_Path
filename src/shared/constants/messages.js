@@ -117,7 +117,8 @@ export const DASHBOARD_LABELS = {
   ENROLLED: "Enrolled",
   WISHLIST: "Wishlist",
   NO_ENROLLED_TITLE: "No enrolled skills yet",
-  NO_ENROLLED_SUBTITLE: "Enroll in skills from the Discover page to get started.",
+  NO_ENROLLED_SUBTITLE:
+    "Enroll in skills from the Discover page to get started.",
   NO_WISHLIST_TITLE: "No wishlisted skills yet",
   NO_WISHLIST_SUBTITLE: "Add skills to your wishlist from the Discover page.",
   START_LEARNING: "Start Learning",
@@ -139,4 +140,23 @@ export const DASHBOARD_HEADER_MESSAGES = [
   "Empower yourself with SkillPath – personalized skills for a brighter future.",
 ];
 
+export const PROFILE_TITLES = {
+  WIDGET: "Learning Goals",
+  DIALOG_GOAL: "Set Your Weekly Learning Goal",
+};
 
+//profile
+export const PROFILE_LABELS = {
+  GOAL_SUBTITLE: "How many lessons do you want to complete per week?",
+  LESSONS_PREVIEW: "{lessons} lessons per week",
+  CURRENT_GOAL: "Current goal: {goal} lessons/week",
+  LESSONS: "Lessons",
+  STREAK: "Streak: {streak} Days",
+  SET_GOAL: "Set Your Goal!",
+};
+
+export const PROFILE_BUTTONS = {
+  SET_GOAL: "Set Goal",
+  CANCEL: "Cancel",
+  SAVE_GOAL: "Save Goal",
+};
