@@ -1,4 +1,6 @@
 import { useState } from "react";
+
+import { useUpdateWeeklyGoal } from "../hooks/useUpdateWeeklyGoal";
 import SetWeeklyGoalDialog from "./SetWeeklyGoalDialog";
 import {
   PROFILE_TITLES,
@@ -18,6 +20,15 @@ import { CustomButton } from "../../../shared/components";
 const GoalsWidget = () => {
   const [open, setOpen] = useState(false);
   const [weeklyGoal, setWeeklyGoal] = useState(5);
+  const updateWeeklyGoal = useUpdateWeeklyGoal();
+
+  const handleUpdateGoal = (goal) => {
+    updateWeeklyGoal.mutate(goal, {
+      onSuccess: () => {
+        setWeeklyGoal(goal);
+      },
+    });
+  };
   const [lessonsThisWeek, setLessonsThisWeek] = useState(3);
   const [streak, setStreak] = useState(6);
 
@@ -98,7 +109,7 @@ const GoalsWidget = () => {
         open={open}
         onClose={() => setOpen(false)}
         currentGoal={weeklyGoal}
-        onSave={setWeeklyGoal}
+        onSave={handleUpdateGoal}
       />
     </>
   );
