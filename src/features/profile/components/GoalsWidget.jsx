@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { useUpdateWeeklyGoal } from "../hooks/useUpdateWeeklyGoal";
+import { useGetUserStats } from "../hooks/useGetUserStats";
 import SetWeeklyGoalDialog from "./SetWeeklyGoalDialog";
 import {
   PROFILE_TITLES,
@@ -21,6 +22,7 @@ const GoalsWidget = () => {
   const [open, setOpen] = useState(false);
   const [weeklyGoal, setWeeklyGoal] = useState(5);
   const updateWeeklyGoal = useUpdateWeeklyGoal();
+  const { data: stats, isLoading } = useGetUserStats();
 
   const handleUpdateGoal = (goal) => {
     updateWeeklyGoal.mutate(goal, {
@@ -29,10 +31,27 @@ const GoalsWidget = () => {
       },
     });
   };
-  const [lessonsThisWeek, setLessonsThisWeek] = useState(3);
-  const [streak, setStreak] = useState(6);
 
-  const weeklyProgress = (lessonsThisWeek / weeklyGoal) * 100;
+  const weeklyProgress =
+    ((stats?.weeklyCompleted ?? 0) / Math.max(stats?.weeklyGoal ?? 1, 1)) * 100;
+
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          p: 3,
+          borderRadius: 2,
+          boxShadow: 3,
+          backgroundColor: "background.paper",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography>Loading your stats...</Typography>
+      </Box>
+    );
+  }
 
   return (
     <>
@@ -71,7 +90,7 @@ const GoalsWidget = () => {
                 }}
               >
                 <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
-                  {lessonsThisWeek}/{weeklyGoal}
+                  {stats?.weeklyCompleted ?? 0}/{stats?.weeklyGoal}
                 </Typography>
                 <Typography variant="caption" color="text.secondary">
                   {PROFILE_LABELS.LESSONS}
@@ -92,7 +111,10 @@ const GoalsWidget = () => {
             <Typography variant="h5">{PROFILE_LABELS.SET_GOAL}</Typography>
             <Divider sx={{ my: 2 }} />
             <Typography variant="body1">
-              {PROFILE_LABELS.STREAK.replace("{streak}", streak)}
+              {PROFILE_LABELS.STREAK.replace(
+                "{streak}",
+                stats?.currentDailyStreak,
+              )}
             </Typography>
           </Grid>
         </Grid>
