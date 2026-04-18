@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useUpdateWeeklyGoal } from "../hooks/useUpdateWeeklyGoal";
 import { useGetUserStats } from "../hooks/useGetUserStats";
 import SetWeeklyGoalDialog from "./SetWeeklyGoalDialog";
+import GoalsWidgetSkeleton from "./GoalsWidgetSkeleton";
 import {
   PROFILE_TITLES,
   PROFILE_LABELS,
@@ -36,21 +37,7 @@ const GoalsWidget = () => {
     ((stats?.weeklyCompleted ?? 0) / Math.max(stats?.weeklyGoal ?? 1, 1)) * 100;
 
   if (isLoading) {
-    return (
-      <Box
-        sx={{
-          p: 3,
-          borderRadius: 2,
-          boxShadow: 3,
-          backgroundColor: "background.paper",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Typography>Loading your stats...</Typography>
-      </Box>
-    );
+    return <GoalsWidgetSkeleton />;
   }
 
   return (
