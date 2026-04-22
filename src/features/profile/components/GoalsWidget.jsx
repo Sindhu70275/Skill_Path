@@ -1,5 +1,12 @@
 import { useState } from "react";
 
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+
 import { useUpdateWeeklyGoal } from "../hooks/useUpdateWeeklyGoal";
 import { useGetUserStats } from "../hooks/useGetUserStats";
 import SetWeeklyGoalDialog from "./SetWeeklyGoalDialog";
@@ -9,13 +16,6 @@ import {
   PROFILE_LABELS,
   PROFILE_BUTTONS,
 } from "../../../shared/constants/messages";
-
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import { CircularProgressbar } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
 
 import { CustomButton } from "../../../shared/components";
 
@@ -45,16 +45,18 @@ const GoalsWidget = () => {
       <Box
         sx={{
           p: 3,
-          borderRadius: 2,
-          boxShadow: 3,
-          backgroundColor: "background.paper",
+          borderRadius: 4,
+          boxShadow: 4,
+          maxHeight: 230,
         }}
       >
-        <Typography variant="h3">{PROFILE_TITLES.WIDGET}</Typography>
+        <Typography variant="h5" fontWeight={700} color="primary.main">
+          {PROFILE_TITLES.WIDGET}
+        </Typography>
 
-        <Divider sx={{ my: 3 }} />
+        <Divider sx={{ my: 2 }} />
 
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={2} alignItems="center" sx={{ my: 3 }}>
           <Grid size={{ xs: 6 }}>
             <Box
               sx={{
@@ -106,10 +108,9 @@ const GoalsWidget = () => {
           </Grid>
         </Grid>
 
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 3, mb: 1.5 }}>
           <CustomButton
             label={PROFILE_BUTTONS.SET_GOAL}
-            variant="outlined"
             onClick={() => setOpen(true)}
           />
         </Box>

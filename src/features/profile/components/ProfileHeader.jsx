@@ -30,11 +30,11 @@ const ProfileHeader = () => {
         alignItems: { xs: "flex-start", sm: "center" },
         gap: 3,
         mb: 4,
-        p: 2,
-        borderRadius: 2,
+        p: 3,
+        borderRadius: 3,
         color: "white",
         position: "relative",
-        boxShadow: 3,
+        boxShadow: 6,
       }}
     >
       <Box
