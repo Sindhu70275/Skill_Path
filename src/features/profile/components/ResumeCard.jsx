@@ -1,71 +1,90 @@
-import {
-  Box,
-  Typography,
-  Button,
-  Paper,
-  LinearProgress,
-  Chip,
-} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
+import Paper from "@mui/material/Paper";
+
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useNavigate } from "react-router-dom";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+
 import { CustomButton } from "../../../shared/components";
+import { useGetLatestLesson } from "../hooks/useGetLatestLesson";
 
 dayjs.extend(relativeTime);
 
-const ResumeCard = ({ data }) => {
+const ResumeCard = () => {
   const navigate = useNavigate();
+  const { data, isLoading } = useGetLatestLesson();
+
+  if (isLoading) {
+    return (
+      <Paper sx={{ p: 3, borderRadius: 3 }}>
+        <Typography>Loading lesson...</Typography>
+      </Paper>
+    );
+  }
 
   if (!data) return null;
 
   const lesson = data.lesson;
+  const isCompleted = lesson?.isCompleted;
   const durationMins = Math.floor((lesson?.durationInSecs || 0) / 60);
 
   return (
     <Paper
-      elevation={4}
       sx={{
         p: 3,
-        borderRadius: 3,
-        boxShadow: 6,
-        display: "flex",
-        flexDirection: "column",
-
+        borderRadius: 4,
+        boxShadow: 4,
+        maxHeight: 230,
       }}
     >
-      <Typography variant="h5" color="primary" fontWeight="bold">
+      <Typography variant="h5" fontWeight={700} color="primary.main">
         Continue Learning
       </Typography>
 
-      <Divider sx={{ my: 3 }} />
+      <Divider sx={{ my: 2 }} />
 
-      <Typography variant="body2" color="text.secondary">
+      <Typography variant="caption" color="text.secondary">
         {data.skill?.title} → {data.module?.title}
       </Typography>
 
-      <Typography variant="subtitle1" fontWeight="medium">
+      <Typography variant="subtitle1" fontWeight={600}>
         {lesson?.title}
       </Typography>
 
-      <Box sx={{ mt: 1 }}>
-        <LinearProgress
-          variant="determinate"
-          value={lesson?.progressPercentage || 0}
+      <Box mt={1} display="flex" alignItems="center" gap={1}>
+        <Chip
+          label={isCompleted ? "Completed" : "In Progress"}
+          color={isCompleted ? "success" : "warning"}
+          size="small"
         />
         <Typography variant="caption" color="text.secondary">
-          {lesson?.progressPercentage}% completed • {durationMins} mins
+          {dayjs(lesson?.lastWatchedAt).fromNow()}
         </Typography>
       </Box>
 
-      <Typography variant="caption" color="text.secondary">
-        Last watched {dayjs(lesson?.lastWatchedAt).fromNow()}
-      </Typography>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 1 }}>
+        <AccessTimeIcon sx={{ fontSize: 20 }} />
+        <Typography variant="body2">{durationMins} mins</Typography>
+      </Box>
 
-      <CustomButton
-        label="Resume"
-        onClick={() => navigate(`/course/${data.skill?._id}`)}
-      />
+      <Box mt={3} display="flex" gap={2} justifyContent="center">
+        <CustomButton
+          label={isCompleted ? "Revisit Lesson" : "Resume"}
+          onClick={() => navigate(`/course/${data.skill?._id}`)}
+        />
+        {isCompleted && (
+          <CustomButton
+            label="Next Lesson"
+            variant="outlined"
+            onClick={() => navigate(`/course/${data.skill?._id}`)}
+          />
+        )}
+      </Box>
     </Paper>
   );
 };

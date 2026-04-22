@@ -1,13 +1,13 @@
-import {
-  Box,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  Chip,
-  Skeleton,
-  Paper,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Chip from "@mui/material/Chip";
+import Skeleton from "@mui/material/Skeleton";
+import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
+
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -16,9 +16,8 @@ dayjs.extend(relativeTime);
 const ActivityList = ({ data, isLoading }) => {
   return (
     <Paper
-      elevation={4}
       sx={{
-        p: 4,
+        p: 3,
         borderRadius: 3,
         boxShadow: 6,
         maxHeight: 300,
@@ -26,9 +25,16 @@ const ActivityList = ({ data, isLoading }) => {
         flexDirection: "column",
       }}
     >
-      <Typography variant="h5" fontWeight="bold" gutterBottom color="primary">
+      <Typography
+        variant="h5"
+        fontWeight={700}
+        gutterBottom
+        color="primary.main"
+      >
         Recent Activity
       </Typography>
+
+      <Divider sx={{ mt: 2 }} />
 
       {isLoading ? (
         <Box sx={{ py: 2 }}>
