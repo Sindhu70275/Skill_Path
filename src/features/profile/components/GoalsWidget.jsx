@@ -50,7 +50,9 @@ const GoalsWidget = () => {
           backgroundColor: "background.paper",
         }}
       >
-        <Typography variant="h3">{PROFILE_TITLES.WIDGET}</Typography>
+        <Typography variant="h5" fontWeight="bold" gutterBottom color="primary">
+          {PROFILE_TITLES.WIDGET}
+        </Typography>
 
         <Divider sx={{ my: 3 }} />
 
@@ -109,7 +111,6 @@ const GoalsWidget = () => {
         <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
           <CustomButton
             label={PROFILE_BUTTONS.SET_GOAL}
-            variant="outlined"
             onClick={() => setOpen(true)}
           />
         </Box>

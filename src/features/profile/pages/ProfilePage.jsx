@@ -1,102 +1,48 @@
-import { lazy, Suspense } from "react";
-import { Box, Container, Grid, Typography, Paper } from "@mui/material";
+import { Box, Container, Grid, Paper, Skeleton } from "@mui/material";
+
 import ProfileHeader from "../components/ProfileHeader";
 import GoalsWidget from "../components/GoalsWidget";
+import ResumeCard from "../components/ResumeCard";
+import ActivityList from "../components/ActivityList";
 
-// const ProgressCard = lazy(() => import("../components/ProgressCard")); // Placeholder
-// const AchievementsGrid = lazy(() => import("../components/AchievementsGrid"));
-// const ActivityTimeline = lazy(() => import("../components/ActivityTimeline"));
-// const GoalsWidget = lazy(() => import("../components/GoalsWidget"));
+import { useGetLatestLesson } from "../hooks/useGetLatestLesson";
+import { useGetRecentActivity } from "../hooks/useGetRecentActivity";
+import { useGetWeeklyProgress } from "../hooks/useGetWeeklyProgress";
+import { useGetUserStats } from "../hooks/useGetUserStats";
 
 const ProfilePage = () => {
+  const { data: latest, isLoading: loadingLatest } = useGetLatestLesson();
+  const { data: recentActivity, isLoading: loadingRecent } =
+    useGetRecentActivity();
+
   return (
-    <Box sx={{ py: 4 }}>
+    <Box
+      sx={{
+        py: 4,
+        minHeight: "100vh",
+        backgroundAttachment: "fixed",
+      }}
+    >
       <Container maxWidth="lg">
         <ProfileHeader />
 
-        <Grid container spacing={4}>
-          <Grid size={{ xs: 12, md: 5 }}>
+        <Grid container spacing={4} sx={{ mt: 2 }}>
+          <Grid size={{ xs: 12, md: 6 }}>
+            {loadingLatest ? (
+              <Paper sx={{ p: 4, mb: 3, borderRadius: 3, boxShadow: 8 }}>
+                <Skeleton variant="rectangular" height={120} />
+              </Paper>
+            ) : (
+              <ResumeCard data={latest} />
+            )}
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 6 }}>
             <GoalsWidget />
           </Grid>
-          <Grid item xs={12} lg={8}>
-            <Paper sx={{ p: 3, mb: 3 }}>
-              <Typography variant="h6" sx={{ mb: 2 }}>
-                Progress Overview
-              </Typography>
-              {/* Charts and stats placeholder */}
-              <Box
-                sx={{
-                  height: 300,
-                  bgcolor: "grey.100",
-                  borderRadius: 1,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                Progress charts and stats will go here
-              </Box>
-            </Paper>
 
-            {/* Activity Timeline */}
-            <Paper sx={{ p: 3 }}>
-              <Typography variant="h6" sx={{ mb: 2 }}>
-                Recent Activity
-              </Typography>
-              <Box
-                sx={{
-                  height: 400,
-                  bgcolor: "grey.100",
-                  borderRadius: 1,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                Activity timeline will go here
-              </Box>
-            </Paper>
-          </Grid>
-
-          {/* Achievements Grid + Goals Widget */}
-          <Grid item xs={12} lg={4}>
-            {/* Achievements */}
-            <Paper sx={{ p: 3, mb: 3 }}>
-              <Typography variant="h6" sx={{ mb: 2 }}>
-                Achievements
-              </Typography>
-              <Box
-                sx={{
-                  height: 250,
-                  bgcolor: "grey.100",
-                  borderRadius: 1,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                Badges grid will go here
-              </Box>
-            </Paper>
-
-            {/* Goals */}
-            <Paper sx={{ p: 3 }}>
-              <Typography variant="h6" sx={{ mb: 2 }}>
-                Goals
-              </Typography>
-              <Box
-                sx={{
-                  height: 200,
-                  bgcolor: "grey.100",
-                  borderRadius: 1,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                Goals widget will go here
-              </Box>
-            </Paper>
+          <Grid size={{ xs: 12 }}>
+            <ActivityList data={recentActivity} isLoading={loadingRecent} />
           </Grid>
         </Grid>
       </Container>
