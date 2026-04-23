@@ -8,7 +8,6 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 import { useUpdateWeeklyGoal } from "../hooks/useUpdateWeeklyGoal";
-import { useGetUserStats } from "../hooks/useGetUserStats";
 import SetWeeklyGoalDialog from "./SetWeeklyGoalDialog";
 import GoalsWidgetSkeleton from "./GoalsWidgetSkeleton";
 import {
@@ -19,11 +18,10 @@ import {
 
 import { CustomButton } from "../../../shared/components";
 
-const GoalsWidget = () => {
+const GoalsWidget = ({ stats, isLoading }) => {
   const [open, setOpen] = useState(false);
   const [weeklyGoal, setWeeklyGoal] = useState(5);
   const updateWeeklyGoal = useUpdateWeeklyGoal();
-  const { data: stats, isLoading } = useGetUserStats();
 
   const handleUpdateGoal = (goal) => {
     updateWeeklyGoal.mutate(goal, {
