@@ -11,20 +11,15 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 import { CustomButton } from "../../../shared/components";
-import { useGetLatestLesson } from "../hooks/useGetLatestLesson";
+import ResumeCardSkeleton from "./ResumeCardSkeleton";
 
 dayjs.extend(relativeTime);
 
-const ResumeCard = () => {
+const ResumeCard = ({ data, isLoading }) => {
   const navigate = useNavigate();
-  const { data, isLoading } = useGetLatestLesson();
 
   if (isLoading) {
-    return (
-      <Paper sx={{ p: 3, borderRadius: 3 }}>
-        <Typography>Loading lesson...</Typography>
-      </Paper>
-    );
+    return <ResumeCardSkeleton />;
   }
 
   if (!data) return null;

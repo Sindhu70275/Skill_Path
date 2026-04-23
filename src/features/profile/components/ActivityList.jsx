@@ -4,12 +4,12 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Chip from "@mui/material/Chip";
-import Skeleton from "@mui/material/Skeleton";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import ActivityListSkeleton from "./ActivityListSkeleton";
 
 dayjs.extend(relativeTime);
 
@@ -37,11 +37,7 @@ const ActivityList = ({ data, isLoading }) => {
       <Divider sx={{ mt: 2 }} />
 
       {isLoading ? (
-        <Box sx={{ py: 2 }}>
-          <Skeleton height={60} />
-          <Skeleton height={60} />
-          <Skeleton height={60} />
-        </Box>
+        <ActivityListSkeleton />
       ) : data && data.length > 0 ? (
         <Box sx={{ flex: 1, overflowY: "auto" }}>
           <List>
