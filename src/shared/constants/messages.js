@@ -143,6 +143,9 @@ export const DASHBOARD_HEADER_MESSAGES = [
 export const PROFILE_TITLES = {
   WIDGET: "Learning Goals",
   DIALOG_GOAL: "Set Your Weekly Learning Goal",
+  RECENT_ACTIVITY: "Recent Activity",
+  CONTINUE_LEARNING: "Continue Learning",
+  EDIT_PROFILE: "Edit Profile",
 };
 
 //profile
@@ -153,10 +156,28 @@ export const PROFILE_LABELS = {
   LESSONS: "Lessons",
   STREAK: "Streak: {streak} Days",
   SET_GOAL: "Set Your Goal!",
+  NO_ACTIVITY: "No recent activity. Get started with your first lesson!",
+  FULL_NAME: "Full Name",
+  CHANGE_PHOTO: "Change Photo",
+  MINS: "{duration} mins",
 };
 
 export const PROFILE_BUTTONS = {
   SET_GOAL: "Set Goal",
   CANCEL: "Cancel",
   SAVE_GOAL: "Save Goal",
+  EDIT_PROFILE: "Edit Profile",
+  RESUME: "Resume",
+  REVISIT_LESSON: "Revisit Lesson",
+  NEXT_LESSON: "Next Lesson",
+  SAVE_CHANGES: "Save Changes",
+};
+
+export const PROFILE_CHIP_LABELS = {
+  COMPLETED: "Completed",
+  IN_PROGRESS: "In Progress",
+};
+
+export const PROFILE_ERRORS = {
+  UPDATE_PROFILE: "Failed to update profile",
 };
