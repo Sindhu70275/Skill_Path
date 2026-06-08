@@ -20,7 +20,7 @@ export const AUTH_TITLES = {
 export const AUTH_LABELS = {
   EMAIL: "Email",
   PASSWORD: "Password",
-  USERNAME: "Username",
+  FULL_NAME: "Full Name",
 };
 
 export const AUTH_BUTTON_LABELS = {
@@ -42,11 +42,11 @@ export const AUTH_VALIDATION = {
   PASSWORD_REQUIRED: "Password is required",
   PASSWORD_MIN_LENGTH: "Password must be at least 8 characters",
   PASSWORD_PATTERN:
-    "Password must contain uppercase, lowercase, number, special char (@$!%*?&)",
-  USERNAME_REQUIRED: "Username is required",
-  USERNAME_MIN_LENGTH: "Username must be at least 6 characters",
-  USERNAME_MAX_LENGTH: "Username must be max 20 characters",
-  USERNAME_PATTERN: "Username can only contain letters, numbers, -, _",
+    "Password must contain uppercase, lowercase, number, special char (@$!%*?&) ",
+  FULL_NAME_REQUIRED: "Full name is required",
+  FULL_NAME_MIN_LENGTH: "Full name must be at least 3 characters",
+  FULL_NAME_MAX_LENGTH: "Full name must be max 50 characters",
+  FULL_NAME_PATTERN: "Full name can only contain letters and spaces",
 };
 
 // discover
@@ -117,7 +117,8 @@ export const DASHBOARD_LABELS = {
   ENROLLED: "Enrolled",
   WISHLIST: "Wishlist",
   NO_ENROLLED_TITLE: "No enrolled skills yet",
-  NO_ENROLLED_SUBTITLE: "Enroll in skills from the Discover page to get started.",
+  NO_ENROLLED_SUBTITLE:
+    "Enroll in skills from the Discover page to get started.",
   NO_WISHLIST_TITLE: "No wishlisted skills yet",
   NO_WISHLIST_SUBTITLE: "Add skills to your wishlist from the Discover page.",
   START_LEARNING: "Start Learning",
@@ -139,4 +140,44 @@ export const DASHBOARD_HEADER_MESSAGES = [
   "Empower yourself with SkillPath – personalized skills for a brighter future.",
 ];
 
+export const PROFILE_TITLES = {
+  WIDGET: "Learning Goals",
+  DIALOG_GOAL: "Set Your Weekly Learning Goal",
+  RECENT_ACTIVITY: "Recent Activity",
+  CONTINUE_LEARNING: "Continue Learning",
+  EDIT_PROFILE: "Edit Profile",
+};
 
+//profile
+export const PROFILE_LABELS = {
+  GOAL_SUBTITLE: "How many lessons do you want to complete per week?",
+  LESSONS_PREVIEW: "{lessons} lessons per week",
+  CURRENT_GOAL: "Current goal: {goal} lessons/week",
+  LESSONS: "Lessons",
+  STREAK: "Streak: {streak} Days",
+  SET_GOAL: "Set Your Goal!",
+  NO_ACTIVITY: "No recent activity. Get started with your first lesson!",
+  FULL_NAME: "Full Name",
+  CHANGE_PHOTO: "Change Photo",
+  MINS: "{duration} mins",
+};
+
+export const PROFILE_BUTTONS = {
+  SET_GOAL: "Set Goal",
+  CANCEL: "Cancel",
+  SAVE_GOAL: "Save Goal",
+  EDIT_PROFILE: "Edit Profile",
+  RESUME: "Resume",
+  REVISIT_LESSON: "Revisit Lesson",
+  NEXT_LESSON: "Next Lesson",
+  SAVE_CHANGES: "Save Changes",
+};
+
+export const PROFILE_CHIP_LABELS = {
+  COMPLETED: "Completed",
+  IN_PROGRESS: "In Progress",
+};
+
+export const PROFILE_ERRORS = {
+  UPDATE_PROFILE: "Failed to update profile",
+};

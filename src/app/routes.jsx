@@ -15,6 +15,7 @@ const SkillDetailPage = lazy(() => import("../features/skilldetail"));
 const DashboardPage = lazy(() => import("../features/dashboard"));
 const CoursesPage = lazy(() => import("../features/course"));
 const AnalyticsPage = lazy(() => import("../features/analytics"));
+const ProfilePage = lazy(() => import("../features/profile"));
 
 const AppRoutes = () => {
   return (
@@ -44,6 +45,7 @@ const AppRoutes = () => {
             </CourseProvider>
           }
         />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route element={<AdminLayout />}>
           <Route path="/analytics" element={<AnalyticsPage />} />
         </Route>

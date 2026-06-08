@@ -38,7 +38,7 @@ const RegisterPage = () => {
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      username: "",
+      fullName: "",
       emailId: "",
       password: "",
     },
@@ -81,28 +81,28 @@ const RegisterPage = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2}>
               <Controller
-                name="username"
+                name="fullName"
                 control={control}
                 rules={{
-                  required: AUTH_VALIDATION.USERNAME_REQUIRED,
+                  required: AUTH_VALIDATION.FULL_NAME_REQUIRED,
                   minLength: {
-                    value: 6,
-                    message: AUTH_VALIDATION.USERNAME_MIN_LENGTH,
+                    value: 2,
+                    message: AUTH_VALIDATION.FULL_NAME_MIN_LENGTH,
                   },
                   maxLength: {
-                    value: 20,
-                    message: AUTH_VALIDATION.USERNAME_MAX_LENGTH,
+                    value: 50,
+                    message: AUTH_VALIDATION.FULL_NAME_MAX_LENGTH,
                   },
                   pattern: {
-                    value: /^[a-zA-Z0-9_-]{6,20}$/i,
-                    message: AUTH_VALIDATION.USERNAME_PATTERN,
+                    value: /^[a-zA-Z\s]{2,50}$/,
+                    message: AUTH_VALIDATION.FULL_NAME_PATTERN,
                   },
                 }}
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    id="username"
-                    label={AUTH_LABELS.USERNAME}
+                    id="fullName"
+                    label={AUTH_LABELS.FULL_NAME}
                     variant="outlined"
                     fullWidth
                     error={!!error}

@@ -48,6 +48,8 @@ const ResponsiveAppBar = () => {
     if (option === "Logout") {
       logout();
       navigate(ROUTES.LANDING);
+    } else if (option === "Profile") {
+      navigate(ROUTES.PROFILE);
     }
     setAnchorElUser(null);
   };
