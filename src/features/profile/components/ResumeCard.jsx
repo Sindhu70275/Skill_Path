@@ -11,6 +11,12 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 import { CustomButton } from "../../../shared/components";
+import {
+  PROFILE_TITLES,
+  PROFILE_LABELS,
+  PROFILE_BUTTONS,
+  PROFILE_CHIP_LABELS,
+} from "../../../shared/constants/messages";
 import ResumeCardSkeleton from "./ResumeCardSkeleton";
 
 dayjs.extend(relativeTime);
@@ -38,7 +44,7 @@ const ResumeCard = ({ data, isLoading }) => {
       }}
     >
       <Typography variant="h5" fontWeight={700} color="primary.main">
-        Continue Learning
+        {PROFILE_TITLES.CONTINUE_LEARNING}
       </Typography>
 
       <Divider sx={{ my: 2 }} />
@@ -53,7 +59,11 @@ const ResumeCard = ({ data, isLoading }) => {
 
       <Box mt={1} display="flex" alignItems="center" gap={1}>
         <Chip
-          label={isCompleted ? "Completed" : "In Progress"}
+          label={
+            isCompleted
+              ? PROFILE_CHIP_LABELS.COMPLETED
+              : PROFILE_CHIP_LABELS.IN_PROGRESS
+          }
           color={isCompleted ? "success" : "warning"}
           size="small"
         />
@@ -64,17 +74,23 @@ const ResumeCard = ({ data, isLoading }) => {
 
       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 1 }}>
         <AccessTimeIcon sx={{ fontSize: 20 }} />
-        <Typography variant="body2">{durationMins} mins</Typography>
+        <Typography variant="body2">
+          {PROFILE_LABELS.MINS.replace("{duration}", durationMins)}
+        </Typography>
       </Box>
 
       <Box mt={3} display="flex" gap={2} justifyContent="center">
         <CustomButton
-          label={isCompleted ? "Revisit Lesson" : "Resume"}
+          label={
+            isCompleted
+              ? PROFILE_BUTTONS.REVISIT_LESSON
+              : PROFILE_BUTTONS.RESUME
+          }
           onClick={() => navigate(`/course/${data.skill?._id}`)}
         />
         {isCompleted && (
           <CustomButton
-            label="Next Lesson"
+            label={PROFILE_BUTTONS.NEXT_LESSON}
             variant="outlined"
             onClick={() => navigate(`/course/${data.skill?._id}`)}
           />

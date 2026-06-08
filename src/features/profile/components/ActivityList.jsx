@@ -9,6 +9,12 @@ import Divider from "@mui/material/Divider";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+
+import {
+  PROFILE_TITLES,
+  PROFILE_LABELS,
+  PROFILE_CHIP_LABELS,
+} from "../../../shared/constants/messages";
 import ActivityListSkeleton from "./ActivityListSkeleton";
 
 dayjs.extend(relativeTime);
@@ -31,7 +37,7 @@ const ActivityList = ({ data, isLoading }) => {
         gutterBottom
         color="primary.main"
       >
-        Recent Activity
+        {PROFILE_TITLES.RECENT_ACTIVITY}
       </Typography>
 
       <Divider sx={{ mt: 2 }} />
@@ -50,7 +56,7 @@ const ActivityList = ({ data, isLoading }) => {
                 <Chip
                   label={
                     item.isCompleted
-                      ? "Completed"
+                      ? PROFILE_CHIP_LABELS.COMPLETED
                       : `${Math.round(item.progressPercentage * 100)}%`
                   }
                   color={item.isCompleted ? "success" : "warning"}
@@ -62,7 +68,7 @@ const ActivityList = ({ data, isLoading }) => {
         </Box>
       ) : (
         <Typography variant="body2" color="text.secondary" sx={{ py: 4 }}>
-          No recent activity. Get started with your first lesson!
+          {PROFILE_LABELS.NO_ACTIVITY}
         </Typography>
       )}
     </Paper>
