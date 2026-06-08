@@ -14,6 +14,12 @@ import CustomButton from "../../../shared/components/CustomButton";
 import { AuthContext } from "../../../features/auth/context/AuthContext.jsx";
 import { useUpdateProfile } from "../hooks/useUpdateProfile";
 import { SnackbarContext } from "../../../shared/context/SnackbarContext.jsx";
+import {
+  PROFILE_TITLES,
+  PROFILE_LABELS,
+  PROFILE_BUTTONS,
+  PROFILE_ERRORS,
+} from "../../../shared/constants/messages";
 
 const EditProfileDialog = ({ open, onClose }) => {
   const { user, setAuth } = useContext(AuthContext);
@@ -72,7 +78,7 @@ const EditProfileDialog = ({ open, onClose }) => {
       },
       onError: (error) => {
         const message =
-          error?.response?.data?.message || "Failed to update profile";
+          error?.response?.data?.message || PROFILE_ERRORS.UPDATE_PROFILE;
         showSnackbar(message, "error");
         console.error(error);
       },
@@ -89,7 +95,7 @@ const EditProfileDialog = ({ open, onClose }) => {
             alignItems: "center",
           }}
         >
-          <span>Edit Profile</span>
+          <span>{PROFILE_TITLES.EDIT_PROFILE}</span>
           <IconButton onClick={onClose} sx={{ color: "grey.500" }}>
             <CloseIcon />
           </IconButton>
@@ -122,14 +128,14 @@ const EditProfileDialog = ({ open, onClose }) => {
                 component="span"
                 variant="outlined"
                 size="small"
-                label="Change Photo"
+                label={PROFILE_LABELS.CHANGE_PHOTO}
               />
             </label>
           </Box>
 
           <TextField
             fullWidth
-            label="Full Name"
+            label={PROFILE_LABELS.FULL_NAME}
             value={formData.fullName}
             onChange={(e) =>
               setFormData({ ...formData, fullName: e.target.value })
@@ -142,14 +148,14 @@ const EditProfileDialog = ({ open, onClose }) => {
 
         <DialogActions sx={{ px: 1.5, pb: 3, pt: 0, justifyContent: "center" }}>
           <CustomButton
-            label="Cancel"
+            label={PROFILE_BUTTONS.CANCEL}
             variant="outlined"
             onClick={onClose}
             disabled={isPending}
           />
           <CustomButton
             type="submit"
-            label="Save Changes"
+            label={PROFILE_BUTTONS.SAVE_CHANGES}
             disabled={!formData.fullName.trim() || isPending}
           />
         </DialogActions>

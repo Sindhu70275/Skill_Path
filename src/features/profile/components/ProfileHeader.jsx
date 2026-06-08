@@ -7,6 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import { AuthContext } from "../../../features/auth/context/AuthContext";
 import { CustomButton } from "../../../shared/components";
+import { PROFILE_BUTTONS } from "../../../shared/constants/messages";
 import EditProfileDialog from "./EditProfileDialog";
 
 const ProfileHeader = () => {
@@ -64,7 +65,7 @@ const ProfileHeader = () => {
         }}
       >
         <CustomButton
-          label="Edit Profile"
+          label={PROFILE_BUTTONS.EDIT_PROFILE}
           startIcon={<EditIcon />}
           fullWidth
           onClick={handleEditProfile}
